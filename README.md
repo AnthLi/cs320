@@ -6,8 +6,11 @@ Ionic App Base
 A starting project for Ionic that optionally supports using custom SCSS.
 
 New/Edit Form - George L, Lisa, Jake
+
 Database - Adam and Shiyan
+
 View - James
+
 Food Code - Dylan and Anthony
 
 ## Using this project
