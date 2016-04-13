@@ -15,7 +15,7 @@ First, make sure you have [Node.js](https://nodejs.org/en/) installed.
 
 Next, install the `ionic` utility:
 ```bash
-$ npm install -g ionic
+$ npm install -g cordova ionic
 ```
 
 To start this app:
