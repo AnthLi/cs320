@@ -1,27 +1,19 @@
 # Inspector Gadget
 
-Ionic App Base
-=====================
+## Getting started
+Make sure you have [Node.js](https://nodejs.org/en/) installed
 
-A starting project for Ionic that optionally supports using custom SCSS.
-
-## Using this project
-
-We recommend using the [Ionic CLI](https://github.com/driftyco/ionic-cli) to create new Ionic projects that are based on this project but use a ready-made starter template.
-
-For example, to start a new Ionic project with the default tabs interface, make sure the `ionic` utility is installed:
-
+## Next, install Ionic:
 ```bash
 $ npm install -g ionic
 ```
 
-Then run:
+Follow [this](http://ionicframework.com/getting-started/) to start up an Ionic application
 
+## To start this app:
 ```bash
-$ ionic start cs320 tabs
+$ cd path/to/project
+$ ionic platform add [platform]
+$ ionic build [platform]
+$ ionic emulate [platform]
 ```
-
-More info on this can be found on the Ionic [Getting Started](http://ionicframework.com/getting-started) page and the [Ionic CLI](https://github.com/driftyco/ionic-cli) repo.
-
-## Issues
-Issues have been disabled on this repo, if you do find an issue or have a question consider posting it on the [Ionic Forum](http://forum.ionicframework.com/).  Or else if there is truly an error, follow our guidelines for [submitting an issue](http://ionicframework.com/submit-issue/) to the main Ionic repository.
