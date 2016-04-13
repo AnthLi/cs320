@@ -12,6 +12,7 @@ Food Code - Dylan and Anthony
 
 ## Using this project
 Make sure you have [Node.js](https://nodejs.org/en/) installed
+
 Follow [this](http://ionicframework.com/getting-started/) to start up an Ionic application
 
 ## Make sure the `ionic` utility is installed:
