@@ -11,14 +11,14 @@ View - James
 Food Code - Dylan and Anthony
 
 ## Using this project
-Make sure you have [Node.js](https://nodejs.org/en/) installed
+First, make sure you have [Node.js](https://nodejs.org/en/) installed.
 
-### Make sure the `ionic` utility is installed:
+Next, install the `ionic` utility:
 ```bash
 $ npm install -g ionic
 ```
 
-### To start this app:
+To start this app:
 ```bash
 $ cd path/to/project
 $ ionic platform add [platform]
