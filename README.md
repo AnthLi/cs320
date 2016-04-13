@@ -10,7 +10,8 @@ View - James
 
 Food Code - Dylan and Anthony
 
-## Using this project
+## Using this app
+
 First, make sure you have [Node.js](https://nodejs.org/en/) installed.
 Install either the LTS (Long Term Support) or Stable versions, both will work
 for this app.
