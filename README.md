@@ -34,4 +34,4 @@ $ ionic build [platform]
 $ ionic emulate [platform]
 ```
 
-To start developing, all HTML, CSS, and JavaScript files are localed in `www`.
+To start developing, all HTML, CSS, and JavaScript files are localed in `www/`.
