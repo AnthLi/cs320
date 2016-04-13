@@ -5,6 +5,11 @@ Ionic App Base
 
 A starting project for Ionic that optionally supports using custom SCSS.
 
+New/Edit Form - George L, Lisa, Jake
+Database - Adam and Shiyan
+View - James
+Food Code - Dylan and Anthony
+
 ## Using this project
 
 We recommend using the [Ionic CLI](https://github.com/driftyco/ionic-cli) to create new Ionic projects that are based on this project but use a ready-made starter template.
