@@ -16,7 +16,7 @@ First, make sure you have [Node.js](https://nodejs.org/en/) installed.
 Install either the LTS (Long Term Support) or Stable versions, both will work
 for this app.
 
-Next, open up a terminal and install the Ionic:
+Next, open up a terminal and install Ionic:
 ```bash
 $ npm install -g cordova ionic
 ```
