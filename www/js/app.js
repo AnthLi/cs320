@@ -8,8 +8,7 @@
 angular.module('starter', [
   'ionic',
   'starter.controllers',
-  'starter.services',
-  'ngPDFViewer'
+  'starter.services'
   ])
 
 .run(function($ionicPlatform) {
@@ -76,7 +75,7 @@ angular.module('starter', [
   })
 
   .state('tab.pdfviewer', {
-    url: '/pdfviewer/:file',
+    url: '/pdfviewer',
     views: {
       'tab-pdfviewer': {
         templateUrl: 'templates/tab-pdfviewer.html',

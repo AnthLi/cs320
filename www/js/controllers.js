@@ -17,22 +17,9 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PdfCtrl', ['$scope', 'PDFViewerService', function($scope, pdf) {
-  $scope.viewer = pdf.Instance("viewer");
+.controller('PdfCtrl', function($scope) {
 
-  $scope.nextPage = function() {
-    $scope.viewer.nextPage();
-  };
-
-  $scope.prevPage = function() {
-    $scope.viewer.prevPage();
-  };
-
-  $scope.pageLoaded = function(curPage, totalPages) {
-    $scope.currentPage = curPage;
-    $scope.totalPages = totalPages;
-  };
-}])
+})
 
 .controller('NewInspectionDetailCtrl', function($scope, $stateParams, NewInspection) {
   $scope.chat = NewInspection.get($stateParams.newinspectionId);
