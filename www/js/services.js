@@ -1,6 +1,6 @@
 angular.module('starter.services', [])
 
-.factory('Chats', function() {
+.factory('NewInspection', function() {
   // Might use a resource here that returns a JSON array
 
   // Ayy Lmao testing data
