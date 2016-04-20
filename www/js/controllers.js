@@ -2,7 +2,7 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('ChatsCtrl', function($scope, Chats) {
+.controller('NewInspectionCtrl', function($scope, NewInspection) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -11,14 +11,31 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  $scope.chats = Chats.all();
+  $scope.chats = NewInspection.all();
   $scope.remove = function(chat) {
-    Chats.remove(chat);
+    NewInspection.remove(chat);
   };
 })
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
+.controller('PdfCtrl', ['$scope', 'PDFViewerService', function($scope, pdf) {
+  $scope.viewer = pdf.Instance("viewer");
+
+  $scope.nextPage = function() {
+    $scope.viewer.nextPage();
+  };
+
+  $scope.prevPage = function() {
+    $scope.viewer.prevPage();
+  };
+
+  $scope.pageLoaded = function(curPage, totalPages) {
+    $scope.currentPage = curPage;
+    $scope.totalPages = totalPages;
+  };
+}])
+
+.controller('NewInspectionDetailCtrl', function($scope, $stateParams, NewInspection) {
+  $scope.chat = NewInspection.get($stateParams.newinspectionId);
 })
 
 .controller('SettingsCtrl', function($scope) {
