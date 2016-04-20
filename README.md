@@ -16,9 +16,20 @@ First, make sure you have [Node.js](https://nodejs.org/en/) installed.
 Install either the LTS (Long Term Support) or Stable versions, both will work
 for this app.
 
-Next, open up a terminal and install Ionic:
+Next, install Bower (may need sudo):
+```bash
+$ npm install -g bower
+```
+
+Then, open up a terminal and install Ionic:
 ```bash
 $ npm install -g cordova ionic
+```
+
+Lastly, install all dependencies:
+```bash
+$ npm install
+$ bower install
 ```
 
 To simply run this app in a browser:
