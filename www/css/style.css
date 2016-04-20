@@ -1,1 +1,15 @@
 /* Empty. Add your own CSS if you like */
+.container{
+	text-align: center;
+	color: #293241;
+}
+
+.padding{
+	padding-top: 20%;
+	padding-left: 20%;
+	padding-right: 20%;
+}
+
+.button{
+	height: 50px;
+}
