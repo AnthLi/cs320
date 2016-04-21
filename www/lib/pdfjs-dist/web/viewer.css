@@ -2102,7 +2102,7 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
 
 @media all and (max-width: 600px) {
   .hiddenSmallView {
-    display: none;
+    /*display: none;*/
   }
   .visibleSmallView {
     display: inherit;
@@ -2125,5 +2125,39 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
 @media all and (max-width: 510px) {
   #scaleSelectContainer, #pageNumberLabel {
     display: none;
+  }
+}
+
+/* Modified CSS Here */
+
+@media all and (max-width: 625px) {
+  html[dir='ltr'] .findbar {
+    height: 60px;
+    left: 37px;
+  }
+
+  #findResultsCount {
+    position: absolute;
+    top: 28px;
+    left: 95px;
+  }
+
+  #findMsg {
+    position: absolute;
+    top: 28px;
+    left: 64px;
+  }
+
+  #findMatchCase, #findMatch {
+    position: absolute;
+    top: 25px;
+  }
+
+  #findMatchCase {
+    left: 257px;
+  }
+
+  #findMatch {
+    left: 269px;
   }
 }
