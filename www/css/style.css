@@ -7,17 +7,15 @@
 	padding-top: 15%;
 }
 
-.buttons .button {
+.button {
   position: relative;
-  margin: 40px 0 40px 0;
-  height: 50px;
 }
 
 .buttons{
-	padding-top: 40px;
+	padding-top: 30px;
 }
 
 img{
-	width: 200px;
-	height: 130px;
+	width: 60%;
+	height: 40%px;
 }
