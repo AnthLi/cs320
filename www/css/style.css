@@ -4,13 +4,18 @@
 }
 
 .padding{
-	padding-top: 5%;
-	padding-left: 20%;
-	padding-right: 20%;
+	padding-top: 15%;
 }
 
-.buttons .button {
+.button {
   position: relative;
-  margin: 40px 0 40px 0;
-  height: 50px;
+}
+
+.buttons{
+	padding-top: 30px;
+}
+
+img{
+	width: 60%;
+	height: 40%px;
 }
