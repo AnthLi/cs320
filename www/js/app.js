@@ -37,64 +37,64 @@ angular.module('starter', [
   $stateProvider
 
   // setup an abstract state for the tabs directive
-  .state('tab', {
-    url: '/tab',
+  .state('page', {
+    url: '/page',
     abstract: true,
-    templateUrl: 'templates/tabs.html'
+    templateUrl: 'templates/pages.html'
   })
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
+  .state('page.dash', {
     url: '/dash',
     views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
+      'page-dash': {
+        templateUrl: 'templates/dash.html',
         controller: 'DashCtrl'
       }
     }
   })
 
-  .state('tab.newinspection', {
+  .state('page.newinspection', {
     url: '/newinspection',
     views: {
-      'tab-newinspection': {
-        templateUrl: 'templates/tab-newinspection.html',
+      'page-newinspection': {
+        templateUrl: 'templates/newinspection.html',
         controller: 'NewInspectionCtrl'
       }
     }
   })
-  .state('tab.newinspection-detail', {
+  .state('page.newinspection-detail', {
     url: '/newinspection/:chatId',
     views: {
-      'tab-newinspection': {
+      'page-newinspection': {
         templateUrl: 'templates/newinspection-detail.html',
         controller: 'NewInspectionDetailCtrl'
       }
     }
   })
 
-  .state('tab.pdfviewer', {
+  .state('page.pdfviewer', {
     url: '/pdfviewer',
     views: {
-      'tab-pdfviewer': {
-        templateUrl: 'templates/tab-pdfviewer.html',
+      'page-pdfviewer': {
+        templateUrl: 'templates/pdfviewer.html',
         controller: 'PdfCtrl'
       }
     }
   })
 
-  .state('tab.settings', {
+  .state('page.settings', {
     url: '/settings',
     views: {
-      'tab-settings': {
-        templateUrl: 'templates/tab-settings.html',
+      'page-settings': {
+        templateUrl: 'templates/settings.html',
         controller: 'SettingsCtrl'
       }
     }
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/page/dash');
 
 });
