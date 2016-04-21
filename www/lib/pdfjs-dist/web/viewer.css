@@ -2130,7 +2130,46 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
 
 /* Modified CSS Here */
 
-@media all and (max-width: 625px) {
+@media all and (max-width: 400px) {
+  html[dir='ltr'] .findbar {
+    width: 80%;
+    height: 60px;
+    left: 37px;
+  }
+
+  #findResultsCount,#findMsg, #findHighlightAll, #findHighlight,
+  #findMatchCase, #findMatch {
+    position: absolute;
+    top: 28px;
+  }
+
+  #findResultsCount {
+    left: 200px;
+  }
+
+  #findMsg {
+    width: 100%;
+    left: 190px;
+  }
+
+  #findHighlightAll {
+    left: 9px;
+  }
+
+  #findHighlight {
+    left: 21px;
+  }
+
+  #findMatchCase {
+    left: 100px;
+  }
+
+  #findMatch {
+    left: 112px;
+  }
+}
+
+@media all and (min-width: 401px) and (max-width: 625px) {
   html[dir='ltr'] .findbar {
     height: 60px;
     left: 37px;
