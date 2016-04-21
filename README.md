@@ -46,10 +46,6 @@ $ ionic build [platform]
 $ ionic emulate [platform]
 ```
 
-To start developing, all HTML, CSS, and JavaScript files are located in `www/`.
+When Ionic asks you for an address, enter in localhost.
 
-To actually run the app, just navigate into the main directory of the repo and type
-```bash
-ionic serve
-```  
-Make sure to tell ionic to use localhost.
+To start developing, all HTML, CSS, and JavaScript files are located in `www/`.

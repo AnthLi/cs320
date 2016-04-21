@@ -1,8 +1,6 @@
 angular.module('starter.services', [])
 
 .factory('NewInspection', function() {
-  // Might use a resource here that returns a JSON array
-
   // Ayy Lmao testing data
   var chats = [{
     id: 0,
