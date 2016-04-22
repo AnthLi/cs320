@@ -1,8 +1,156 @@
 <ion-view view-title="Inspection Form">
+
   <ion-content class="content">
+
+
+
+    <div class = "info">
+    <button class="button button-full button-balanced">
+    INSPECTION INFO
+    </button>
+
+    <!--INSERT DATA FIELDS-->
+
+    <div class="row">
+      <div class = "col">
+        <label class="item item-input">
+           <input type="text" placeholder="Name of Food Establishment">
+        </label>
+      </div>
+
+      <div class = "col">
+        <label class="item item-input">
+          <input type="text" placeholder="MM/DD/YYYY">
+        </label>
+      </div>
+    </div>
+
+     <div class="row">
+      <div class = "col">
+        <label class="item item-input">
+           <input type="text" placeholder="Address">
+        </label>
+      </div>
+
+      <div class = "col">
+        <label class="item item-input">
+          <input type="text" placeholder="Owner">
+        </label>
+      </div>
+    </div>
+
+     <div class="row">
+      <div class = "col">
+        <label class="item item-input">
+           <input type="text" placeholder="Telephone">
+        </label>
+      </div>
+
+      <div class = "col">
+        <label class="item item-input">
+          <input type="text" placeholder="Person In Charge">
+        </label>
+      </div>
+    </div>
+
+     <div class="row">
+      <div class = "col">
+        <label class="item item-input">
+           <input type="text" placeholder="Permit No.">
+        </label>
+      </div>
+
+      <div class = "col">
+        <label class="item item-input">
+          <input type="text" placeholder="Inspector">
+        </label>
+      </div>
+    </div>
+
+     <div class="row">
+      <div class = "col">
+        <label class="item item-input">
+           <input type="text" placeholder="Risk Level">
+        </label>
+      </div>
+
+      <div class = "col">
+        <label class="item item-input">
+          <input type="text" placeholder="Permit No.">
+        </label>
+      </div>
+    </div>
+
+      <div class="row">
+      <div class = "col">
+        <label class="item item-input">
+           <input type="text" placeholder="Risk Level">
+        </label>
+      </div>
+
+      <div class = "col">
+       <ion-checkbox ng-model="filter.blue">HACCP</ion-checkbox>
+      </div>
+    </div>
+
+      <div class = "row">
+        <div class = "col">
+          <div class="list">
+
+  <label class="item item-input item-select">
+    <div class="input-label">
+      Type of Operation:
+    </div>
+    <select>
+      <option>Retail</option>
+      <option selected>Food Service</option>
+      <option>Residential Kitchen</option>
+      <option>Mobile</option>
+      <option>Temporary</option>
+      <option>Caterer</option>
+      <option>Bed and Breakfast</option>
+    </select>
+  </label>
+
+</div>
+</div>
+</div> 
+
+
+
+<div class = "row">
+        <div class = "col">
+          <div class="list">
+
+  <label class="item item-input item-select">
+    <div class="input-label">
+      Type of Inspection:
+    </div>
+    <select>
+      <option>Re-Inspection</option>
+      <option selected>Routine</option>
+    </select>
+  </label>
+
+</div>
+</div>
+</div> 
+
+    </div>
+
+
+
+    <div class = "violations">
+    <button class="button button-full button-assertive">
+    VIOLATIONS
+    </button>
   
-    <ion-list>
-    
-    </ion-list>
+     <!--INSERT DATA FIELDS-->
+
+    </div>
+
+
+
+
   </ion-content>
 </ion-view>
