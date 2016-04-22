@@ -80,7 +80,7 @@ angular.module('starter', [
     views: {
       'page-addviolation': {
         templateUrl: 'templates/addviolation.html',
-        controller: 'addviolationCtrl'
+        controller: 'AddViolationCtrl'
       }
     }
   });
