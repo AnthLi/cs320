@@ -1,12 +1,11 @@
-<!-- Source: https://goo.gl/VH5R3g-->
+<!-- pdf.js source: https://goo.gl/VH5R3g-->
 <ion-view view-title="Form Viewer">
-  <ion-content>
+  <ion-content style="overflow: hidden;">
     <div class="row">
       <div class="col">
-        <div id="formSelectionBox" class="list">
           <label id="formSelector" class="item item-input item-select">
             <div class="input-label">
-              Form currently viewing:
+              Viewing:
             </div>
 
             <select ng-model="selection" required>
@@ -14,7 +13,6 @@
               <option ng-repeat="form in forms" value="{{form.path}}" label="{{form.name}}"></option>
             </select>
           </label>
-        </div>
       </div>
     </div>
 
