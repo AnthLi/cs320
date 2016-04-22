@@ -3,9 +3,13 @@
   <ion-content>
     <div class="row">
       <div class="col">
-        <div class="list">
+        <div id="formSelectionBox" class="list">
           <label id="formSelector" class="item item-input item-select">
-            <select class="input-label" ng-model="selection" required>
+            <div class="input-label">
+              Form currently viewing:
+            </div>
+
+            <select ng-model="selection" required>
               <option value="" disabled selected hidden>Choose a file...</option>
               <option ng-repeat="form in forms" value="{{form.path}}" label="{{form.name}}"></option>
             </select>

@@ -4,8 +4,13 @@
   height: 100%;
 }
 
+#formSelectionBox {
+  position: absolute;
+  left: 50%;
+}
+
 #formSelector {
-  height: 50px;
+  /*height: 50px;*/
 }
 
 @media (min-width: 600px) {
