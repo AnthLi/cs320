@@ -1,0 +1,19 @@
+<!-- Source: https://goo.gl/VH5R3g-->
+<ion-view view-title="Form Viewer">
+  <ion-content>
+    <div class="row">
+      <div class="col">
+        <div class="list">
+          <label class="item item-input item-select">
+            <select class="input-label" ng-model="selection" required>
+              <option value="" disabled selected hidden>Choose a file...</option>
+              <option ng-repeat="form in forms" value="{{form.path}}" label="{{form.name}}"></option>
+            </select>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <iframe id="formViewer" ng-show="selection !== null" ng-src={{getFromPath(selection)}}></iframe>
+  </ion-content>
+</ion-view>
