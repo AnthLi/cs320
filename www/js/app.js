@@ -64,15 +64,6 @@ angular.module('starter', [
       }
     }
   })
-  .state('page.newinspection-detail', {
-    url: '/newinspection/:chatId',
-    views: {
-      'page-newinspection': {
-        templateUrl: 'templates/newinspection-detail.html',
-        controller: 'NewInspectionDetailCtrl'
-      }
-    }
-  })
 
   .state('page.formviewer', {
     url: '/formviewer',
@@ -83,8 +74,6 @@ angular.module('starter', [
       }
     }
   })
-
-
 
   .state('page.addviolation', {
     url: '/addviolation',
