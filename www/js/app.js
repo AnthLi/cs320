@@ -84,6 +84,19 @@ angular.module('starter', [
     }
   })
 
+/*
+  .state('page.addviolation', {
+    url: '/addviolation',
+    views: {
+      'page-addviolation': {
+        templateUrl: 'templates/addviolation.html',
+        controller: 'AddViolationCtrl'
+      }
+    }
+  })
+*/
+
+
   .state('page.settings', {
     url: '/settings',
     views: {
