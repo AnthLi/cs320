@@ -84,7 +84,7 @@ angular.module('starter', [
     }
   })
 
-/*
+
   .state('page.addviolation', {
     url: '/addviolation',
     views: {
@@ -94,7 +94,6 @@ angular.module('starter', [
       }
     }
   })
-*/
 
 
   .state('page.settings', {
