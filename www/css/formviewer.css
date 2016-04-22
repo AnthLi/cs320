@@ -4,17 +4,22 @@
   height: 100%;
 }
 
-#formSelector {
-  height: 50px;
+#formViewer {
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }
 
 @media (min-width: 600px) {
   #formSelector {
+    position: absolute;
     width: 50%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
   }
-}
 
-#formViewer {
-  width: 100%;
-  height: 100%;
+  #formViewer {
+    top: 70px;
+  }
 }

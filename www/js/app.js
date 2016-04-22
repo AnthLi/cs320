@@ -64,15 +64,6 @@ angular.module('starter', [
       }
     }
   })
-  .state('page.newinspection-detail', {
-    url: '/newinspection/:chatId',
-    views: {
-      'page-newinspection': {
-        templateUrl: 'templates/newinspection-detail.html',
-        controller: 'NewInspectionDetailCtrl'
-      }
-    }
-  })
 
   .state('page.formviewer', {
     url: '/formviewer',
@@ -98,3 +89,16 @@ angular.module('starter', [
   $urlRouterProvider.otherwise('/page/dash');
 
 });
+
+// .controller('AppCtrl', function($scope, $http) {
+//     $scope.data = {};
+//
+//     $scope.submit = function(){
+//         var link = 'localhost:8100/ionic-lab/formdata';
+//
+//         $http.post(link, {est-name : $scope.data.est-name,}).then(function (res){
+//           console.log('$scope.data.est-name')
+//             $scope.response = res.data;
+//         });
+//     };
+// });
