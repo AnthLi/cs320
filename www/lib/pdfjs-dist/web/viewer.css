@@ -2130,6 +2130,40 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
 
 /* Modified CSS Here */
 
+.splitToolbarButtonSeparator, .verticalToolbarSeparator {
+  display: none;
+}
+
+#scaleSelectContainer {
+  top: 2px;
+}
+
+@media all and (max-width: 510px) {
+  #zoomOut, #zoomIn {
+    left: 50px;
+  }
+}
+
+@media all and (min-width: 511px) and (max-width: 535px) {
+  #zoomOut, #zoomIn {
+    left: 100px;
+  }
+
+  #scaleSelectContainer {
+    display: none;
+  }
+}
+
+@media all and (min-width: 536px) and (max-width: 600px) {
+  #zoomOut, #zoomIn {
+    left: 20px;
+  }
+
+  #scaleSelectContainer {
+    left: 25px;
+  }
+}
+
 @media all and (max-width: 400px) {
   html[dir='ltr'] .findbar {
     width: 80%;
