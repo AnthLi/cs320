@@ -34,6 +34,8 @@ angular.module('starter.controllers', ['ngSanitize'])
   // typeofOp - type of operation (e.g. retail, food service, residential, etc.)
   // typeofInsp - type of inspection (routine, re-inspection)
 
+  // HACCP - i have no idea how to get the value from the checkbox :/
+
   $scope.processForm = function() {
     //TODO: do something with the form data
   }

@@ -97,7 +97,7 @@
 
     <div class = "row">
       <div class = "col form-group">
-       <ion-checkbox ng-model="filter.blue">HACCP</ion-checkbox>
+       <ion-checkbox name="haccp" id="haccp" ng-model="filter.blue">HACCP</ion-checkbox>
       </div>
     </div>
 
@@ -108,7 +108,7 @@
             <div class="input-label">
               Type of Operation:
             </div>
-          <select class="form-control" ng-model="formData.typeofOp" >
+          <select class="form-control" ng-model="formData.typeofOp">
             <option>Retail</option>
             <option selected>Food Service</option>
             <option>Residential Kitchen</option>
