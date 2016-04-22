@@ -25,6 +25,11 @@ angular.module('starter.controllers', [])
   $scope.chat = NewInspection.get($stateParams.newinspectionId);
 })
 
+/*
+.controller('AddViolationCtrl', function($scope){
+})
+*/
+
 .controller('SettingsCtrl', function($scope) {
 
 });
