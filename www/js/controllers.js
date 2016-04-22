@@ -43,6 +43,6 @@ angular.module('starter.controllers', ['ngSanitize'])
 })
 
 
-.controller('SettingsCtrl', function($scope) {
+.controller('addviolationCtrl', function($scope) {
 
 });
