@@ -3,19 +3,16 @@
   <ion-content style="overflow: hidden;">
     <div class="row">
       <div class="col">
-        <div class="list">
-          <label class="item item-input item-select">
-            <select class="input-label" ng-model="selection" required>
-          <label id="formSelector" class="item item-input item-select">
-            <div class="input-label">
-              Viewing:
-            </div>
+        <label id="formSelector" class="item item-input item-select">
+          <div class="input-label">
+            Viewing:
+          </div>
 
-            <select ng-model="selection" required>
-              <option value="" disabled selected hidden>Choose a file...</option>
-              <option ng-repeat="form in forms" value="{{form.path}}" label="{{form.name}}"></option>
-            </select>
-          </label>
+          <select ng-model="selection" required>
+            <option value="" disabled selected hidden>Choose a file...</option>
+            <option ng-repeat="form in forms" value="{{form.path}}" label="{{form.name}}"></option>
+          </select>
+        </label>
       </div>
     </div>
 
