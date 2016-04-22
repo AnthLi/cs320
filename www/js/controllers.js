@@ -15,6 +15,12 @@ angular.module('starter.controllers', ['ngSanitize'])
   $scope.remove = function(chat) {
     NewInspection.remove(chat);
   };
+
+  $scope.formData = {};
+
+  $scope.processForm = function() {
+    alert('sick shit');
+  }
 })
 
 // Controller for the Form Viewer containing each selectable form for the user.
@@ -45,4 +51,4 @@ angular.module('starter.controllers', ['ngSanitize'])
 
 .controller('addviolationCtrl', function($scope) {
 
-});
+})

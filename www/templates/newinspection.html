@@ -5,20 +5,20 @@
 <!---.................................................................
   ...........................INSPECTION INFO...........................
 ...................................................................-->
-<form method="post" action="localhost:8100/ionic-lab/formdata">
+<form id="new-form" ng-submit="processForm()">
     <div class = "info">
     <button class="button button-full button-positive">
     INSPECTION INFO
     </button>
 
     <div class="row">
-      <div class = "col">
+      <div class = "col form-group">
         <label class="item item-input">
-           <input type="text" name="est-name" placeholder="Name of Food Establishment">
+          <input type="text" class="form-control" name="estname" placeholder="Name of Food Establishment" ng-model="formData.estname">
         </label>
       </div>
 
-      <div class = "col">
+      <div class = "col form-group">
         <label class="item item-input">
           <input type="text" name="date" placeholder="MM/DD/YYYY">
         </label>
@@ -26,13 +26,13 @@
     </div>
 
      <div class="row">
-      <div class = "col">
+      <div class = "col form-group">
         <label class="item item-input">
            <input type="text" name="address" placeholder="Address">
         </label>
       </div>
 
-      <div class = "col">
+      <div class = "col form-group">
         <label class="item item-input">
           <input type="text" name="owner" placeholder="Owner">
         </label>
@@ -40,13 +40,13 @@
     </div>
 
      <div class="row">
-      <div class = "col">
+      <div class = "col form-group">
         <label class="item item-input">
            <input type="text" name="phone" placeholder="Telephone">
         </label>
       </div>
 
-      <div class = "col">
+      <div class = "col form-group">
         <label class="item item-input">
           <input type="text" name="person-in-charge" placeholder="Person In Charge">
         </label>
@@ -54,13 +54,13 @@
     </div>
 
      <div class="row">
-      <div class = "col">
+      <div class = "col form-group">
         <label class="item item-input">
            <input type="text" name="permit-no" placeholder="Permit No.">
         </label>
       </div>
 
-      <div class = "col">
+      <div class = "col form-group">
         <label class="item item-input">
           <input type="text" name="inspector" placeholder="Inspector">
         </label>
@@ -68,13 +68,13 @@
     </div>
 
      <div class="row">
-      <div class = "col">
+      <div class = "col form-group">
         <label class="item item-input">
            <input type="text" name="risk-lvl" placeholder="Risk Level">
         </label>
       </div>
 
-      <div class = "col">
+      <div class = "col form-group">
         <label class="item item-input">
           <input type="text" name="prev-insp-date" placeholder="Prev. Inspection Date">
         </label>
@@ -82,13 +82,13 @@
     </div>
 
       <div class="row">
-      <div class = "col">
+      <div class = "col form-group">
         <label class="item item-input item-stacked-label">
            <span class=input-label">Time In:</span><input type="time" placeholder="">
         </label>
       </div>
 
-      <div class = "col">
+      <div class = "col form-group">
         <label class="item item-input item-stacked-label">
            <span class=input-label">Time Out:</span><input type="time" placeholder="">
         </label>
@@ -96,13 +96,13 @@
     </div>
 
     <div class = "row">
-      <div class = "col">
+      <div class = "col form-group">
        <ion-checkbox ng-model="filter.blue">HACCP</ion-checkbox>
       </div>
     </div>
 
       <div class = "row">
-        <div class = "col">
+        <div class = "col form-group">
           <div class="list">
           <label class="item item-input item-select">
             <div class="input-label">
@@ -123,7 +123,7 @@
       </div>
 
       <div class = "row">
-        <div class = "col">
+        <div class = "col form-group">
           <div class="list">
           <label class="item item-input item-select">
             <div class="input-label">
@@ -190,6 +190,11 @@
 <a class="button icon-right ion-chevron-right button-balanced">Save & Continue</a>
 
 </form>
+
+<!-- idk if we need this... -->
+<pre>
+  {{ formData }}
+</pre>
 
 
 
