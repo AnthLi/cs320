@@ -86,12 +86,12 @@ angular.module('starter', [
 
 
 
-  .state('page.settings', {
-    url: '/settings',
+  .state('page.addviolation', {
+    url: '/addviolation',
     views: {
-      'page-settings': {
-        templateUrl: 'templates/settings.html',
-        controller: 'SettingsCtrl'
+      'page-addviolation': {
+        templateUrl: 'templates/addviolation.html',
+        controller: 'addviolationCtrl'
       }
     }
   });
