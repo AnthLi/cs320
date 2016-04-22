@@ -1,7 +1,15 @@
 <!-- Source: https://goo.gl/VH5R3g-->
 <ion-view view-title="PDF Viewer">
   <ion-content>
-    <iframe class="pdf-viewer" src="lib/pdfjs-dist/web/viewer.html?file=/pdfs/1999_fda_food_code.pdf"></iframe>
-    <!-- <iframe class="pdf-viewer" src="lib/pdfjs-dist/web/viewer.html?file=/pdfs/ma_food_code.pdf"></iframe> -->
+    <div>
+      Select a file to view
+      <select ng-model="selection">
+        <option ng-repeat="form in forms" value="{{form.path}}">
+          {{form.name}}
+        </option>
+      </select>
+    </div>
+
+    <iframe class="pdf-viewer" ng-show="selection !== null" ng-src={{getFromPath(selection)}}></iframe>
   </ion-content>
 </ion-view>

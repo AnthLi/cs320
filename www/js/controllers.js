@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ngSanitize'])
 
 .controller('DashCtrl', function($scope) {})
 
@@ -17,8 +17,25 @@ angular.module('starter.controllers', [])
   };
 })
 
+// Controller for the PDF Viewer containing each selectable form for the user.
+// Starting off, there is no form selected, so the PDF Viewer won't show up
+// until $scope.selection isn't null.
+// $scope.getFromPath returns the path of the form selected by the user, which
+// will bring up the PDF Viewer with the selected form.
 .controller('PdfCtrl', function($scope) {
+  $scope.selection = null;
 
+  $scope.forms = [{
+    path: "1999_fda_food_code.pdf",
+    name: "1999 FDA Food Code"
+  }, {
+    path: "ma_food_code.pdf",
+    name: "Massachusetts Food Code"
+  }];
+
+  $scope.getFromPath = function(path) {
+    return "lib/pdfjs-dist/web/viewer.html?file=/pdfs/" + path;
+  }
 })
 
 .controller('NewInspectionDetailCtrl', function($scope, $stateParams, NewInspection) {
