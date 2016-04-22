@@ -17,12 +17,12 @@ angular.module('starter.controllers', ['ngSanitize'])
   };
 })
 
-// Controller for the PDF Viewer containing each selectable form for the user.
-// Starting off, there is no form selected, so the PDF Viewer won't show up
+// Controller for the Form Viewer containing each selectable form for the user.
+// Starting off, there is no form selected, so the Form Viewer won't show up
 // until $scope.selection isn't null.
 // $scope.getFromPath returns the path of the form selected by the user, which
-// will bring up the PDF Viewer with the selected form.
-.controller('PdfCtrl', function($scope) {
+// will bring up the Form Viewer with the selected form.
+.controller('FormCtrl', function($scope) {
   $scope.selection = null;
 
   $scope.forms = [{
@@ -34,7 +34,7 @@ angular.module('starter.controllers', ['ngSanitize'])
   }];
 
   $scope.getFromPath = function(path) {
-    return "lib/pdfjs-dist/web/viewer.html?file=/pdfs/" + path;
+    return "lib/pdfjs-dist/web/viewer.html?file=/forms/" + path;
   }
 })
 

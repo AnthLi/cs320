@@ -74,12 +74,12 @@ angular.module('starter', [
     }
   })
 
-  .state('page.pdfviewer', {
-    url: '/pdfviewer',
+  .state('page.formviewer', {
+    url: '/formviewer',
     views: {
-      'page-pdfviewer': {
-        templateUrl: 'templates/pdfviewer.html',
-        controller: 'PdfCtrl'
+      'page-formviewer': {
+        templateUrl: 'templates/formviewer.html',
+        controller: 'FormCtrl'
       }
     }
   })
