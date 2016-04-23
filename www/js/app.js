@@ -5,11 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', [
-  'ionic',
-  'starter.controllers',
-  'starter.services'
-  ])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -65,12 +61,21 @@ angular.module('starter', [
     }
   })
 
-  .state('page.formviewer', {
-    url: '/formviewer',
+  .state('page.forms', {
+    url: '/forms',
     views: {
-      'page-formviewer': {
+      'page-forms': {
+        templateUrl: 'templates/forms.html',
+        controller: 'FormsCtrl'
+      }
+    }
+  })
+  .state('page.formviewer', {
+    url: '/forms/:formPath',
+    views: {
+      'page-forms': {
         templateUrl: 'templates/formviewer.html',
-        controller: 'FormCtrl'
+        controller: 'FormViewerCtrl'
       }
     }
   })

@@ -1,47 +1,25 @@
 angular.module('starter.services', [])
 
-.factory('NewInspection', function() {
-  // Ayy Lmao testing data
-  var chats = [{
-    id: 0,
-    name: 'Ayy Lmao',
-    lastText: 'You on your way?',
-    face: 'img/ayy_lmao.png'
+.factory('Forms', function() {
+  var forms = [{
+    path: "1999_fda_food_code.pdf",
+    name: "1999 FDA Food Code"
   }, {
-    id: 1,
-    name: 'Ayy Lmao',
-    lastText: 'Hey, it\'s me',
-    face: 'img/ayy_lmao.png'
-  }, {
-    id: 2,
-    name: 'Ayy Lmao',
-    lastText: 'I should buy a boat',
-    face: 'img/ayy_lmao.png'
-  }, {
-    id: 3,
-    name: 'Ayy Lmao',
-    lastText: 'Look at my mukluks!',
-    face: 'img/ayy_lmao.png'
-  }, {
-    id: 4,
-    name: 'Ayy Lmao',
-    lastText: 'This is wicked good ice cream.',
-    face: 'img/ayy_lmao.png'
+    path: "ma_food_code.pdf",
+    name: "Massachusetts Food Code"
   }];
 
   return {
     all: function() {
-      return chats;
+      return forms;
     },
-    remove: function(chat) {
-      chats.splice(chats.indexOf(chat), 1);
-    },
-    get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
+    get: function(formPath) {
+      for (var i = 0; i < forms.length; i++) {
+        if (forms[i].path === formPath) {
+          return forms[i];
         }
       }
+
       return null;
     }
   };

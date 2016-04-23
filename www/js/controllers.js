@@ -23,31 +23,23 @@ angular.module('starter.controllers', ['ngSanitize'])
   }
 })
 
+// Search function source: <!-- Source: http://goo.gl/H2455O -->
 // Controller for the Form Viewer containing each selectable form for the user.
 // Starting off, there is no form selected, so the Form Viewer won't show up
 // until $scope.selection isn't null.
 // $scope.getFromPath returns the path of the form selected by the user, which
 // will bring up the Form Viewer with the selected form.
-.controller('FormCtrl', function($scope) {
-  $scope.selection = null;
+.controller('FormsCtrl', function($scope, Forms) {
+  $scope.forms = Forms.all();
+})
 
-  $scope.forms = [{
-    path: "1999_fda_food_code.pdf",
-    name: "1999 FDA Food Code"
-  }, {
-    path: "ma_food_code.pdf",
-    name: "Massachusetts Food Code"
-  }];
+.controller('FormViewerCtrl', function($scope, $stateParams, Forms) {
+  $scope.form = Forms.get($stateParams.formPath);
 
   $scope.getFromPath = function(path) {
     return "lib/pdfjs-dist/web/viewer.html?file=/forms/" + path;
-  }
+  };
 })
-
-.controller('NewInspectionDetailCtrl', function($scope, $stateParams, NewInspection) {
-  $scope.chat = NewInspection.get($stateParams.newinspectionId);
-})
-
 
 .controller('AddViolationCtrl', function($scope) {
 
