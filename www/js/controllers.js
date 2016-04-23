@@ -17,9 +17,27 @@ angular.module('starter.controllers', ['ngSanitize'])
   };
 
   $scope.formData = {};
+  // Yo database dogs...
+  // $scope.formData is a javascript object and contains all the formData
+  // fields: estName - name of establishment
+  // date
+  // address
+  // owner
+  // phone
+  // PIC - person in charge
+  // permitno - permit number
+  // inspector
+  // risklvl
+  // prevInspDate - previous inspection date
+  // timein
+  // timeout
+  // typeofOp - type of operation (e.g. retail, food service, residential, etc.)
+  // typeofInsp - type of inspection (routine, re-inspection)
+
+  // HACCP - i have no idea how to get the value from the checkbox :/
 
   $scope.processForm = function() {
-    alert('sick shit');
+    //TODO: do something with the form data
   }
 })
 

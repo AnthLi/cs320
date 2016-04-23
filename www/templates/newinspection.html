@@ -14,27 +14,13 @@
     <div class="row">
       <div class = "col form-group">
         <label class="item item-input">
-          <input type="text" class="form-control" name="estname" placeholder="Name of Food Establishment" ng-model="formData.estname">
+          <input type="text" name="estname" class="form-control" ng-model="formData.estname" placeholder="Name of Food Establishment">
         </label>
       </div>
 
       <div class = "col form-group">
         <label class="item item-input">
-          <input type="text" name="date" placeholder="MM/DD/YYYY">
-        </label>
-      </div>
-    </div>
-
-     <div class="row">
-      <div class = "col form-group">
-        <label class="item item-input">
-           <input type="text" name="address" placeholder="Address">
-        </label>
-      </div>
-
-      <div class = "col form-group">
-        <label class="item item-input">
-          <input type="text" name="owner" placeholder="Owner">
+          <input type="text" name="date" class="form-control" ng-model="formData.date" placeholder="MM/DD/YYYY">
         </label>
       </div>
     </div>
@@ -42,27 +28,13 @@
      <div class="row">
       <div class = "col form-group">
         <label class="item item-input">
-           <input type="text" name="phone" placeholder="Telephone">
+           <input type="text" name="address" class="form-control" ng-model="formData.address" placeholder="Address">
         </label>
       </div>
 
       <div class = "col form-group">
         <label class="item item-input">
-          <input type="text" name="person-in-charge" placeholder="Person In Charge">
-        </label>
-      </div>
-    </div>
-
-     <div class="row">
-      <div class = "col form-group">
-        <label class="item item-input">
-           <input type="text" name="permit-no" placeholder="Permit No.">
-        </label>
-      </div>
-
-      <div class = "col form-group">
-        <label class="item item-input">
-          <input type="text" name="inspector" placeholder="Inspector">
+          <input type="text" name="owner" class="form-control" ng-model="formData.owner" placeholder="Owner">
         </label>
       </div>
     </div>
@@ -70,13 +42,41 @@
      <div class="row">
       <div class = "col form-group">
         <label class="item item-input">
-           <input type="text" name="risk-lvl" placeholder="Risk Level">
+           <input type="text" name="phone" class="form-control" ng-model="formData.phone" placeholder="Telephone">
         </label>
       </div>
 
       <div class = "col form-group">
         <label class="item item-input">
-          <input type="text" name="prev-insp-date" placeholder="Prev. Inspection Date">
+          <input type="text" name="PIC" class="form-control" ng-model="formData.PIC" placeholder="Person In Charge">
+        </label>
+      </div>
+    </div>
+
+     <div class="row">
+      <div class = "col form-group">
+        <label class="item item-input">
+           <input type="text" name="permitno" class="form-control" ng-model="formData.permitno" placeholder="Permit No.">
+        </label>
+      </div>
+
+      <div class = "col form-group">
+        <label class="item item-input">
+          <input type="text" name="inspector" class="form-control" ng-model="formData.inspector" placeholder="Inspector">
+        </label>
+      </div>
+    </div>
+
+     <div class="row">
+      <div class = "col form-group">
+        <label class="item item-input">
+           <input type="text" name="risklvl" class="form-control" ng-model="formData.risklvl" placeholder="Risk Level">
+        </label>
+      </div>
+
+      <div class = "col form-group">
+        <label class="item item-input">
+          <input type="text" name="prevInspDate" class="form-control" ng-model="formData.prevInspDate" placeholder="Prev. Inspection Date">
         </label>
       </div>
     </div>
@@ -84,20 +84,20 @@
       <div class="row">
       <div class = "col form-group">
         <label class="item item-input item-stacked-label">
-           <span class=input-label">Time In:</span><input type="time" placeholder="">
+           <span class=input-label">Time In:</span><input type="time" class="form-control" ng-model="formData.timein" placeholder="">
         </label>
       </div>
 
       <div class = "col form-group">
         <label class="item item-input item-stacked-label">
-           <span class=input-label">Time Out:</span><input type="time" placeholder="">
+           <span class=input-label">Time Out:</span><input type="time" class="form-control" ng-model="formData.timeout" placeholder="">
         </label>
       </div>
     </div>
 
     <div class = "row">
       <div class = "col form-group">
-       <ion-checkbox ng-model="filter.blue">HACCP</ion-checkbox>
+       <ion-checkbox name="haccp" id="haccp" ng-model="filter.blue">HACCP</ion-checkbox>
       </div>
     </div>
 
@@ -108,7 +108,7 @@
             <div class="input-label">
               Type of Operation:
             </div>
-          <select>
+          <select class="form-control" ng-model="formData.typeofOp">
             <option>Retail</option>
             <option selected>Food Service</option>
             <option>Residential Kitchen</option>
@@ -129,7 +129,7 @@
             <div class="input-label">
               Type of Inspection:
             </div>
-            <select>
+            <select class="form-control" ng-model="formData.typeofInsp">
               <option>Re-Inspection</option>
               <option selected>Routine</option>
             </select>
