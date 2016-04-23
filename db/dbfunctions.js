@@ -6,7 +6,7 @@ var sqlite3 = require('sqlite3');
 var db = new sqlite3.Database(__dirname + '/inspections.db');
 
 // add a new form to the database
-public addForm(var formObj){
+var addForm(var formObj){
 	var establishment = [
 		formObj.name,
 		formObj.pic,
@@ -38,16 +38,23 @@ public addForm(var formObj){
 }
 
 // update an existing form in the database
-public updateForm(){
+var updateForm(){
 
 }
 
 // search forms in the database
-public searchForm(){
+var searchForm(){
 
 }
 
 // remove a form from the database
-public removeForm(){
+var removeForm(){
 
+}
+
+module.exports = {
+	addForm: addForm,
+	updateForm: updateForm,
+	searchForm: searchForm,
+	removeForm: removeForm
 }
