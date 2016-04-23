@@ -25,6 +25,18 @@ var v3 = {
 	description: 'The owner was super snooty, I don\'t like him'
 }
 
+var v4 = {
+	codeRef: 'Article wut, Section infinity',
+	isCrit: false,
+	description: 'Blue with yellow spots'
+}
+
+var v5 = {
+	codeRef: 'Sec 3, Article III',
+	isCrit: false,
+	description: 'Is this thing still on?  How do I turn this off?'
+}
+
 var form = {
 	name: 'New Restaurant',
 	pic: 'Herr Bismarck',
@@ -36,5 +48,15 @@ var form = {
 	violations: [v1,v2,v3]
 };
 
-console.log('Adding: '+form);
+
+console.log('Adding:',form);
 db.addForm(form);
+
+form.date = '04-25-2016';
+form.violations = [v4,v5];
+
+// asynchronous programming is hard
+setTimeout(function(){
+	console.log('Adding:',form);
+	db.addForm(form);
+}, 1000);

@@ -40,8 +40,7 @@ violation = {
 When passing objects, it is ok to leave some fields as null.  
 
 ## Important!  
-Due to the way SQLite is implemented, the database takes the form of a file called `db/inspections.db`. This database is in the github and is shared between all of us.  Be careful when merging changes on this file, as it can be blown up fairly easily.  If you do manage to screw up the database, just delete the file and then run these two scripts:  
+Due to the way SQLite is implemented, the database takes the form of a file called `db/inspections.db`. This database is in the github and is shared between all of us.  Be careful when merging changes on this file, as it can be blown up fairly easily.  If you do manage to screw up the database, just delete the file and then run the handy reset script:  
 ```bash
-$ node db/dbcreate.js
-$ node db/dbsampledata.js
+$ ./db/resetdb.sh
 ```
