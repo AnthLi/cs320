@@ -1,28 +1,21 @@
-<!-- We'll call tabs pages for the sake of staying consistent with our SDD -->
-
-<!--
-Create tabs with an icon and label, using the tabs-positive style.
-Each tab's child <ion-nav-view> directive will have its own
-navigation history that also transitions its views in and out.
--->
 <ion-tabs class="tabs-icon-top tabs-color-active-positive">
   <!-- Home -->
-  <ion-tab title="Home" icon-off="ion-ios-home-outline" icon-on="ion-ios-home" href="#/page/dash">
+  <ion-tab title="Home" icon-off="ion-ios-home" icon-on="ion-ios-home" href="#/page/dash">
     <ion-nav-view name="page-dash"></ion-nav-view>
   </ion-tab>
 
   <!-- New Inspection Form -->
-  <ion-tab title="New Inspection" icon-off="ion-ios-paper-outline" icon-on="ion-ios-paper" href="#/page/newinspection">
+  <ion-tab title="New Inspection" icon-off="ion-clipboard" icon-on="ion-clipboard" href="#/page/newinspection">
     <ion-nav-view name="page-newinspection"></ion-nav-view>
   </ion-tab>
 
   <!-- Forms -->
-  <ion-tab title="Forms" icon-off="ion-search" icon-on="ion-search" href="#/page/forms">
+  <ion-tab title="Forms" icon-off="ion-ios-paper-outline" icon-on="ion-ios-paper" href="#/page/forms">
     <ion-nav-view name="page-forms"></ion-nav-view>
   </ion-tab>
 
   <!-- Add Violation -->
-  <ion-tab title="Add Violation" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/page/addviolation" hidden="true">
+  <ion-tab title="Add Violation" href="#/page/addviolation" hidden="true">
     <ion-nav-view name="page-addviolation"></ion-nav-view>
   </ion-tab>
 </ion-tabs>

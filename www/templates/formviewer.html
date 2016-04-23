@@ -1,6 +1,11 @@
 <!-- pdf.js source: https://goo.gl/VH5R3g-->
 <ion-view view-title="{{form.name}}">
-  <ion-content style="overflow: hidden;">
-    <iframe id="formViewer" ng-src={{getFromPath(form.path)}}></iframe>
+  <ion-nav-bar>
+    <ion-nav-back-button id="backButton" class="button-clear">
+      <i class="ion-chevron-left"></i>
+    </ion-nav-back-button>
+  </ion-nav-bar>
+  <ion-content>
+    <iframe id="formViewer" ng-src={{getFormPath(form.path)}}></iframe>
   </ion-content>
 </ion-view>

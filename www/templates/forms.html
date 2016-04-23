@@ -1,22 +1,15 @@
-<!-- Source: http://goo.gl/H2455O -->
 <ion-view view-title="Forms">
-<!--   <ion-header-bar class="bar-light bar-subheader">
-    <input id="formSearchBox"
-      type="search"
-      placeholder="Search existing forms..."
-      ng-model="search"
-      ng-focus="searchFocused = true"
-      ng-blur="searchFocused = false"
-      ng-change="scrollTop()">
-    <button ng-if="search.length"
-      class="button button-icon ion-android-close input-button"
-      ng-click="clearSearch()">
+  <!-- Search bar header -->
+  <ion-header-bar class="bar-light bar-subheader">
+    <input id="formSearchBox" type="search" placeholder="Search existing forms..." ng-model="query">
+    <button id="formSearchClear" class="button button-icon ion-android-close input-button" ng-if="query.length" ng-click="clearSearch()">
     </button>
-  </ion-header-bar> -->
+  </ion-header-bar>
 
+  <!-- List of each Form -->
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-icon-right" ng-repeat="form in forms" type="item-text-wrap" href="#/page/forms/{{form.path}}">
+      <ion-item id="formItem" class="item-icon-right" ng-repeat="form in forms | filter:query" href="#/page/forms/{{form.path}}">
         <h2>{{form.name}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
