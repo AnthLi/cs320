@@ -13,11 +13,9 @@ establishment = {
   addr2 = string
   town = string
   state = string
-  zip = string
-  form = {
-    date = string
-    violations = []
-  }
+  zip = int
+  date = string
+  violations = []
 }
 ```  
 Each entry in the violations array should be an object in the following format:  
