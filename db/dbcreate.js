@@ -13,7 +13,7 @@ db.run("CREATE TABLE IF NOT EXISTS Establishment( \
 			addr2	TEXT, \
 			town	TEXT, \
 			state	TEXT, \
-			zip		INT )");
+			zip		TEXT )");
 
 db.run("CREATE TABLE IF NOT EXISTS Form( \
 			fid		INTEGER PRIMARY KEY AUTOINCREMENT, \

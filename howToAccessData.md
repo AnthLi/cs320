@@ -13,7 +13,7 @@ establishment = {
   addr2 = string
   town = string
   state = string
-  zip = int
+  zip = string
   date = string
   violations = []
 }
