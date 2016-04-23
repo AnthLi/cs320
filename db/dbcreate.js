@@ -7,7 +7,7 @@ var db = new sqlite3.Database(__dirname + '/inspections.db');
 
 db.run("CREATE TABLE IF NOT EXISTS Establishment( \
 			eid		INTEGER PRIMARY KEY AUTOINCREMENT, \
-			name	TEXT NOT NULL UNIQUE, \
+			name	TEXT NOT NULL, \
 			pic		TEXT, \
 			addr1	TEXT, \
 			addr2	TEXT, \
