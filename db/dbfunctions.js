@@ -18,23 +18,42 @@ var addForm = function(formObj){
 	var formDate = formObj.date;
 	var violations = formObj.violations;
 
-	db.serialize(function(){
-		db.run("INSERT INTO Establishment(name,pic,addr1,addr2,town,state,zip) VALUES(?,?,?,?,?,?,?)",establishment,function(){
-			db.run("INSERT INTO Form(eid,date) VALUES(?,?)",[this.lastID,formDate],function(){
-				var fid = this.lastID;
-				for(var i=0;i<violations.length;i++){
-					var violation = [
-						fid,
-						violations[i].codeRef,
-						violations[i].isCrit,
-						violations[i].description];
-					db.run("INSERT INTO Violation(fid,codeRef,isCrit,description) VALUES(?,?,?,?)",violation,function(){
-						// picture related stuff goes here
-					});
-				}
-			});
+	var insertEstablishment = function(){
+		db.get("SELECT eid FROM Establishment WHERE name=?",formObj.name,function(err, row){
+			if(row){
+				insertForm(row.eid);
+			}else{
+				db.run("INSERT INTO Establishment(name,pic,addr1,addr2,town,state,zip) VALUES(?,?,?,?,?,?,?)",establishment,function(){
+					insertForm(this.lastID);
+				});
+			}
 		});
-	});
+	}
+
+	var insertForm = function(eid){
+		db.run("INSERT INTO Form(eid,date) VALUES(?,?)",[eid,formDate],function(){
+			insertViolations(this.lastID);
+		});
+	}
+
+	var insertViolations = function(fid){
+		for(var i=0;i<violations.length;i++){
+			var violation = [
+				fid,
+				violations[i].codeRef,
+				violations[i].isCrit,
+				violations[i].description];
+			db.run("INSERT INTO Violation(fid,codeRef,isCrit,description) VALUES(?,?,?,?)",violation,function(){
+				insertPictures(this.lastID);
+			});
+		}
+	}
+
+	var insertPictures = function(vid){
+		// TODO
+	}
+
+	db.serialize(insertEstablishment());
 }
 
 // update an existing form in the database
