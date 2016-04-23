@@ -9,7 +9,7 @@
   <!-- List of each Form -->
   <ion-content>
     <ion-list>
-      <ion-item id="formItem" class="item-icon-right" ng-repeat="form in forms | filter:query" href="#/page/forms/{{form.path}}">
+      <ion-item class="item-icon-right" ng-repeat="form in forms | filter:query" href="#/page/forms/{{form.path}}">
         <h2>{{form.name}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>

@@ -2,8 +2,8 @@ var app = angular.module('inspectorGadget.controllers', []);
 
 app.controller('DashCtrl', function($scope) {});
 
-app.controller('NewInspectionCtrl', function($scope, Violations) {
-  $scope.violations = Violations.all();
+app.controller('NewInspectionCtrl', function($scope) {
+  // $scope.violations = Violations.all();
   $scope.formData = {};
   // Yo database dogs...
   // $scope.formData is a javascript object and contains all the formData
@@ -30,7 +30,7 @@ app.controller('NewInspectionCtrl', function($scope, Violations) {
 });
 
 app.controller('AddViolationCtrl', function($scope, $stateParams, Violations) {
-  $scope.violation = Violations.get($stateParams.violationID);
+  // $scope.violation = Violations.get($stateParams.violationID);
 });
 
 // Controller containing each Form accessible to the user. Once the user selects
@@ -57,5 +57,20 @@ app.controller('FormViewerCtrl', function($scope, $stateParams, Forms) {
   // Gets the path to a form so that the Form Viewer can open it
   $scope.getFormPath = function(path) {
     return "lib/pdfjs-dist/web/viewer.html?file=/forms/" + path;
+  };
+});
+
+// Same thing as FormsCtrl and FormViewerCtrl, but for the Food Codes instead
+app.controller('FoodCodesCtrl', function($scope, FoodCodes) {
+  // Food Codes available for the user to search through
+  $scope.foodCodes = FoodCodes.all();
+});
+
+app.controller('FoodCodeViewerCtrl', function($scope, $stateParams, FoodCodes) {
+  $scope.foodCode = FoodCodes.get($stateParams.foodCodePath);
+
+  // Gets the path to a Food Code for the user to search through
+  $scope.getFormPath = function(path) {
+    return "lib/pdfjs-dist/web/viewer.html?file=/foodcodes/" + path;
   };
 });
