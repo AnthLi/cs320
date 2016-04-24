@@ -56,6 +56,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   })
+
   .state('page.addviolation', {
     url: '/addviolation',
     views: {
@@ -75,12 +76,33 @@ app.config(function($stateProvider, $urlRouterProvider) {
       }
     }
   })
+
   .state('page.formviewer', {
     url: '/forms/:formPath',
     views: {
       'page-forms': {
         templateUrl: 'templates/formviewer.html',
         controller: 'FormViewerCtrl'
+      }
+    }
+  })
+
+  .state('page.foodcodes', {
+    url: '/foodcodes',
+    views: {
+      'page-foodcodes': {
+        templateUrl: 'templates/foodcodes.html',
+        controller: 'FoodCodesCtrl'
+      }
+    }
+  })
+
+  .state('page.foodcodeviewer', {
+    url: '/foodcodes/:foodCodePath',
+    views: {
+      'page-foodcodes': {
+        templateUrl: 'templates/foodcodeviewer.html',
+        controller: 'FoodCodeViewerCtrl'
       }
     }
   });
