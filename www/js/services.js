@@ -27,14 +27,35 @@ app.factory('Violations', function() {
 
 app.factory('Forms', function() {
   var forms = [{
-    path: 'test_1.pdf',
-    name: 'Red Team Software Design Specification'
+    path: '1.pdf',
+    name: 'Dates'
   }, {
-    path: 'test_2.pdf',
-    name: 'Green Team Software Design Document'
+    path: '2.pdf',
+    name: 'Hangman'
   }, {
-    path: 'test_3.pdf',
-    name: 'Green Team High Level Design Document'
+    path: '3.pdf',
+    name: 'Post Fix Evaluator'
+  }, {
+    path: '4.pdf',
+    name: 'Tower of Hanoi (remember this?)'
+  }, {
+    path: '5.pdf',
+    name: 'Recursive Linked List'
+  }, {
+    path: '6_p1.pdf',
+    name: 'Grocery Store Simulator Part 1'
+  }, {
+    path: '6_p2.pdf',
+    name: 'Grocery Store Simulator Part 2'
+  }, {
+    path: '7.pdf',
+    name: 'Token Ring Simulator'
+  }, {
+    path: '8.pdf',
+    name: 'Binary Search Trees'
+  }, {
+    path: '9.pdf',
+    name: 'Priority Queue'
   }];
 
   return {
