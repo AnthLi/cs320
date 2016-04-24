@@ -70,6 +70,10 @@ app.factory('Forms', function() {
       }
 
       return null;
+    },
+    add: function(form) {
+      forms.push(form);
+      return null;
     }
   };
 });

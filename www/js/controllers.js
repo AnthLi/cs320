@@ -44,7 +44,6 @@ app.controller('FormsCtrl', function($scope, Forms) {
   // Search query based on user input, allowing the user to filter certain forms
   $scope.query = '';
 
-  // Source: http://goo.gl/r9dkjh
   // Clears the search bar when triggered by the user
   $scope.clearSearch = function() {
     $scope.query = '';
