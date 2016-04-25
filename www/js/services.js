@@ -47,7 +47,7 @@ app.factory('Forms', function() {
     all: function() {
       return forms;
     },
-    get: function(formPath) {
+    get: function(formName) {
       for (var i = 0; i < forms.length; i++) {
         if (forms[i].estName === formName) {
           return forms[i];
