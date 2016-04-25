@@ -57,6 +57,7 @@ var addForm = function(formObj){
 }
 
 // update an existing form in the database
+// TODO - are we editing existing forms?  If so, how?
 var updateForm = function(formObj){
     var new_establishment = [
 		formObj.name,
@@ -69,8 +70,8 @@ var updateForm = function(formObj){
     
     var new_formDate = formObj.date;
 	var new_violations = formObj.violations;
-    
-    var update_form = function(formObj){
+
+/*    var update_form = function(formObj){
         // eid is same
         // I assume we can get the eid only from row. If not, the code can be shorter
         db.get("SELECT eid FROM Establishment WHERE name=?", formObj.name, function(err, row)){
@@ -88,29 +89,33 @@ var updateForm = function(formObj){
                 addForm(formObj)
             }
         }
-    }
+    }*/
+}
 
 
 // search forms in the database
-var searchForm = function(formObj){
-    // search by form_name
+// TODO - what are our search criterion?
+var searchForm = function(searchStr){
+/*    // search by form_name
     db.get("SELECT eid FROM Establishment WHERE name=?", formObj.name, function(err, row){
         // first row(Obj) or error
+    }*/
 }
 
 // remove a form from the database
+// TODO
 var removeForm = function(formObj){
-        // check valid form
-        db.get("SELECT eid FROM Establishment WHERE name=?",formObj.name,function(err, row){
-			if(row){
-				db.run("DELETE... Data in db where eid=?", formObj.eid, function()){
-                    // done
-                }
+/*    // check valid form
+    db.get("SELECT eid FROM Establishment WHERE name=?",formObj.name,function(err, row){
+		if(row){
+			db.run("DELETE... Data in db where eid=?", formObj.eid, function()){
+                // done
             }
-            else{
-                // print('invalid form')
-            }
+        }else{
+            // print('invalid form')
         }
+    }*/
+}
 
 module.exports = {
 	addForm: addForm,
