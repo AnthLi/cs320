@@ -49,7 +49,7 @@ app.factory('Forms', function() {
     },
     get: function(formPath) {
       for (var i = 0; i < forms.length; i++) {
-        if (forms[i].estName === formPath) {
+        if (forms[i].estName === formName) {
           return forms[i];
         }
       }

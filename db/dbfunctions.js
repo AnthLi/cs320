@@ -56,8 +56,8 @@ var addForm = function(formObj){
 	db.serialize(insertEstablishment());
 }
 
-// update an existing form in the database
-// TODO - are we editing existing forms?  If so, how?
+// update an existing form in the database - Not implementing this at this time
+/*
 var updateForm = function(formObj){
     var new_establishment = [
 		formObj.name,
@@ -71,7 +71,7 @@ var updateForm = function(formObj){
     var new_formDate = formObj.date;
 	var new_violations = formObj.violations;
 
-/*    var update_form = function(formObj){
+    var update_form = function(formObj){
         // eid is same
         // I assume we can get the eid only from row. If not, the code can be shorter
         db.get("SELECT eid FROM Establishment WHERE name=?", formObj.name, function(err, row)){
@@ -89,23 +89,36 @@ var updateForm = function(formObj){
                 addForm(formObj)
             }
         }
-    }*/
-}
+    }
+}*/
 
 
 // search forms in the database
-// TODO - what are our search criterion?
-var searchForm = function(searchStr){
+// TODO - search on restaurant name, town, or inspection date
+var searchForm = function(searchObj){
 /*    // search by form_name
-    db.get("SELECT eid FROM Establishment WHERE name=?", formObj.name, function(err, row){
-        // first row(Obj) or error
-    }*/
+
+	var searchArr = [];
+	var sqlStr = "SELECT eid FROM Establishment WHERE ";
+	if searchObj has name field {
+		sqlStr += "name=?"
+		searchArr += searchObj.name;
+	}
+	if searchObj has town field {
+		sqlStr += "town=?";
+		searchArr += searchObj.town;
+	}
+	...
+
+    db.all("SELECT eid FROM Establishment WHERE name=?", searchArr, function(err, row){
+        // return all rows
+    });*/
 }
 
-// remove a form from the database
-// TODO
+// remove a form from the database - not implementing this at this time
+/*
 var removeForm = function(formObj){
-/*    // check valid form
+    // check valid form
     db.get("SELECT eid FROM Establishment WHERE name=?",formObj.name,function(err, row){
 		if(row){
 			db.run("DELETE... Data in db where eid=?", formObj.eid, function()){
@@ -114,12 +127,12 @@ var removeForm = function(formObj){
         }else{
             // print('invalid form')
         }
-    }*/
-}
+    }
+}*/
 
 module.exports = {
 	addForm: addForm,
-	updateForm: updateForm,
+	//updateForm: updateForm,
 	searchForm: searchForm,
-	removeForm: removeForm
+	//removeForm: removeForm
 }

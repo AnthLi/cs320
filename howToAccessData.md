@@ -17,13 +17,23 @@ Each function requires you to pass it a JavaScript object that follows the follo
 ```javascript
 establishment = {
   name = string
+  owner = string
   pic = string
-  addr1 = string
-  addr2 = string
+  inspector = string
+  address = string
   town = string
   state = string
   zip = string
+  phone = string
+  permitNum = string
   date = string
+  riskLvl = string
+  prevInspectDate = string
+  timeIn = string
+  timeOut = string
+  opType = string
+  inspType = string
+  haccp = boolean
   violations = []
 }
 ```  

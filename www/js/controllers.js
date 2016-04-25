@@ -52,12 +52,7 @@ app.controller('FormsCtrl', function($scope, Forms) {
 });
 
 app.controller('FormViewerCtrl', function($scope, $stateParams, Forms) {
-  $scope.form = Forms.get($stateParams.formPath);
-
-  // Gets the path to a form so that the Form Viewer can open it
-  $scope.getFormPath = function(path) {
-    return "lib/pdfjs-dist/web/viewer.html?file=/forms/" + path;
-  };
+  $scope.form = Forms.get($stateParams.formName);
 });
 
 // Same thing as FormsCtrl and FormViewerCtrl, but for the Food Codes instead

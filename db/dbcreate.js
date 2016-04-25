@@ -5,21 +5,26 @@
 var sqlite3 = require('sqlite3');
 var db = new sqlite3.Database(__dirname + '/inspections.db');
 
-db.run("CREATE TABLE IF NOT EXISTS Establishment( \
-			eid		INTEGER PRIMARY KEY AUTOINCREMENT, \
-			name	TEXT NOT NULL, \
-			pic		TEXT, \
-			addr1	TEXT, \
-			addr2	TEXT, \
-			town	TEXT, \
-			state	TEXT, \
-			zip		TEXT )");
-
 db.run("CREATE TABLE IF NOT EXISTS Form( \
 			fid		INTEGER PRIMARY KEY AUTOINCREMENT, \
-			eid		INTEGER NOT NULL, \
-			date 	TEXT NOT NULL, \
-			FOREIGN KEY(eid) REFERENCES Establishment(eid) )");
+			name	TEXT NOT NULL, \
+			owner	TEXT, \
+			pic		TEXT, \
+			inspector TEXT, \
+			address	TEXT, \
+			town	TEXT, \
+			state	TEXT, \
+			zip		TEXT, \
+			phone	TEXT, \
+			permitNum TEXT, \
+			date 	TEXT, \
+			riskLvl	TEXT, \
+			prevInspectDate TEXT, \
+			timeIn	TEXT, \
+			timeOut	TEXT, \
+			opType	TEXT, \
+			inspType TEXT, \
+			haccp	BOOLEAN )");
 
 db.run("CREATE TABLE IF NOT EXISTS Violation( \
 			vid		INTEGER PRIMARY KEY AUTOINCREMENT, \
