@@ -37,6 +37,7 @@ angular.module('starter.controllers', ['ngSanitize'])
   // HACCP - i have no idea how to get the value from the checkbox :/
 
   $scope.processForm = function() {
+    alert($scope.formData.risklvl)
     //TODO: do something with the form data
   }
 })
