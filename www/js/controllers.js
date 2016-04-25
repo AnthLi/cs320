@@ -7,7 +7,8 @@ app.controller('NewInspectionCtrl', function($scope) {
   $scope.formData = {};
   // Yo database dogs...
   // $scope.formData is a javascript object and contains all the formData
-  // fields: estName - name of establishment
+  // fields:
+  // estName - name of establishment
   // date
   // address
   // owner
@@ -25,7 +26,6 @@ app.controller('NewInspectionCtrl', function($scope) {
   // HACCP - i have no idea how to get the value from the checkbox :/
 
   $scope.processForm = function() {
-    alert($scope.formData.risklvl)
     //TODO: do something with the form data
   }
 });
