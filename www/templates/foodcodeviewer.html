@@ -1,5 +1,5 @@
 <!-- pdf.js source: https://goo.gl/VH5R3g -->
-<ion-view view-title="{{form.name}}">
+<ion-view view-title="{{foodCode.name}}">
   <!-- Back button -->
   <ion-nav-bar>
     <ion-nav-back-button id="backButton" class="button-clear">
@@ -8,6 +8,6 @@
   </ion-nav-bar>
 
   <ion-content>
-    <iframe id="formViewer" ng-src={{getFormPath(form.path)}}></iframe>
+    <iframe id="formViewer" ng-src={{getFormPath(foodCode.path)}}></iframe>
   </ion-content>
 </ion-view>

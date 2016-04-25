@@ -1,20 +1,13 @@
-// Ionic Starter App
-
-// angular.module is a global place for creating, registering and retrieving Angular modules
-// 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
-// the 2nd parameter is an array of 'requires'
-// 'starter.services' is found in services.js
-// 'starter.controllers' is found in controllers.js
-angular.module('starter', [
+var app = angular.module('inspectorGadget', [
   'ionic',
-  'starter.controllers',
-  'starter.services'
-  ])
+  'inspectorGadget.controllers',
+  'inspectorGadget.services'
+]);
 
-.run(function($ionicPlatform) {
+app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
+    // Hide the accessory bar by default (remove this to show the accessory bar
+    // above the keyboard for form inputs)
     if (window.cordova && window.cordova.plugins &&
       window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -26,24 +19,23 @@ angular.module('starter', [
       StatusBar.styleDefault();
     }
   });
-})
+});
 
-.config(function($stateProvider, $urlRouterProvider) {
+// Place the nav-bar on the bottom of the screen for Android
+app.config(['$ionicConfigProvider', function($ionicConfigProvider) {
+  $ionicConfigProvider.tabs.position('bottom');
+}]);
 
-  // Ionic uses AngularUI Router which uses the concept of states
-  // Learn more here: https://github.com/angular-ui/ui-router
-  // Set up the various states which the app can be in.
-  // Each state's controller can be found in controllers.js
-  $stateProvider
-
-  // setup an abstract state for the tabs directive
-  .state('page', {
+// Ionic uses AngularUI Router which uses the concept of states
+// Learn more here: https://github.com/angular-ui/ui-router
+// Set up the various states which the app can be in.
+// Each state's controller can be found in controllers.js
+app.config(function($stateProvider, $urlRouterProvider) {
+  $stateProvider.state('page', {
     url: '/page',
     abstract: true,
     templateUrl: 'templates/pages.html'
   })
-
-  // Each tab has its own nav history stack:
 
   .state('page.dash', {
     url: '/dash',
@@ -65,16 +57,6 @@ angular.module('starter', [
     }
   })
 
-  .state('page.formviewer', {
-    url: '/formviewer',
-    views: {
-      'page-formviewer': {
-        templateUrl: 'templates/formviewer.html',
-        controller: 'FormCtrl'
-      }
-    }
-  })
-
   .state('page.addviolation', {
     url: '/addviolation',
     views: {
@@ -83,9 +65,47 @@ angular.module('starter', [
         controller: 'AddViolationCtrl'
       }
     }
+  })
+
+  .state('page.forms', {
+    url: '/forms',
+    views: {
+      'page-forms': {
+        templateUrl: 'templates/forms.html',
+        controller: 'FormsCtrl'
+      }
+    }
+  })
+
+  .state('page.formviewer', {
+    url: '/forms/:formPath',
+    views: {
+      'page-forms': {
+        templateUrl: 'templates/formviewer.html',
+        controller: 'FormViewerCtrl'
+      }
+    }
+  })
+
+  .state('page.foodcodes', {
+    url: '/foodcodes',
+    views: {
+      'page-foodcodes': {
+        templateUrl: 'templates/foodcodes.html',
+        controller: 'FoodCodesCtrl'
+      }
+    }
+  })
+
+  .state('page.foodcodeviewer', {
+    url: '/foodcodes/:foodCodePath',
+    views: {
+      'page-foodcodes': {
+        templateUrl: 'templates/foodcodeviewer.html',
+        controller: 'FoodCodeViewerCtrl'
+      }
+    }
   });
 
-  // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/page/dash');
-
 });

@@ -1,21 +1,9 @@
-angular.module('starter.controllers', ['ngSanitize'])
+var app = angular.module('inspectorGadget.controllers', []);
 
-.controller('DashCtrl', function($scope) {})
+app.controller('DashCtrl', function($scope) {});
 
-.controller('NewInspectionCtrl', function($scope, NewInspection) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-
-  $scope.chats = NewInspection.all();
-  $scope.remove = function(chat) {
-    NewInspection.remove(chat);
-  };
-
+app.controller('NewInspectionCtrl', function($scope) {
+  // $scope.violations = Violations.all();
   $scope.formData = {};
   // Yo database dogs...
   // $scope.formData is a javascript object and contains all the formData
@@ -40,34 +28,49 @@ angular.module('starter.controllers', ['ngSanitize'])
     alert($scope.formData.risklvl)
     //TODO: do something with the form data
   }
-})
+});
 
-// Controller for the Form Viewer containing each selectable form for the user.
-// Starting off, there is no form selected, so the Form Viewer won't show up
-// until $scope.selection isn't null.
-// $scope.getFromPath returns the path of the form selected by the user, which
-// will bring up the Form Viewer with the selected form.
-.controller('FormCtrl', function($scope) {
-  $scope.selection = null;
+app.controller('AddViolationCtrl', function($scope, $stateParams, Violations) {
+  // $scope.violation = Violations.get($stateParams.violationID);
+});
 
-  $scope.forms = [{
-    path: "1999_fda_food_code.pdf",
-    name: "1999 FDA Food Code"
-  }, {
-    path: "ma_food_code.pdf",
-    name: "Massachusetts Food Code"
-  }];
+// Controller containing each Form accessible to the user. Once the user selects
+// a Form, it will direct him to the Form Viewer page where he/she can scroll
+// through and search the Form.
+app.controller('FormsCtrl', function($scope, Forms) {
+  // All available forms to the user
+  $scope.forms = Forms.all();
 
-  $scope.getFromPath = function(path) {
+  // Source: http://goo.gl/r9dkjh
+  // Search query based on user input, allowing the user to filter certain forms
+  $scope.query = '';
+
+  // Clears the search bar when triggered by the user
+  $scope.clearSearch = function() {
+    $scope.query = '';
+  };
+});
+
+app.controller('FormViewerCtrl', function($scope, $stateParams, Forms) {
+  $scope.form = Forms.get($stateParams.formPath);
+
+  // Gets the path to a form so that the Form Viewer can open it
+  $scope.getFormPath = function(path) {
     return "lib/pdfjs-dist/web/viewer.html?file=/forms/" + path;
-  }
-})
+  };
+});
 
-.controller('NewInspectionDetailCtrl', function($scope, $stateParams, NewInspection) {
-  $scope.chat = NewInspection.get($stateParams.newinspectionId);
-})
+// Same thing as FormsCtrl and FormViewerCtrl, but for the Food Codes instead
+app.controller('FoodCodesCtrl', function($scope, FoodCodes) {
+  // Food Codes available for the user to search through
+  $scope.foodCodes = FoodCodes.all();
+});
 
+app.controller('FoodCodeViewerCtrl', function($scope, $stateParams, FoodCodes) {
+  $scope.foodCode = FoodCodes.get($stateParams.foodCodePath);
 
-.controller('AddViolationCtrl', function($scope) {
-
-})
+  // Gets the path to a Food Code for the user to search through
+  $scope.getFormPath = function(path) {
+    return "lib/pdfjs-dist/web/viewer.html?file=/foodcodes/" + path;
+  };
+});

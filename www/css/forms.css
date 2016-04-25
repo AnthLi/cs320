@@ -1,0 +1,10 @@
+#formSearchBox {
+  width: 100%;
+}
+
+#formSearchClear {
+  position: absolute;
+  right: 0;
+  top: 5px;
+  color: #bbbbbb;
+}
