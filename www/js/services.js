@@ -27,35 +27,20 @@ app.factory('Violations', function() {
 
 app.factory('Forms', function() {
   var forms = [{
-    path: '1.pdf',
-    name: 'Dates'
-  }, {
-    path: '2.pdf',
-    name: 'Hangman'
-  }, {
-    path: '3.pdf',
-    name: 'Post Fix Evaluator'
-  }, {
-    path: '4.pdf',
-    name: 'Tower of Hanoi (remember this?)'
-  }, {
-    path: '5.pdf',
-    name: 'Recursive Linked List'
-  }, {
-    path: '6_p1.pdf',
-    name: 'Grocery Store Simulator Part 1'
-  }, {
-    path: '6_p2.pdf',
-    name: 'Grocery Store Simulator Part 2'
-  }, {
-    path: '7.pdf',
-    name: 'Token Ring Simulator'
-  }, {
-    path: '8.pdf',
-    name: 'Binary Search Trees'
-  }, {
-    path: '9.pdf',
-    name: 'Priority Queue'
+    estName: 'Test Establishment',
+    date: 'January 1, 1970',
+    address: 'Test Street',
+    owner: 'Test Owner',
+    phone: '1-800-NUM-TEST',
+    pic: 'Test Pic',
+    permitNo: '0001',
+    inspector: 'Test Inspector',
+    riskLvl: 'Over 9000',
+    prevInspDate: 'N/A',
+    timeIn: '00:00:00',
+    timeOut: '00:00:00',
+    typeOfOp: 'Food Service',
+    typeOfInsp: 'Routine'
   }];
 
   return {
@@ -64,7 +49,7 @@ app.factory('Forms', function() {
     },
     get: function(formPath) {
       for (var i = 0; i < forms.length; i++) {
-        if (forms[i].path === formPath) {
+        if (forms[i].estName === formPath) {
           return forms[i];
         }
       }

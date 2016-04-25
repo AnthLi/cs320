@@ -1,5 +1,5 @@
 <!-- pdf.js source: https://goo.gl/VH5R3g -->
-<ion-view view-title="{{form.name}}">
+<ion-view view-title="{{form.estName}}">
   <!-- Back button -->
   <ion-nav-bar>
     <ion-nav-back-button id="backButton" class="button-clear">
@@ -8,6 +8,19 @@
   </ion-nav-bar>
 
   <ion-content>
-    <iframe id="formViewer" ng-src={{getFormPath(form.path)}}></iframe>
+    {{form.estName}} <br>
+    {{form.date}} <br>
+    {{form.address}} <br>
+    {{form.owner}} <br>
+    {{form.phone}} <br>
+    {{form.pic}} <br>
+    {{form.permitNo}} <br>
+    {{form.inspector}} <br>
+    {{form.riskLvl}} <br>
+    {{form.prevInspDate}} <br>
+    {{form.timeIn}} <br>
+    {{form.timeOut}} <br>
+    {{form.typeOfOp}} <br>
+    {{form.typeOfInsp}}
   </ion-content>
 </ion-view>
