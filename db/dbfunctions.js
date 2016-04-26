@@ -95,24 +95,24 @@ var updateForm = function(formObj){
 
 // search forms in the database
 // TODO - search on restaurant name, town, or inspection date
-var searchForm = function(searchObj){
-/*    // search by form_name
+var searchForm = function(formObj){
+    // search by form_name
 
-	var searchArr = [];
-	var sqlStr = "SELECT eid FROM Establishment WHERE ";
-	if searchObj has name field {
-		sqlStr += "name=?"
-		searchArr += searchObj.name;
-	}
-	if searchObj has town field {
-		sqlStr += "town=?";
-		searchArr += searchObj.town;
-	}
-	...
+//	var searchArr = [];
+//	var sqlStr = "SELECT eid FROM Establishment WHERE ";
+//	if searchObj has name field {
+//		sqlStr += "name=?"
+//		searchArr += searchObj.name;
+//	}
+//	if searchObj has town field {
+//		sqlStr += "town=?";
+//		searchArr += searchObj.town;
+//	}
+//	...
 
-    db.all("SELECT eid FROM Establishment WHERE name=?", searchArr, function(err, row){
+    db.all("SELECT * FROM Form WHERE name=?", formObj.name, function(err, rows){
         // return all rows
-    });*/
+    });
 }
 
 // remove a form from the database - not implementing this at this time
