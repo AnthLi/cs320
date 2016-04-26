@@ -13,15 +13,15 @@ app.controller('NewInspectionCtrl', function($scope) {
   // address
   // owner
   // phone
-  // PIC - person in charge
-  // permitno - permit number
+  // pic - person in charge
+  // permitNo - permit number
   // inspector
-  // risklvl
+  // riskLvl
   // prevInspDate - previous inspection date
-  // timein
-  // timeout
-  // typeofOp - type of operation (e.g. retail, food service, residential, etc.)
-  // typeofInsp - type of inspection (routine, re-inspection)
+  // timeIn
+  // timeOut
+  // typeOfOp - type of operation (e.g. retail, food service, residential, etc.)
+  // typeOfInsp - type of inspection (routine, re-inspection)
 
   // HACCP - i have no idea how to get the value from the checkbox :/
 

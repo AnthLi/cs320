@@ -1,10 +1,10 @@
 .container{
-	text-align: center;
-	color: #293241;
+  text-align: center;
+  color: #293241;
 }
 
 .logo {
-	padding-top: 15%;
+  padding-top: 15%;
 }
 
 .button {
@@ -12,18 +12,28 @@
 }
 
 .buttons{
-	padding-top: 30px;
+  padding-top: 30px;
 }
 
 img{
-	width: 60%;
-	height: 40%px;
+  width: 60%;
+  height: 40%px;
 }
 
 .content{
-	text-align: center;
+  text-align: center;
 }
 
 .hide{
-	display: none;
+  display: none;
+}
+
+#savecontinue {
+  margin-bottom: 20px;
+}
+
+@media (max-width: 740px) {
+  .sig {
+    display: inline-block;
+  }
 }

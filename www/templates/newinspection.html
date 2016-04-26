@@ -1,21 +1,20 @@
 <ion-view view-title="Inspection Form">
   <ion-content class="content">
-
     <!---.................................................................
     ...........................INSPECTION INFO............................
     ...................................................................-->
     <form id="new-form" ng-submit="processForm()">
-      <div class = "info">
+      <div class="info">
         <button class="button button-full button-positive">INSPECTION INFO</button>
 
         <div class="row">
-          <div class = "col form-group">
+          <div class="col form-group">
             <label class="item item-input">
               <input type="text" name="estname" class="form-control" ng-model="formData.estname" placeholder="Name of Food Establishment">
             </label>
           </div>
 
-          <div class = "col form-group">
+          <div class="col form-group">
             <label class="item item-input">
               <input type="text" name="date" class="form-control" ng-model="formData.date" placeholder="MM/DD/YYYY">
             </label>
@@ -23,13 +22,13 @@
         </div>
 
         <div class="row">
-          <div class = "col form-group">
+          <div class="col form-group">
             <label class="item item-input">
               <input type="text" name="address" class="form-control" ng-model="formData.address" placeholder="Address">
             </label>
           </div>
 
-          <div class = "col form-group">
+          <div class="col form-group">
             <label class="item item-input">
               <input type="text" name="owner" class="form-control" ng-model="formData.owner" placeholder="Owner">
             </label>
@@ -37,13 +36,13 @@
         </div>
 
         <div class="row">
-          <div class = "col form-group">
+          <div class="col form-group">
             <label class="item item-input">
               <input type="text" name="phone" class="form-control" ng-model="formData.phone" placeholder="Telephone">
             </label>
           </div>
 
-          <div class = "col form-group">
+          <div class="col form-group">
             <label class="item item-input">
               <input type="text" name="PIC" class="form-control" ng-model="formData.PIC" placeholder="Person In Charge">
             </label>
@@ -51,13 +50,13 @@
         </div>
 
         <div class="row">
-          <div class = "col form-group">
+          <div class="col form-group">
             <label class="item item-input">
               <input type="text" name="permitno" class="form-control" ng-model="formData.permitno" placeholder="Permit No.">
             </label>
           </div>
 
-          <div class = "col form-group">
+          <div class="col form-group">
             <label class="item item-input">
               <input type="text" name="inspector" class="form-control" ng-model="formData.inspector" placeholder="Inspector">
             </label>
@@ -65,13 +64,13 @@
         </div>
 
         <div class="row">
-          <div class = "col form-group">
+          <div class="col form-group">
             <label class="item item-input">
               <input type="text" name="risklvl" class="form-control" ng-model="formData.risklvl" placeholder="Risk Level">
             </label>
           </div>
 
-          <div class = "col form-group">
+          <div class="col form-group">
             <label class="item item-input">
               <input type="text" name="prevInspDate" class="form-control" ng-model="formData.prevInspDate" placeholder="Prev. Inspection Date">
             </label>
@@ -85,21 +84,21 @@
             </label>
           </div>
 
-          <div class = "col form-group">
+          <div class="col form-group">
             <label class="item item-input item-stacked-label">
               <span class="input-label">Time Out:</span><input type="time" class="form-control" ng-model="formData.timeout" placeholder="">
             </label>
           </div>
         </div>
 
-        <div class = "row">
-          <div class = "col form-group">
+        <div class="row">
+          <div class="col form-group">
             <ion-checkbox name="haccp" id="haccp" ng-model="filter.blue">HACCP</ion-checkbox>
           </div>
         </div>
 
-        <div class = "row">
-          <div class = "col form-group">
+        <div class="row">
+          <div class="col form-group">
             <div class="list">
               <label class="item item-input item-select">
                 <div class="input-label">
@@ -120,8 +119,8 @@
           </div>
         </div>
 
-        <div class = "row">
-          <div class = "col form-group">
+        <div class="row">
+          <div class="col form-group">
             <div class="list">
               <label class="item item-input item-select">
                 <div class="input-label">
@@ -138,10 +137,10 @@
         </div>
       </div>
 
-    <!---.................................................................
-    ...........................VIOLATIONS.................................
-    ...................................................................-->
-      <div class = "violations">
+      <!---.................................................................
+      ...........................VIOLATIONS.................................
+      ...................................................................-->
+      <div class="violations">
         <button class="button button-full button-assertive">VIOLATIONS</button>
          <!--INSERT DATA FIELDS-->
 
@@ -150,26 +149,28 @@
         </a>
       </div>
 
-    <!---.................................................................
-    ...........................SIGNATURE..................................
-    ...................................................................-->
-      <div class = "signature">
+      <!---.................................................................
+      ...........................SIGNATURE..................................
+      ...................................................................-->
+      <div class="signature">
         <button class="button button-full button-dark">SIGNATURE</button>
 
-        <div class = "sig row">
-          <div class = "col">
-            <button class="button icon-left ion-android-close button-clear button-stable button-medium">_____________________</button>
+        <div class="sig row">
+          <div class="col">
+            <button class="sigline button icon-left ion-android-close button-clear button-stable button-medium">
+              ________________________________________
+            </button>
           </div>
 
-
-          <div class = "col">
-            <button class="button icon-left ion-android-close button-clear button-stable button-medium">_____________________</button>
+          <div class="col">
+            <button class="sigline button icon-left ion-android-close button-clear button-stable button-medium">
+              ________________________________________
+            </button>
           </div>
         </div>
       </div>
 
-      <a class="button icon-right ion-chevron-right button-balanced">Save & Continue</a>
+      <a id="savecontinue" class="button icon-right ion-chevron-right button-balanced">Save & Continue</a>
     </form>
-
   </ion-content>
 </ion-view>
