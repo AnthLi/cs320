@@ -222,16 +222,18 @@
 <!--......................................................................-->
 
 
-    <div class="photos" span="inline-block">
-      <button class="button button-full button-balanced">ADD PHOTO</button>
-    <!--  <div class="images">
-      <img src="img/ios-camera-icon.png" /> <h5>Take Photo</h5>
-      <img src = "img/gallery.png" /> <h5>Choose from Gallery</h5>
 
-
-</div>
--->
-
+    <button class="button button-full button-balanced">ADD PHOTO</button>
+      <div class="photos">
+        <div class = "row">
+          <div class = "col">
+            <button class="button icon-left ion-ios-camera button-clear button-dark button-large center">Take Photo</button>
+          </div>
+          <div class = "col">
+            <button class="button icon-left ion-ios-photos button-clear button-dark button-large center">Choose From Gallery</button>
+          </div>
+        </div>
+      </div>
     </div>
 
 <!--......................................................................-->
@@ -248,11 +250,10 @@
 
     <div class="description">
       <button class="button button-full button-positive">ADD DESCRIPTION</button>
-
-
-
-
-    </div>
+        <label class="item item-input">
+          <input type="text" placeholder="Tap to add description">
+        </label>
+      </div>
 
 
   </ion-content>
