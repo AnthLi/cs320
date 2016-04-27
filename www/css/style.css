@@ -7,6 +7,14 @@
   padding-top: 15%;
 }
 
+.photos{
+	text-align: center;
+}
+.images{
+	width: 125px;
+	height: 125px;
+}
+
 .button {
   position: relative;
 }
