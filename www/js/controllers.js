@@ -52,7 +52,7 @@ app.controller('FormsCtrl', function($scope, Forms) {
 });
 
 app.controller('FormViewerCtrl', function($scope, $stateParams, Forms) {
-  $scope.form = Forms.get($stateParams.formName);
+  $scope.form = Forms.get($stateParams.formName, $stateParams.date);
 });
 
 // Same thing as FormsCtrl and FormViewerCtrl, but for the Food Codes instead
