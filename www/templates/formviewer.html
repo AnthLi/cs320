@@ -1,18 +1,53 @@
+
+<!--
 <ion-view view-title="{{form.estName}}">
-  <!-- Back button -->
+  Back button 
   <ion-nav-bar>
     <ion-nav-back-button id="backButton" class="button-clear">
       <i class="ion-chevron-left"></i> Back
     </ion-nav-back-button>
   </ion-nav-bar>
 
-	<!-- Content -->
+	
+	<ion-content>
+		<div id="estName">
+			{{form.estName}}
+		</div>
+		
+		<div id="parent">
+			<div id="row">
+				<div id="child_left">
+					Address: <br> {{form.address}} <br>
+					Telephone: <br> {{form.phone}} <br>
+					Owner: <br> {{form.owner}} <br>
+					PIC: <br> {{form.PIC}} <br>
+					Inspector: <br> {{form.inspector}} <br>
+					Operation Type: <br> {{form.typeOfOp}} <br>
+					Inspection Type: <br> {{form.typeOfInsp}}
+				</div>
+				<div id="child_middle">
+					Date: {{form.date}} <br>
+					Risk Level: {{form.riskLvl}} <br>
+					Time in: {{form.timeIn}} <br>
+					Time out: {{form.timeOut}}
+				</div>
+			</div>
+		</div>
+
+		<div id="violations">
+			Violations:
+		</div>
+	</ion-content>
+
+
+	Shit 
 	<ion-content>
 		<div id="estName">
 			{{form.estName}}
 		</div>
 
 		<div id="date">
+			Inspector: {{form.inspector}} <br>
 			Inspection date: {{form.date}}
 		</div>
 
@@ -30,11 +65,10 @@
 			</div>
 		</div>
 
-		<!-- No need for pi
+	
 		<div id="pic">
 			{{form.pic}}
 		</div>
-		-->
 
 		<div id="permitNo">
 			Permit Number: {{form.permitNo}}
@@ -63,4 +97,112 @@
 			{{form.typeOfInsp}}
 		</div>
 	</ion-content>
+
+</ion-view>
+-->
+
+<ion-view view-title="{{form.estName}}">
+  <ion-content class="content">
+    <form id="new-form" ng-submit="processForm()">
+      <div class="info">
+        <button class="button button-full button-positive">INSPECTION INFO</button>
+
+        <div class="row">
+          <div class="col form-group">
+          	Name: <br>
+            {{form.estName}}
+          </div>
+
+          <div class="col form-group">
+            Date: <br>
+            {{form.date}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-group">
+            Address: <br>
+            {{form.address}}
+          </div>
+
+          <div class="col form-group">
+            Owner: <br>
+            {{form.owner}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-group">
+            Phone: <br>
+            {{form.phone}}
+          </div>
+
+          <div class="col form-group">
+            PIC: <br>
+            {{form.PIC}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-group">
+            Permit Number: <br>
+            {{form.permitNo}}
+          </div>
+
+          <div class="col form-group">
+            Inspector: <br>
+            {{form.inspector}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-group">
+            Risk Level: <br>
+            {{form.riskLvl}}
+          </div>
+
+          <div class="col form-group">
+            Previous Inspection Date:
+            {{form.prevInspDate}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-group">
+            Time in: <br>
+            {{form.timeIn}}
+          </div>
+
+          <div class="col form-group">
+            Time out: <br>
+            {{form.timeOut}}
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-group">
+            Type of Operation: <br>
+            {{form.typeOfOp}}
+          </div>
+
+         	<div class="col form-group">
+            Type of Inspection: <br>
+            {{form.typeOfInsp}}
+          </div>
+        </div>
+
+      <!---.................................................................
+      ...........................VIOLATIONS.................................
+      ...................................................................-->
+      <div class="violations">
+        <button class="button button-full button-assertive">VIOLATIONS</button>
+        	List of Violations
+        	<!-- Breaks needed to properly space bottom -->
+        	<br>
+        	<br>
+        	<br>
+
+      </div>
+    </form>
+  </ion-content>
 </ion-view>

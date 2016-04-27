@@ -28,9 +28,10 @@ app.factory('Violations', function() {
 app.factory('Forms', function() {
   var forms = [{
     estName: 'Ridgy-D\'s',
-    date: 'January 1, 1970',
+    date: '1/1/2016',
     address: '144 Ridgway Lane Sunderland MA, 01001 US',
     owner: 'John Ridgbay',
+    PIC: 'Spencer Gagnon',
     phone: '1-800-THI-SSUX',
     pic: 'pic/path',
     permitNo: '0001',

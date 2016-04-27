@@ -23,27 +23,37 @@
 	font-size: 200%
 }
 
-#date {
-	text-align: center;
-}
-
-#parent{
-	width: 100%;
-	float: left;
-	border-color: black;
+#parent {
+	display: table;
 	border-style: solid;
+	border-color: black;
 	border-width: 1px;
 }
 
+#row {
+	display: table-row;
+}
+
 #child_left {
-	width: 50%;
-	float: left;
+	display: table-cell;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
 }
 
-#time {
-
+#child_middle {
+	display: table-cell;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
 }
 
-#time_in {
-
+#violations {
+	padding-top: 2%;
+	padding-bottom: 2%;
+	width: 100%;
+	text-align: center;
+	text-decoration: underline;
+	font-weight: bold;
+	font-size: 150%
 }
