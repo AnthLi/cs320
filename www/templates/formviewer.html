@@ -1,26 +1,66 @@
-<!-- pdf.js source: https://goo.gl/VH5R3g -->
 <ion-view view-title="{{form.estName}}">
-  <!-- Back button -->
-  <ion-nav-bar>
-    <ion-nav-back-button id="backButton" class="button-clear">
-      <i class="ion-chevron-left"></i>
-    </ion-nav-back-button>
-  </ion-nav-bar>
+	<!-- Back button -->
+	<ion-nav-bar>
+		<ion-nav-back-button id="backButton" class="button-clear">
+			<i class="ion-chevron-left"></i>
+		</ion-nav-back-button>
+	</ion-nav-bar>
 
-  <ion-content>
-    {{form.estName}} <br>
-    {{form.date}} <br>
-    {{form.address}} <br>
-    {{form.owner}} <br>
-    {{form.phone}} <br>
-    {{form.pic}} <br>
-    {{form.permitNo}} <br>
-    {{form.inspector}} <br>
-    {{form.riskLvl}} <br>
-    {{form.prevInspDate}} <br>
-    {{form.timeIn}} <br>
-    {{form.timeOut}} <br>
-    {{form.typeOfOp}} <br>
-    {{form.typeOfInsp}}
-  </ion-content>
+	<!-- Content -->
+	<ion-content>
+		<div id="estName">
+			{{form.estName}}
+		</div>
+
+		<div id="date">
+			Inspection date: {{form.date}}
+		</div>
+
+		<div id="parent">
+			<div id="child_left">
+				<div id="owner">
+					Owner: {{form.owner}}
+				</div>
+				<div id="phone" >
+					Phone: {{form.phone}}
+				</div>
+			</div>
+			<div id="address">
+				{{form.address}}
+			</div>
+		</div>
+
+		<!-- No need for pi
+		<div id="pic">
+			{{form.pic}}
+		</div>
+		-->
+
+		<div id="permitNo">
+			Permit Number: {{form.permitNo}}
+		</div>
+		<div id="inspector">
+			Inspector: {{form.inspector}}
+		</div>
+		<div id="riskLvl">
+			Risk Level: {{form.riskLvl}}
+		</div>
+		<div id="prevInspDate">
+			Previous Inspection: {{form.prevInspDate}}
+		</div>
+		<div id="time">
+			<div id="time_in">
+				Time in: {{form.timeIn}}
+			</div> 
+			<div>
+				Time out:{{form.timeOut}}
+			</div>
+		</div>
+		<div id="typeOfOp">
+			{{form.typeOfOp}}
+		</div>
+		<div id="typeOfInsp">
+			{{form.typeOfInsp}}
+		</div>
+	</ion-content>
 </ion-view>

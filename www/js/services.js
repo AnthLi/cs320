@@ -27,18 +27,18 @@ app.factory('Violations', function() {
 
 app.factory('Forms', function() {
   var forms = [{
-    estName: 'Test Establishment',
+    estName: 'Ridgy-D\'s',
     date: 'January 1, 1970',
-    address: 'Test Street',
-    owner: 'Test Owner',
-    phone: '1-800-NUM-TEST',
-    pic: 'Test Pic',
+    address: '144 Ridgway Lane Sunderland MA, 01001 US',
+    owner: 'John Ridgbay',
+    phone: '1-800-THI-SSUX',
+    pic: 'pic/path',
     permitNo: '0001',
-    inspector: 'Test Inspector',
+    inspector: 'Dude Magoo',
     riskLvl: 'Over 9000',
     prevInspDate: 'N/A',
     timeIn: '00:00:00',
-    timeOut: '00:00:00',
+    timeOut: '00:00:01',
     typeOfOp: 'Food Service',
     typeOfInsp: 'Routine'
   }];
