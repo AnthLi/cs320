@@ -27,15 +27,14 @@ app.factory('Violations', function() {
 
 app.factory('Forms', function() {
   var forms = [{
-    estName: 'Ridgy-D\'s',
-    date: '1/1/2016',
-    address: '144 Ridgway Lane Sunderland MA, 01001 US',
-    owner: 'John Ridgbay',
-    PIC: 'Spencer Gagnon',
-    phone: '1-800-THI-SSUX',
-    pic: 'pic/path',
+    estName: 'Apartment 101',
+    date: 'January 1, 1970',
+    address: '101 Complex Street, Amherst, MA 01003',
+    owner: 'Some guy',
+    phone: '1-800-COM-PLEX',
+    pic: 'Some PIC',
     permitNo: '0001',
-    inspector: 'Simple Inspector',
+    inspector: 'Some Inspector',
     riskLvl: '42',
     prevInspDate: 'N/A',
     timeIn: '00:00:00',
@@ -48,7 +47,7 @@ app.factory('Forms', function() {
     address: '123 ABC Street, Amherst, MA 01003',
     owner: 'XYZ',
     phone: '1-234-567-8910',
-    pic: 'pic/path',
+    pic: 'XYZ',
     permitNo: '1234',
     inspector: 'Gadget',
     riskLvl: '1',
@@ -63,7 +62,7 @@ app.factory('Forms', function() {
     address: '123 ABC Street, Amherst, MA 01003',
     owner: 'XYZ',
     phone: '1-234-567-8910',
-    pic: 'pic/path',
+    pic: 'XYZ',
     permitNo: '1234',
     inspector: 'Gadget',
     riskLvl: '1',
@@ -76,17 +75,17 @@ app.factory('Forms', function() {
     estName: 'Apartment 101',
     date: 'January 1, 1971',
     address: '101 Complex Street, Amherst, MA 01003',
-    owner: 'John Ridgbay',
+    owner: 'Some guy',
     phone: '1-800-COM-PLEX',
-    pic: 'pic/path',
+    pic: 'Some PIC',
     permitNo: '0001',
-    inspector: 'Simple Inspector',
+    inspector: 'Some Inspector',
     riskLvl: '42',
     prevInspDate: 'January 1, 1970',
     timeIn: '00:00:00',
     timeOut: '00:00:01',
     typeOfOp: 'Residential',
-    typeOfInsp: 'Routine'
+    typeOfInsp: 'Re-inspection'
   }];
 
   return {
