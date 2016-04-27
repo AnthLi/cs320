@@ -4,8 +4,8 @@
 }
 
 .logo {
-  padding-top: 50px;
   max-width: 400px;
+  padding-top: 50px;
 }
 
 .button {
@@ -13,7 +13,9 @@
 }
 
 .buttons{
+  max-width: 400px;
   padding-top: 30px;
+  margin: 0 auto;
 }
 
 img{
