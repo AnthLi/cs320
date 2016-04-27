@@ -31,22 +31,17 @@ db.run("CREATE TABLE IF NOT EXISTS Form( \
 db.run("CREATE TABLE IF NOT EXISTS Violation( \
 			vid				INTEGER PRIMARY KEY AUTOINCREMENT, \
 			fid				INTEGER NOT NULL, \
-			itemNo			TEXT, \
+			tid				INTEGER NOT NULL, \
 			codeRef			TEXT, \
-			isCrit			BOOLEAN NOT NULL, \
+			isCrit			TEXT NOT NULL, \
 			description 	TEXT NOT NULL, \
 			dateVerified 	TEXT, \
-			FOREIGN KEY(fid) REFERENCES Form(fid) )");
+			FOREIGN KEY(fid) REFERENCES Form(fid), \
+			FOREIGN KEY(tid) REFERENCES Vtype(tid) )");
 
 db.run("CREATE TABLE IF NOT EXISTS Vtype( \
 			tid		INTEGER PRIMARY KEY, \
 			type 	TEXT NOT NULL )");
-
-db.run("CREATE TABLE IF NOT EXISTS xViolationVtype( \
-			vid	INTEGER NOT NULL, \
-			tid	INTEGER NOT NULL, \
-			FOREIGN KEY(vid) REFERENCES Violation(vid), \
-			FOREIGN KEY(tid) REFERENCES Vtype(tid) )");
 
 db.run("CREATE TABLE IF NOT EXISTS Picture( \
 			pid 		INTEGER PRIMARY KEY AUTOINCREMENT, \
