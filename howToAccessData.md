@@ -41,10 +41,12 @@ establishment = {
 Each entry in the violations array should be an object in the following format:  
 ```javascript
 violation = {
+  tid = integer // this number references which checkbox this references
   codeRef = string
-  isCrit = boolean
+  isCrit = string // should be either C, N, or R
   description = string
-  pics = []  //not sure how this will be implemented on the backend, so ignore it for now
+  dateVerified = string
+  pics = []  // not sure how this will be implemented on the backend, so ignore it for now
 }
 ```  
 When passing objects, it is ok to leave some fields as null.  
