@@ -7,31 +7,33 @@ var db = new sqlite3.Database(__dirname + '/inspections.db');
 
 // add a new form to the database
 var addForm = function(formObj){
-	var establishment = [
+	var form = [
 		formObj.name,
+		formObj.owner,
 		formObj.pic,
-		formObj.addr1,
-		formObj.addr2,
+		formObj.inspector,
+		formObj.address,
 		formObj.town,
 		formObj.state,
-		formObj.zip];
-	var formDate = formObj.date;
+		formObj.zip,
+		formObj.phone,
+		formObj.permitNum,
+		formObj.date,
+		formObj.riskLvl,
+		formObj.prevInspectDate,
+		formObj.timeIn,
+		formObj.timeOut,
+		formObj.opType,
+		formObj.inspType,
+		formObj.haccp ];
 	var violations = formObj.violations;
 
-	var insertEstablishment = function(){
-		db.get("SELECT eid FROM Establishment WHERE name=?",formObj.name,function(err, row){
-			if(row){
-				insertForm(row.eid);
-			}else{
-				db.run("INSERT INTO Establishment(name,pic,addr1,addr2,town,state,zip) VALUES(?,?,?,?,?,?,?)",establishment,function(){
-					insertForm(this.lastID);
-				});
-			}
-		});
-	}
-
-	var insertForm = function(eid){
-		db.run("INSERT INTO Form(eid,date) VALUES(?,?)",[eid,formDate],function(){
+	var insertForm = function(){
+		var sqlstr = "INSERT INTO Form(name,owner,pic,inspector,address, \
+					town,state,zip,phone,permitNum,date,riskLvl, \
+					prevInspectDate,timeIn,timeOut,opType,inspType,haccp) \
+					VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		db.run(sqlstr,form,function(){
 			insertViolations(this.lastID);
 		});
 	}
@@ -40,10 +42,13 @@ var addForm = function(formObj){
 		for(var i=0;i<violations.length;i++){
 			var violation = [
 				fid,
+				violations[i].itemNo,
 				violations[i].codeRef,
 				violations[i].isCrit,
-				violations[i].description];
-			db.run("INSERT INTO Violation(fid,codeRef,isCrit,description) VALUES(?,?,?,?)",violation,function(){
+				violations[i].description,
+				violations[i].dateVerified];
+			db.run("INSERT INTO Violation(fid,itemNo,codeRef,isCrit,description,dateVerified) \
+					VALUES(?,?,?,?,?,?)",violation,function(){
 				insertPictures(this.lastID);
 			});
 		}
@@ -53,7 +58,7 @@ var addForm = function(formObj){
 		// TODO
 	}
 
-	db.serialize(insertEstablishment());
+	db.serialize(insertForm());
 }
 
 

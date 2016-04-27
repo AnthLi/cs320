@@ -5,6 +5,8 @@
 var sqlite3 = require('sqlite3');
 var db = new sqlite3.Database(__dirname + '/inspections.db');
 
+
+db.serialize(function(){
 db.run("CREATE TABLE IF NOT EXISTS Form( \
 			fid				INTEGER PRIMARY KEY AUTOINCREMENT, \
 			name			TEXT NOT NULL, \
@@ -73,3 +75,5 @@ db.run("INSERT INTO Vtype(tid,type) VALUES(19,'Hot and Cold Holding')");
 db.run("INSERT INTO Vtype(tid,type) VALUES(20,'Time as a Public Health Control')");
 db.run("INSERT INTO Vtype(tid,type) VALUES(21,'Food and Food Preparation for HSP')");
 db.run("INSERT INTO Vtype(tid,type) VALUES(22,'Posting of Consumer Advisories')");
+
+});
