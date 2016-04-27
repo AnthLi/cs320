@@ -21,6 +21,12 @@
 	display: block;
 }
 
+.pics{
+  font-size: 12px;
+}
+
+}
+
 
 .button {
   position: relative;
@@ -45,9 +51,18 @@ img{
   display: none;
 }
 
+.corr-input-label{
+  font-size: 11px;
+}
+
 .checkboxes{
 	font-family: "Calibri";
 }
+
+.correctiveaction{
+	font-family: "Calibri";
+}
+
 #savecontinue {
   margin-bottom: 20px;
 }
