@@ -80,7 +80,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   })
 
   .state('page.formviewer', {
-    url: '/forms/:formName',
+    url: '/forms/:formName?date=',
     views: {
       'page-forms': {
         templateUrl: 'templates/formviewer.html',

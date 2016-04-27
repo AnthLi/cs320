@@ -27,19 +27,64 @@ app.factory('Violations', function() {
 
 app.factory('Forms', function() {
   var forms = [{
-    estName: 'Ridgy-D\'s',
+    estName: 'Apartment 101',
     date: 'January 1, 1970',
-    address: '144 Ridgway Lane Sunderland MA, 01001 US',
-    owner: 'John Ridgbay',
-    phone: '1-800-THI-SSUX',
+    address: '101 Complex Street, Amherst, MA 01003',
+    owner: 'Dude down the street',
+    phone: '1-800-COM-PLEX',
     pic: 'pic/path',
     permitNo: '0001',
-    inspector: 'Dude Magoo',
-    riskLvl: 'Over 9000',
+    inspector: 'Simple Inspector',
+    riskLvl: '42',
+    prevInspDate: 'N/A',
+    timeIn: '00:00:00',
+    timeOut: '00:00:01',
+    typeOfOp: 'Residential',
+    typeOfInsp: 'Routine'
+  }, {
+    estName: 'Restaurant ABC',
+    date: 'February 1, 1970',
+    address: '123 ABC Street, Amherst, MA 01003',
+    owner: 'XYZ',
+    phone: '1-234-567-8910',
+    pic: 'pic/path',
+    permitNo: '1234',
+    inspector: 'Gadget',
+    riskLvl: '1',
     prevInspDate: 'N/A',
     timeIn: '00:00:00',
     timeOut: '00:00:01',
     typeOfOp: 'Food Service',
+    typeOfInsp: 'Routine'
+  }, {
+    estName: 'Restaurant ABC',
+    date: 'March 1, 1970',
+    address: '123 ABC Street, Amherst, MA 01003',
+    owner: 'XYZ',
+    phone: '1-234-567-8910',
+    pic: 'pic/path',
+    permitNo: '1234',
+    inspector: 'Gadget',
+    riskLvl: '1',
+    prevInspDate: 'February 1, 1970',
+    timeIn: '00:00:01',
+    timeOut: '00:00:02',
+    typeOfOp: 'Food Service',
+    typeOfInsp: 'Re-Inspection'
+  }, {
+    estName: 'Apartment 101',
+    date: 'January 1, 1971',
+    address: '101 Complex Street, Amherst, MA 01003',
+    owner: 'John Ridgbay',
+    phone: '1-800-COM-PLEX',
+    pic: 'pic/path',
+    permitNo: '0001',
+    inspector: 'Simple Inspector',
+    riskLvl: '42',
+    prevInspDate: 'January 1, 1970',
+    timeIn: '00:00:00',
+    timeOut: '00:00:01',
+    typeOfOp: 'Residential',
     typeOfInsp: 'Routine'
   }];
 
@@ -47,9 +92,9 @@ app.factory('Forms', function() {
     all: function() {
       return forms;
     },
-    get: function(formName) {
+    get: function(formName, date) {
       for (var i = 0; i < forms.length; i++) {
-        if (forms[i].estName === formName) {
+        if (forms[i].estName === formName && forms[i].date === date) {
           return forms[i];
         }
       }
