@@ -21,9 +21,11 @@ app.run(function($ionicPlatform) {
   });
 });
 
-// Place the nav-bar on the bottom of the screen for Android
 app.config(['$ionicConfigProvider', function($ionicConfigProvider) {
+  // Place the nav-bar on the bottom of the screen for Android
   $ionicConfigProvider.tabs.position('bottom');
+  // Remove the back button text so it doesn't display the previous view's name
+  $ionicConfigProvider.backButton.previousTitleText(false).text('');
 }]);
 
 // Ionic uses AngularUI Router which uses the concept of states
@@ -78,7 +80,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
   })
 
   .state('page.formviewer', {
-    url: '/forms/:formPath',
+    url: '/forms/:formName?date=',
     views: {
       'page-forms': {
         templateUrl: 'templates/formviewer.html',

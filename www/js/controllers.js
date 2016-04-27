@@ -13,15 +13,15 @@ app.controller('NewInspectionCtrl', function($scope) {
   // address
   // owner
   // phone
-  // PIC - person in charge
-  // permitno - permit number
+  // pic - person in charge
+  // permitNo - permit number
   // inspector
-  // risklvl
+  // riskLvl
   // prevInspDate - previous inspection date
-  // timein
-  // timeout
-  // typeofOp - type of operation (e.g. retail, food service, residential, etc.)
-  // typeofInsp - type of inspection (routine, re-inspection)
+  // timeIn
+  // timeOut
+  // typeOfOp - type of operation (e.g. retail, food service, residential, etc.)
+  // typeOfInsp - type of inspection (routine, re-inspection)
 
   // HACCP - i have no idea how to get the value from the checkbox :/
 
@@ -52,12 +52,7 @@ app.controller('FormsCtrl', function($scope, Forms) {
 });
 
 app.controller('FormViewerCtrl', function($scope, $stateParams, Forms) {
-  $scope.form = Forms.get($stateParams.formPath);
-
-  // Gets the path to a form so that the Form Viewer can open it
-  $scope.getFormPath = function(path) {
-    return "lib/pdfjs-dist/web/viewer.html?file=/forms/" + path;
-  };
+  $scope.form = Forms.get($stateParams.formName, $stateParams.date);
 });
 
 // Same thing as FormsCtrl and FormViewerCtrl, but for the Food Codes instead
