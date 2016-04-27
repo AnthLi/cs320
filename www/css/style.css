@@ -28,6 +28,9 @@ img{
   display: none;
 }
 
+.checkboxes{
+	font-family: "Calibri";
+}
 #savecontinue {
   margin-bottom: 20px;
 }
