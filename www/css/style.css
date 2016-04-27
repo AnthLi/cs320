@@ -4,7 +4,8 @@
 }
 
 .logo {
-  padding-top: 15%;
+  max-width: 400px;
+  padding-top: 50px;
 }
 
 .photos{
@@ -20,7 +21,9 @@
 }
 
 .buttons{
+  max-width: 400px;
   padding-top: 30px;
+  margin: 0 auto;
 }
 
 img{
