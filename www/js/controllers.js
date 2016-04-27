@@ -66,6 +66,12 @@ app.controller('FoodCodeViewerCtrl', function($scope, $stateParams, FoodCodes) {
 
   // Gets the path to a Food Code for the user to search through
   $scope.getFormPath = function(path) {
-    return "lib/pdfjs-dist/web/viewer.html?file=/foodcodes/" + path;
+    var formViewerURL = 'lib/pdfjs-dist/web/viewer.html?file=';
+    var formURL = '/foodcodes/';
+    if (ionic.Platform.isIOS()) {
+      formURL = '../../../foodcodes/';
+    }
+
+    return formViewerURL + formURL + path;
   };
 });

@@ -42,12 +42,12 @@ var addForm = function(formObj){
 		for(var i=0;i<violations.length;i++){
 			var violation = [
 				fid,
-				violations[i].itemNo,
+				violations[i].tid,
 				violations[i].codeRef,
 				violations[i].isCrit,
 				violations[i].description,
 				violations[i].dateVerified];
-			db.run("INSERT INTO Violation(fid,itemNo,codeRef,isCrit,description,dateVerified) \
+			db.run("INSERT INTO Violation(fid,tid,codeRef,isCrit,description,dateVerified) \
 					VALUES(?,?,?,?,?,?)",violation,function(){
 				insertPictures(this.lastID);
 			});
