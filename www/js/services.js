@@ -1,5 +1,61 @@
 var app = angular.module('inspectorGadget.services', []);
 
+app.factory('NewInspectionFields', function() {
+  var rows = [{
+    name: [
+      'estName',
+      'date'
+    ],
+    model: [
+      'formData.estName',
+      'formData.date'
+    ],
+    placeholder: [
+      'Name of Food Establishment',
+      'MM/DD/YYYY'
+    ]
+  }, {
+    name: [
+      'address',
+      'owner'
+    ],
+    model: [
+      'formData.address',
+      'formData.owner'
+    ],
+    placeholder: [
+      'Address',
+      'Owner'
+    ]
+  }, {
+    name: [
+      'phone',
+      'PIC'
+    ],
+    model: [
+      'formData.phone',
+      'formData.PIC'
+    ],
+    placeholder: [
+      'Telephone',
+      'Person In Charge'
+    ]
+  }, {
+    name: [
+      'permitno',
+      'inspector'
+    ],
+    model: [
+      'formData.permitno',
+      'formData.inspector'
+    ],
+    placeholder: [
+      'Permit No.',
+      'Inspector'
+    ]
+  }]
+});
+
 app.factory('Violations', function() {
   var violations = [{
     title: 'FOOD PROTECTION MANAGEMENT',
