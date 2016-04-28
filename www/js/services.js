@@ -1,7 +1,7 @@
 var app = angular.module('inspectorGadget.services', []);
 
 app.factory('NewInspectionFields', function() {
-  var rows = [{
+  var fieldRows = [{
     name: [
       'estName',
       'date'
@@ -69,8 +69,8 @@ app.factory('NewInspectionFields', function() {
   }];
 
   return {
-    allRows: function() {
-      return rows;
+    allFieldRows: function() {
+      return fieldRows;
     }
   }
 });

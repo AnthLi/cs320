@@ -7,17 +7,17 @@
       <div class="info">
         <button class="button button-full button-positive">INSPECTION INFO</button>
 
-        <div class="row" ng-repeat="field in rows">
-          {{field}}
+        <div class="row" ng-repeat="obj in fieldRows">
+          {{obj.model[0]}}, {{obj.model[1]}}
           <!-- <div class="col form-group">
             <label class="item item-input">
-              <input type="text" name="{{field.name[0]}}" class="form-control" ng-model="{{field.model[0]}}" placeholder="{{field.placeholder[0]}}">
+              <input type="text" class="form-control" name="{{obj.name[0]}}" ng-model="obj.model[0][key]" placeholder="{{obj.placeholder[0]}}">
             </label>
           </div>
 
           <div class="col form-group">
             <label class="item item-input">
-              <input type="text" name="{{field.name[1]}}" class="form-control" ng-model="{{field.model[1]}}" placeholder="{{field.placeholder[1]}}">
+              <input type="text" class="form-control" name="{{obj.name[1]}}" ng-model="obj.model[1][key]" placeholder="{{obj.placeholder[1]}}">
             </label>
           </div> -->
         </div>

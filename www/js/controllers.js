@@ -3,7 +3,8 @@ var app = angular.module('inspectorGadget.controllers', []);
 app.controller('DashCtrl', function($scope) {});
 
 app.controller('NewInspectionCtrl', function($scope, NewInspectionFields) {
-  $scope.rows = NewInspectionFields.allRows();
+  $scope.fieldRows = NewInspectionFields.allFieldRows();
+
   $scope.formData = {};
   // Yo database dogs...
   // $scope.formData is a javascript object and contains all the formData
@@ -27,7 +28,7 @@ app.controller('NewInspectionCtrl', function($scope, NewInspectionFields) {
 
   $scope.processForm = function() {
     //TODO: do something with the form data
-  }
+  };
 });
 
 app.controller('AddViolationCtrl', function($scope, $stateParams, Violations) {
