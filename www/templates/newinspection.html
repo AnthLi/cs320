@@ -9,23 +9,25 @@
         DELETE THIS IN THE CODE, IT ONLY SHOWS THE DATA-BINDING BETWEEN THE
         FORM AND THE formData OBJECT (fill out the form and watch this bitch
         grow)
-        {{formData}}
+        <div ng-repeat="(key, value) in formData">
+          {{key}}: {{value}}
+        </div>
 
         <!--
         The ng-repeat here significantly shortened the code for the new
         insepction. Rather than having each field have its own place here,
         ng-repeat allowed for the dynamic creation of the fields instead
         -->
-        <div class="row" ng-repeat="obj in fieldRows">
+        <div class="row" ng-repeat="field in fields">
           <div class="col form-group">
             <label class="item item-input">
-              <input type="text" class="form-control" name="{{obj.name[0]}}" ng-model="formData[obj.model[0]]" placeholder="{{obj.placeholder[0]}}">
+              <input type="text" class="form-control" name="{{field.name[0]}}" ng-model="formData[field.model[0]]" placeholder="{{field.temp[0]}}">
             </label>
           </div>
 
           <div class="col form-group">
             <label class="item item-input">
-              <input type="text" class="form-control" name="{{obj.name[1]}}" ng-model="formData[obj.model[1]]" placeholder="{{obj.placeholder[1]}}">
+              <input type="text" class="form-control" name="{{field.name[1]}}" ng-model="formData[field.model[1]]" placeholder="{{field.temp[1]}}">
             </label>
           </div>
         </div>

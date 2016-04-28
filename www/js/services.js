@@ -1,7 +1,11 @@
 var app = angular.module('inspectorGadget.services', []);
 
 app.factory('NewInspectionFields', function() {
-  var fieldRows = [{
+  // The fields are paired together based on how the front-end shows it.
+  // This is to help dynamically generate the input fields rather than
+  // hard-coding every single one of them, decreasing the amount of code
+  // being written
+  var newInspFields = [{
     name: [
       'estName',
       'date'
@@ -10,7 +14,7 @@ app.factory('NewInspectionFields', function() {
       'estName',
       'date'
     ],
-    placeholder: [
+    temp: [
       'Name of Food Establishment',
       'MM/DD/YYYY'
     ]
@@ -23,7 +27,7 @@ app.factory('NewInspectionFields', function() {
       'address',
       'owner'
     ],
-    placeholder: [
+    temp: [
       'Address',
       'Owner'
     ]
@@ -36,7 +40,7 @@ app.factory('NewInspectionFields', function() {
       'phone',
       'PIC'
     ],
-    placeholder: [
+    temp: [
       'Telephone',
       'Person In Charge'
     ]
@@ -49,7 +53,7 @@ app.factory('NewInspectionFields', function() {
       'permitno',
       'inspector'
     ],
-    placeholder: [
+    temp: [
       'Permit No.',
       'Inspector'
     ]
@@ -62,15 +66,15 @@ app.factory('NewInspectionFields', function() {
       'risklvl',
       'prevInspDate'
     ],
-    placeholder: [
+    temp: [
       'Risk Level',
       'Prev. Inspection Date'
     ]
   }];
 
   return {
-    allFieldRows: function() {
-      return fieldRows;
+    newInspFields: function() {
+      return newInspFields;
     }
   }
 });
@@ -156,10 +160,10 @@ app.factory('Violations', function() {
   ];
 
   return {
-    allViolations: function() {
+    violations: function() {
       return violations;
     },
-    allCorrectiveActions: function() {
+    correctiveActions: function() {
       return correctiveActions;
     }
   };

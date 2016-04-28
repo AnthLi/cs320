@@ -3,7 +3,7 @@ var app = angular.module('inspectorGadget.controllers', []);
 app.controller('DashCtrl', function($scope) {});
 
 app.controller('NewInspectionCtrl', function($scope, NewInspectionFields) {
-  $scope.fieldRows = NewInspectionFields.allFieldRows();
+  $scope.fields = NewInspectionFields.newInspFields();
 
   $scope.formData = {
     estName: '',
@@ -18,9 +18,9 @@ app.controller('NewInspectionCtrl', function($scope, NewInspectionFields) {
     prevInspDate: '',
     timein: '',
     timeout: '',
+    HACCP: false,
     typeofOp: '',
-    typeofInsp: '',
-    HACCP: false
+    typeofInsp: ''
   };
 
   $scope.processForm = function() {
