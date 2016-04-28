@@ -2,7 +2,8 @@ var app = angular.module('inspectorGadget.controllers', []);
 
 app.controller('DashCtrl', function($scope) {});
 
-app.controller('NewInspectionCtrl', function($scope) {
+app.controller('NewInspectionCtrl', function($scope, NewInspectionFields) {
+  $scope.rows = NewInspectionFields.allRows();
   $scope.formData = {};
   // Yo database dogs...
   // $scope.formData is a javascript object and contains all the formData
@@ -12,15 +13,15 @@ app.controller('NewInspectionCtrl', function($scope) {
   // address
   // owner
   // phone
-  // pic - person in charge
-  // permitNo - permit number
+  // PIC - person in charge
+  // permitno - permit number
   // inspector
-  // riskLvl
+  // risklvl
   // prevInspDate - previous inspection date
-  // timeIn
-  // timeOut
-  // typeOfOp - type of operation (e.g. retail, food service, residential, etc.)
-  // typeOfInsp - type of inspection (routine, re-inspection)
+  // timein
+  // timeout
+  // typeofOp - type of operation (e.g. retail, food service, residential, etc.)
+  // typeofInsp - type of inspection (routine, re-inspection)
 
   // HACCP - i have no idea how to get the value from the checkbox :/
 

@@ -7,74 +7,19 @@
       <div class="info">
         <button class="button button-full button-positive">INSPECTION INFO</button>
 
-        <div class="row">
-          <div class="col form-group">
+        <div class="row" ng-repeat="field in rows">
+          {{field}}
+          <!-- <div class="col form-group">
             <label class="item item-input">
-              <input type="text" name="estname" class="form-control" ng-model="formData.estname" placeholder="Name of Food Establishment">
+              <input type="text" name="{{field.name[0]}}" class="form-control" ng-model="{{field.model[0]}}" placeholder="{{field.placeholder[0]}}">
             </label>
           </div>
 
           <div class="col form-group">
             <label class="item item-input">
-              <input type="text" name="date" class="form-control" ng-model="formData.date" placeholder="MM/DD/YYYY">
+              <input type="text" name="{{field.name[1]}}" class="form-control" ng-model="{{field.model[1]}}" placeholder="{{field.placeholder[1]}}">
             </label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col form-group">
-            <label class="item item-input">
-              <input type="text" name="address" class="form-control" ng-model="formData.address" placeholder="Address">
-            </label>
-          </div>
-
-          <div class="col form-group">
-            <label class="item item-input">
-              <input type="text" name="owner" class="form-control" ng-model="formData.owner" placeholder="Owner">
-            </label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col form-group">
-            <label class="item item-input">
-              <input type="text" name="phone" class="form-control" ng-model="formData.phone" placeholder="Telephone">
-            </label>
-          </div>
-
-          <div class="col form-group">
-            <label class="item item-input">
-              <input type="text" name="PIC" class="form-control" ng-model="formData.PIC" placeholder="Person In Charge">
-            </label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col form-group">
-            <label class="item item-input">
-              <input type="text" name="permitno" class="form-control" ng-model="formData.permitno" placeholder="Permit No.">
-            </label>
-          </div>
-
-          <div class="col form-group">
-            <label class="item item-input">
-              <input type="text" name="inspector" class="form-control" ng-model="formData.inspector" placeholder="Inspector">
-            </label>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col form-group">
-            <label class="item item-input">
-              <input type="text" name="risklvl" class="form-control" ng-model="formData.risklvl" placeholder="Risk Level">
-            </label>
-          </div>
-
-          <div class="col form-group">
-            <label class="item item-input">
-              <input type="text" name="prevInspDate" class="form-control" ng-model="formData.prevInspDate" placeholder="Prev. Inspection Date">
-            </label>
-          </div>
+          </div> -->
         </div>
 
         <div class="row">

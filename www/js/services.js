@@ -53,7 +53,26 @@ app.factory('NewInspectionFields', function() {
       'Permit No.',
       'Inspector'
     ]
-  }]
+  }, {
+    name: [
+      'risklvl',
+      'prevInspDate'
+    ],
+    model: [
+      'formData.risklvl',
+      'formData.prevInspDate'
+    ],
+    placeholder: [
+      'Risk Level',
+      'Prev. Inspection Date'
+    ]
+  }];
+
+  return {
+    allRows: function() {
+      return rows;
+    }
+  }
 });
 
 app.factory('Violations', function() {
@@ -153,60 +172,60 @@ app.factory('Forms', function() {
     address: '101 Complex Street, Amherst, MA 01003',
     owner: 'Some guy',
     phone: '1-800-COM-PLEX',
-    pic: 'Some PIC',
-    permitNo: '0001',
+    PIC: 'Some PIC',
+    permitno: '0001',
     inspector: 'Some Inspector',
-    riskLvl: '42',
+    risklvl: '42',
     prevInspDate: 'N/A',
-    timeIn: '00:00:00',
-    timeOut: '00:00:01',
-    typeOfOp: 'Residential',
-    typeOfInsp: 'Routine'
+    timein: '00:00:00',
+    timeout: '00:00:01',
+    typeofOp: 'Residential',
+    typeofInsp: 'Routine'
   }, {
     estName: 'Restaurant ABC',
     date: 'February 1, 1970',
     address: '123 ABC Street, Amherst, MA 01003',
     owner: 'XYZ',
     phone: '1-234-567-8910',
-    pic: 'XYZ',
-    permitNo: '1234',
+    PIC: 'XYZ',
+    permitno: '1234',
     inspector: 'Gadget',
-    riskLvl: '1',
+    risklvl: '1',
     prevInspDate: 'N/A',
-    timeIn: '00:00:00',
-    timeOut: '00:00:01',
-    typeOfOp: 'Food Service',
-    typeOfInsp: 'Routine'
+    timein: '00:00:00',
+    timeout: '00:00:01',
+    typeofOp: 'Food Service',
+    typeofInsp: 'Routine'
   }, {
     estName: 'Restaurant ABC',
     date: 'March 1, 1970',
     address: '123 ABC Street, Amherst, MA 01003',
     owner: 'XYZ',
     phone: '1-234-567-8910',
-    pic: 'XYZ',
-    permitNo: '1234',
+    PIC: 'XYZ',
+    permitno: '1234',
     inspector: 'Gadget',
-    riskLvl: '1',
+    risklvl: '1',
     prevInspDate: 'February 1, 1970',
-    timeIn: '00:00:01',
-    timeOut: '00:00:02',
-    typeOfOp: 'Food Service',
-    typeOfInsp: 'Re-Inspection'
+    timein: '00:00:01',
+    timeout: '00:00:02',
+    typeofOp: 'Food Service',
+    typeofInsp: 'Re-Inspection'
   }, {
     estName: 'Apartment 101',
     date: 'January 1, 1971',
     address: '101 Complex Street, Amherst, MA 01003',
     owner: 'Some guy',
     phone: '1-800-COM-PLEX',
-    pic: 'Some PIC',
-    permitNo: '0001',
+    PIC: 'Some PIC',
+    permitno: '0001',
     inspector: 'Some Inspector',
-    riskLvl: '42',
+    risklvl: '42',
     prevInspDate: 'January 1, 1970',
-    timeIn: '00:00:00',
-    timeOut: '00:00:01',
-    typeOfOp: 'Residential',
-    typeOfInsp: 'Re-inspection'
+    timein: '00:00:00',
+    timeout: '00:00:01',
+    typeofOp: 'Residential',
+    typeofInsp: 'Re-inspection'
   }];
 
   return {
