@@ -1,487 +1,74 @@
-<ion-view view-title="Inspector Gadget">
+<ion-view view-title="Add Violation">
+  <!-- Back button -->
+  <ion-nav-bar>
+    <ion-nav-back-button id="backButton" class="button-clear">
+      <i class="ion-chevron-left"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+  <!-- Violations -->
   <ion-content class="padding">
     <div class="checkboxes ion-scroll">
       <button class="button button-full button-assertive">CHOOSE VIOLATION</button>
-      <ion-scroll zooming="false" direction="xy" style="width: device-width; height: 350px">
-        <div style= "width: 1000px; height: 3000px">
-          <form name="violations" ng-controller="violations">
-<!--......................................................................-->
-
-            <h5>FOOD PROTECTION MANAGEMENT</h5>
-            <ul class="list">
-              <li class = "item item-checkbox checkbox-assertive">
-                PIC Assigned
-                <label class = "checkbox">
-                  <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
+      <ion-scroll zooming="false" direction="y" style="width: device-width; height: 350px">
+        <div>
+          <form name="violations" ng-repeat="obj in violations">
+            <h5>{{obj.title}}</h5>
+            <ion-list>
+              <ion-item class="item item-checkbox checkbox-assertive" ng-repeat="violation in obj.violations">
+                {{violation}}
+                <label class="checkbox">
+                  <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
                 </label>
-              </li>
-          </ul>
-
-<!--......................................................................-->
-
-            <h5>EMPLOYEE HEALTH</h5>
-            <ul class="list">
-                <li class = "item item-checkbox checkbox-assertive">
-                  Reporting of Diseases by Food Employee and PIC
-                  <label class = "checkbox">
-                    <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                  </label>
-                </li>
-
-                <li class = "item item-checkbox checkbox-assertive">
-                  Personnel with Infections Restricted/Excluded
-                  <label class = "checkbox">
-                    <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                  </label>
-                </li>
-              </ul>
-<!--......................................................................-->
-
-             <h5>FOOD FROM APPROVED SOURCE</h5>
-             <ul class="list">
-
-               <li class = "item item-checkbox checkbox-assertive">
-                   Food and Water from Approved Source
-                   <label class = "checkbox">
-                     <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                   </label>
-                 </li>
-
-                 <li class = "item item-checkbox checkbox-assertive">
-                   Receiving/Condition
-                   <label class = "checkbox">
-                     <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                   </label>
-                 </li>
-
-                 <li class = "item item-checkbox checkbox-assertive">
-                   Tags/Records/Accuracy of Ingredient Statements
-                   <label class = "checkbox">
-                     <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                   </label>
-                 </li>
-
-                 <li class = "item item-checkbox checkbox-assertive">
-                   Conformance with Approved Procedures/HACCP Plans
-                   <label class = "checkbox">
-                     <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                   </label>
-                 </li>
-              </ul>
-<!--......................................................................-->
-
-              <h5>PROTECTION FROM CONTAMINATION</h5>
-              <ul class="list">
-
-                  <li class = "item item-checkbox checkbox-assertive">
-                    Separation/Segregation/Protection
-                    <label class = "checkbox">
-                      <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                    </label>
-                  </li>
-
-                  <li class = "item item-checkbox checkbox-assertive">
-                    Food Contact Surface Cleaning and Sanitizing
-                    <label class = "checkbox">
-                      <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                    </label>
-                  </li>
-
-                  <li class = "item item-checkbox checkbox-assertive">
-                    Proper Adequate Handwashing
-                    <label class = "checkbox">
-                      <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                    </label>
-                  </li>
-
-                  <li class = "item item-checkbox checkbox-assertive">
-                    Good Hygeinic Practices
-                    <label class = "checkbox">
-                      <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                    </label>
-                  </li>
-
-                  <li class = "item item-checkbox checkbox-assertive">
-                    Prevention of Contamination
-                    <label class = "checkbox">
-                      <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                    </label>
-                  </li>
-
-                  <li class = "item item-checkbox checkbox-assertive">
-                    Handwash Facilities
-                    <label class = "checkbox">
-                      <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                    </label>
-                  </li>
-              </ul>
-<!--......................................................................-->
-
-              <h5>PROTECTION FROM CHEMICALS</h5>
-              <ul class="list">
-                <li class = "item item-checkbox checkbox-assertive">
-                  Approved Food or Color Additives
-                  <label class = "checkbox">
-                    <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                  </label>
-                </li>
-
-                <li class = "item item-checkbox checkbox-assertive">
-                  Toxic Chemicals
-                  <label class = "checkbox">
-                    <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                  </label>
-                </li>
-
-              </ul>
-
-<!--......................................................................-->
-
-               <h5>TIME/TEMPERATURE CONTROLS</h5>
-               <ul class="list">
-                 <li class = "item item-checkbox checkbox-assertive">
-                  Cooking Temperature
-                   <label class = "checkbox">
-                     <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                   </label>
-                 </li>
-
-                 <li class = "item item-checkbox checkbox-assertive">
-                   Reheating
-                   <label class = "checkbox">
-                     <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                   </label>
-                 </li>
-
-                 <li class = "item item-checkbox checkbox-assertive">
-                   Cooling
-                   <label class = "checkbox">
-                     <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                   </label>
-                 </li>
-
-                 <li class = "item item-checkbox checkbox-assertive">
-                   Hot and Cold Holding
-                   <label class = "checkbox">
-                     <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                   </label>
-                 </li>
-
-                 <li class = "item item-checkbox checkbox-assertive">
-                   Time as a Public Health Control
-                   <label class = "checkbox">
-                     <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                   </label>
-                 </li>
-
-
-               </ul>
-
-<!--......................................................................-->
-
-               <h5>REQUIREMENTS FOR HIGHLY SUSCEPTIBLE POPULATIONS</h5>
-               <ul class="list">
-                 <li class = "item item-checkbox checkbox-assertive">
-                   Food and Food Preparation for HSP
-                   <label class = "checkbox">
-                     <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                   </label>
-                 </li>
-                </ul>
-
-<!--......................................................................-->
-
-               <h5>CONSUMER ADVISORY</h5>
-               <ul class="list">
-                 <li class = "item item-checkbox checkbox-assertive">
-                   Posting of Consumer Advisories
-                   <label class = "checkbox">
-                     <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                   </label>
-                 </li>
-               </ul>
-
-<!--......................................................................-->
-
-<h5>PROTECTION FROM CONTAMINATION</h5>
-<ul class="list">
-
-    <li class = "item item-checkbox checkbox-assertive">
-      Separation/Segregation/Protection
-      <label class = "checkbox">
-        <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-      </label>
-    </li>
-
-    <li class = "item item-checkbox checkbox-assertive">
-      Food Contact Surface Cleaning and Sanitizing
-      <label class = "checkbox">
-        <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-      </label>
-    </li>
-
-    <li class = "item item-checkbox checkbox-assertive">
-      Proper Adequate Handwashing
-      <label class = "checkbox">
-        <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-      </label>
-    </li>
-
-    <li class = "item item-checkbox checkbox-assertive">
-      Good Hygeinic Practices
-      <label class = "checkbox">
-        <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-      </label>
-    </li>
-
-    <li class = "item item-checkbox checkbox-assertive">
-      Prevention of Contamination
-      <label class = "checkbox">
-        <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-      </label>
-    </li>
-
-    <li class = "item item-checkbox checkbox-assertive">
-      Handwash Facilities
-      <label class = "checkbox">
-        <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-      </label>
-    </li>
-</ul>
-<!--......................................................................-->
-
-<h5>PROTECTION FROM CHEMICALS</h5>
-<ul class="list">
-  <li class = "item item-checkbox checkbox-assertive">
-    Approved Food or Color Additives
-    <label class = "checkbox">
-      <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-    </label>
-  </li>
-
-  <li class = "item item-checkbox checkbox-assertive">
-    Toxic Chemicals
-    <label class = "checkbox">
-      <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-    </label>
-  </li>
-
-</ul>
-
-<!--......................................................................-->
-
- <h5>GOOD RETAIL PRACTICES (BLUE ITEMS)</h5>
- <ul class="list">
-   <li class = "item item-checkbox checkbox-calm">
-    Management and Personnel
-     <label class = "checkbox">
-       <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-     </label>
-   </li>
-
-   <li class = "item item-checkbox checkbox-calm">
-     Food and Food Protection
-     <label class = "checkbox">
-       <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-     </label>
-   </li>
-
-   <li class = "item item-checkbox checkbox-calm">
-     Equipment and Utensils
-     <label class = "checkbox">
-       <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-     </label>
-   </li>
-
-   <li class = "item item-checkbox checkbox-calm">
-     Water, Plumbing and Waste
-     <label class = "checkbox">
-       <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-     </label>
-   </li>
-
-   <li class = "item item-checkbox checkbox-calm">
-     Physical Facility
-     <label class = "checkbox">
-       <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-     </label>
-   </li>
-
-   <li class = "item item-checkbox checkbox-calm">
-     Poisonous or Toxic Material
-     <label class = "checkbox">
-       <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-     </label>
-   </li>
-
-   <li class = "item item-checkbox checkbox-calm">
-     Special Requirements
-     <label class = "checkbox">
-       <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-     </label>
-   </li>
-
-   <li class = "item item-checkbox checkbox-calm">
-     Other
-     <label class = "checkbox">
-       <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-     </label>
-   </li>
-</ul>
-
- </ul>
-
-
-           </form>
-         </div>
-      </ion-scroll>
-
-
-    </div>
-
-
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-
-
-
-    <button class="button button-full button-balanced">ADD PHOTO</button>
-      <div class="photos">
-        <div class = "row">
-          <div class = "col">
-            <button class="button icon-left ion-ios-camera button-clear button-dark button-large center"><span class = "pics">Take Photo</span></button>
-          </div>
-          <div class = "col">
-            <button class="button icon-left ion-ios-photos button-clear button-dark button-large center"><span class = "pics">Choose From Gallery</span></button>
-          </div>
+              </ion-item>
+            </ion-list>
+          </form>
         </div>
-      </div>
+      </ion-scroll>
     </div>
 
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
+    <!-- Corrective Actions -->
+    <div class="correctiveaction">
+      <button class="button button-full button-energized">CORRECTIVE ACTION REQUIRED</button>
+      <form name="corrective action" ng-repeat="action in correctiveactions">
+        <ion-list>
+          <ion-item class="item item-checkbox checkbox-energized">
+          {{action}}
+          <label class="checkbox">
+            <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
+          </label>
+        </ion-list>
+      </form>
+    </div>
 
-<div class = "correctiveaction">
-  <button class="button button-full button-energized">CORRECTIVE ACTION REQUIRED</button>
-          <form name="corrective action" ng-controller="corrective action">
-<!--......................................................................-->
-
-            <ul class="list">
-              <li class = "item item-checkbox checkbox-energized">
-                Voluntary Compliance
-                <label class = "checkbox">
-                  <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                </label>
-              </li>
-
-              <li class = "item item-checkbox checkbox-energized">
-                Re-inspection Scheduled
-                <label class = "checkbox">
-                  <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                </label>
-              </li>
-
-              <li class = "item item-checkbox checkbox-energized">
-                Embargo
-                <label class = "checkbox">
-                  <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                </label>
-              </li>
-
-              <li class = "item item-checkbox checkbox-energized">
-                Voluntary Disposal
-                <label class = "checkbox">
-                  <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                </label>
-              </li>
-
-              <li class = "item item-checkbox checkbox-energized">
-                Employee Restriction/Exclusion
-                <label class = "checkbox">
-                  <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                </label>
-              </li>
-
-              <li class = "item item-checkbox checkbox-energized">
-                Emergency Suspension
-                <label class = "checkbox">
-                  <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                </label>
-              </li>
-
-              <li class = "item item-checkbox checkbox-energized">
-                Emergency Closure
-                <label class = "checkbox">
-                  <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                </label>
-              </li>
-
-              <li class = "item item-checkbox checkbox-energized">
-                Other
-                <label class = "checkbox">
-                  <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                </label>
-              </li>
-          </ul>
-        </form>
-       </div>
-
-
-
-
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-<!--......................................................................-->
-
-
+    <!-- Add Description -->
     <div class="description">
       <button class="button button-full button-positive">ADD DESCRIPTION</button>
-
       <div class="row">
+
         <div class="col form-group">
-          <li class = "item item-checkbox checkbox-assertive">
+          <li class="item item-checkbox checkbox-assertive">
             Red Item
-            <label class = "checkbox">
-              <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
+            <label class="checkbox">
+              <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
             </label>
           </li>
         </div>
+
         <div class="col form-group">
-          <li class = "item item-checkbox checkbox-energized">
+          <li class="item item-checkbox checkbox-energized">
             Critical Item
-            <label class = "checkbox">
-              <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
+            <label class="checkbox">
+              <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
             </label>
           </li>
         </div>
+
         <div class="col form-group">
-          <li class = "item item-checkbox checkbox-royal">
+          <li class="item item-checkbox checkbox-royal">
             Non-Critical
-            <label class = "checkbox">
-              <input type = "checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
+            <label class="checkbox">
+              <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
             </label>
           </li>
         </div>
@@ -493,24 +80,22 @@
             <input type="text" placeholder="Item No.">
           </label>
         </div>
-        <div class = "col form-group">
+
+        <div class="col form-group">
           <label class="item item-input">
             <input type="text" placeholder="Code Ref.">
           </label>
         </div>
-        <div class = "col form-group">
+
+        <div class="col form-group">
           <label class="item item-input item-stacked-label">
             <span class="corr-input-label">Date Verified:</span><input type="time" class="form-control" ng-model="formData.timein" placeholder="">
           </label>
         </div>
-      </div>
 
         <label class="item item-input">
           <input type="text" placeholder="Tap to add description">
         </label>
       </div>
-
-
-
   </ion-content>
 </ion-view>

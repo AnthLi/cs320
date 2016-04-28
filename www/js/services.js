@@ -1,26 +1,91 @@
 var app = angular.module('inspectorGadget.services', []);
 
 app.factory('Violations', function() {
-  var violations = [
-    {id: 1, name: 'Violation 1'},
-    {id: 2, name: 'Violation 2'},
-    {id: 3, name: 'Violation 3'},
-    {id: 4, name: 'Violation 4'},
-    {id: 5, name: 'Violation 5'}
+  var violations = [{
+    title: 'FOOD PROTECTION MANAGEMENT',
+    violations: [
+      'PIC Assigned'
+    ]
+  }, {
+    title: 'EMPLOYEE HEALTH',
+    violations: [
+      'Reporting of Diseases by Food Employee and PIC',
+      'Personnel with Infections Restricted/Excluded'
+    ]
+  }, {
+    title: 'FOOD FROM APPROVED SOURCE',
+    violations: [
+      'Food and Water from Approved Source',
+      'Receiving/Condition',
+      'Tags/Records/Accuracy of Ingredient Statements',
+      'Conformance with Approved Procedures/HACCP Plans'
+    ]
+  }, {
+    title: 'PROTECTION FROM CONTAMINATION',
+    violations: [
+      'Separation/Segregation/Protection',
+      'Food Contact Surface Cleaning and Sanitizing',
+      'Proper Adequate Handwashing',
+      'Good Hygeinic Practices',
+      'Prevention of Contamination',
+      'Handwash Facilities'
+    ]
+  }, {
+    title: 'PROTECTION FROM CHEMICALS',
+    violations: [
+      'Approved Food or Color Additives',
+      'Toxic Chemicals'
+    ]
+  }, {
+    title: 'TIME/TEMPERATURE CONTROLS',
+    violations: [
+      'Cooking Temperature',
+      'Reheating',
+      'Cooling',
+      'Hot and Cold Holding',
+      'Time as a Public Health Control'
+    ]
+  }, {
+    title: 'REQUIREMENTS FOR HIGHLY SUSCEPTIBLE POPULATIONS',
+    violations: [
+      'Food and Food Preparation for HSP'
+    ]
+  }, {
+    title: 'CONSUMER ADVISORY',
+    violations: [
+      'Posting of Consumer Advisories'
+    ]
+  }, {
+    title: 'GOOD RETAIL PRACTICES (BLUE ITEMS)',
+    violations: [
+      'Management and Personnel',
+      'Food and Food Protection',
+      'Equipment and Utensils',
+      'Water, Plumbing and Waste',
+      'Physical Facility',
+      'Poisonous or Toxic Material',
+      'Special Requirements',
+      'Other'
+    ]
+  }];
+
+  var correctiveActions = [
+    'Voluntary Compliance',
+    'Re-inspection Scheduled',
+    'Embargo',
+    'Voluntary Disposal',
+    'Employee Restriction/Exclusion',
+    'Emergency Suspension',
+    'Emergency Closure',
+    'Other'
   ];
 
   return {
-    all: function() {
+    allViolations: function() {
       return violations;
     },
-    get: function(formPath) {
-      for (var i = 0; i < violations.length; i++) {
-        if (violations[i].id === violationID) {
-          return forms[i];
-        }
-      }
-
-      return null;
+    allCorrectiveActions: function() {
+      return correctiveActions;
     }
   };
 });

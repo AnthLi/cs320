@@ -3,7 +3,6 @@ var app = angular.module('inspectorGadget.controllers', []);
 app.controller('DashCtrl', function($scope) {});
 
 app.controller('NewInspectionCtrl', function($scope) {
-  // $scope.violations = Violations.all();
   $scope.formData = {};
   // Yo database dogs...
   // $scope.formData is a javascript object and contains all the formData
@@ -31,7 +30,8 @@ app.controller('NewInspectionCtrl', function($scope) {
 });
 
 app.controller('AddViolationCtrl', function($scope, $stateParams, Violations) {
-  // $scope.violation = Violations.get($stateParams.violationID);
+  $scope.violations = Violations.allViolations();
+  $scope.correctiveactions = Violations.allCorrectiveActions();
 });
 
 // Controller containing each Form accessible to the user. Once the user selects

@@ -60,9 +60,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
   })
 
   .state('page.addviolation', {
-    url: '/addviolation',
+    url: '/newinspection/addviolation',
     views: {
-      'page-addviolation': {
+      'page-newinspection': {
         templateUrl: 'templates/addviolation.html',
         controller: 'AddViolationCtrl'
       }
