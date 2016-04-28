@@ -7,8 +7,8 @@ app.factory('NewInspectionFields', function() {
       'date'
     ],
     model: [
-      'formData.estName',
-      'formData.date'
+      'estName',
+      'date'
     ],
     placeholder: [
       'Name of Food Establishment',
@@ -20,8 +20,8 @@ app.factory('NewInspectionFields', function() {
       'owner'
     ],
     model: [
-      'formData.address',
-      'formData.owner'
+      'address',
+      'owner'
     ],
     placeholder: [
       'Address',
@@ -33,8 +33,8 @@ app.factory('NewInspectionFields', function() {
       'PIC'
     ],
     model: [
-      'formData.phone',
-      'formData.PIC'
+      'phone',
+      'PIC'
     ],
     placeholder: [
       'Telephone',
@@ -46,8 +46,8 @@ app.factory('NewInspectionFields', function() {
       'inspector'
     ],
     model: [
-      'formData.permitno',
-      'formData.inspector'
+      'permitno',
+      'inspector'
     ],
     placeholder: [
       'Permit No.',
@@ -59,8 +59,8 @@ app.factory('NewInspectionFields', function() {
       'prevInspDate'
     ],
     model: [
-      'formData.risklvl',
-      'formData.prevInspDate'
+      'risklvl',
+      'prevInspDate'
     ],
     placeholder: [
       'Risk Level',

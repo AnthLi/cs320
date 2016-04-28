@@ -5,26 +5,23 @@ app.controller('DashCtrl', function($scope) {});
 app.controller('NewInspectionCtrl', function($scope, NewInspectionFields) {
   $scope.fieldRows = NewInspectionFields.allFieldRows();
 
-  $scope.formData = {};
-  // Yo database dogs...
-  // $scope.formData is a javascript object and contains all the formData
-  // fields:
-  // estName - name of establishment
-  // date
-  // address
-  // owner
-  // phone
-  // PIC - person in charge
-  // permitno - permit number
-  // inspector
-  // risklvl
-  // prevInspDate - previous inspection date
-  // timein
-  // timeout
-  // typeofOp - type of operation (e.g. retail, food service, residential, etc.)
-  // typeofInsp - type of inspection (routine, re-inspection)
-
-  // HACCP - i have no idea how to get the value from the checkbox :/
+  $scope.formData = {
+    estName: '',
+    date: '',
+    address: '',
+    owner: '',
+    phone: '',
+    PIC: '',
+    permitno: '',
+    inspector: '',
+    risklvl: '',
+    prevInspDate: '',
+    timin: '',
+    timeout: '',
+    typeofOp: '',
+    typeofInsp: '',
+    HACCP: false
+  };
 
   $scope.processForm = function() {
     //TODO: do something with the form data

@@ -7,19 +7,19 @@
       <div class="info">
         <button class="button button-full button-positive">INSPECTION INFO</button>
 
+        {{formData}}
         <div class="row" ng-repeat="obj in fieldRows">
-          {{obj.model[0]}}, {{obj.model[1]}}
-          <!-- <div class="col form-group">
+          <div class="col form-group">
             <label class="item item-input">
-              <input type="text" class="form-control" name="{{obj.name[0]}}" ng-model="obj.model[0][key]" placeholder="{{obj.placeholder[0]}}">
+              <input type="text" class="form-control" name="{{obj.name[0]}}" ng-model="formData[obj.model[0]]" placeholder="{{obj.placeholder[0]}}">
             </label>
           </div>
 
           <div class="col form-group">
             <label class="item item-input">
-              <input type="text" class="form-control" name="{{obj.name[1]}}" ng-model="obj.model[1][key]" placeholder="{{obj.placeholder[1]}}">
+              <input type="text" class="form-control" name="{{obj.name[1]}}" ng-model="formData[obj.model[1]]" placeholder="{{obj.placeholder[1]}}">
             </label>
-          </div> -->
+          </div>
         </div>
 
         <div class="row">
@@ -38,7 +38,7 @@
 
         <div class="row">
           <div class="col form-group">
-            <ion-checkbox name="haccp" id="haccp" ng-model="filter.blue">HACCP</ion-checkbox>
+            <ion-checkbox name="haccp" id="haccp" ng-model="formData.HACCP" ng-click="!formData.HACCP">HACCP</ion-checkbox>
           </div>
         </div>
 
