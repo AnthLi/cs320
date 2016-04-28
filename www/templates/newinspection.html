@@ -6,8 +6,16 @@
     <form id="new-form" ng-submit="processForm()">
       <div class="info">
         <button class="button button-full button-positive">INSPECTION INFO</button>
-
+        DELETE THIS IN THE CODE, IT ONLY SHOWS THE DATA-BINDING BETWEEN THE
+        FORM AND THE formData OBJECT (fill out the form and watch this bitch
+        grow)
         {{formData}}
+
+        <!--
+        The ng-repeat here significantly shortened the code for the new
+        insepction. Rather than having each field have its own place here,
+        ng-repeat allowed for the dynamic creation of the fields instead
+        -->
         <div class="row" ng-repeat="obj in fieldRows">
           <div class="col form-group">
             <label class="item item-input">
