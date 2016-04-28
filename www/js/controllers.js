@@ -16,7 +16,7 @@ app.controller('NewInspectionCtrl', function($scope, NewInspectionFields) {
     inspector: '',
     risklvl: '',
     prevInspDate: '',
-    timin: '',
+    timein: '',
     timeout: '',
     typeofOp: '',
     typeofInsp: '',
