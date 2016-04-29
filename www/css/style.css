@@ -27,7 +27,6 @@
 
 }
 
-
 .button {
   position: relative;
 }
@@ -51,8 +50,19 @@ img{
   display: none;
 }
 
+#violationList {
+  overflow: hidden;
+  width: 100%;
+  height: 350px;
+}
+
 .corr-input-label{
   font-size: 11px;
+}
+
+.vItems, .caItems {
+  text-align: left;
+  width: 100%;
 }
 
 .checkboxes{

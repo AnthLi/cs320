@@ -5,7 +5,9 @@
     ...................................................................-->
     <form id="new-form" ng-submit="processForm()">
       <div class="info">
-        <button class="button button-full button-positive">INSPECTION INFO</button>
+        <ion-item class="button button-full button-positive" disabled style="opacity: 1.0">
+          INSPECTION INFO
+        </ion-item>
         DELETE THIS IN THE CODE, IT ONLY SHOWS THE DATA-BINDING BETWEEN THE
         FORM AND THE formData OBJECT (fill out the form and watch this bitch
         grow)
@@ -35,20 +37,30 @@
         <div class="row">
           <div class="col form-group">
             <label class="item item-input item-stacked-label">
-              <span class="input-label">Time In:</span><input type="time" class="form-control" ng-model="formData.timein" placeholder="">
+              <span class="input-label">
+                Time In:
+              </span>
+
+              <input type="time" class="form-control" ng-model="formData.timein" placeholder="" required>
             </label>
           </div>
 
           <div class="col form-group">
             <label class="item item-input item-stacked-label">
-              <span class="input-label">Time Out:</span><input type="time" class="form-control" ng-model="formData.timeout" placeholder="">
+              <span class="input-label">
+                Time Out:
+              </span>
+
+              <input type="time" class="form-control" ng-model="formData.timeout" placeholder="" required>
             </label>
           </div>
         </div>
 
         <div class="row">
           <div class="col form-group">
-            <ion-checkbox name="haccp" id="haccp" ng-model="formData.HACCP" ng-click="!formData.HACCP">HACCP</ion-checkbox>
+            <ion-checkbox name="haccp" id="haccp" ng-model="formData.HACCP" ng-click="!formData.HACCP">
+              HACCP
+            </ion-checkbox>
           </div>
         </div>
 
@@ -96,19 +108,35 @@
       ...........................VIOLATIONS.................................
       ...................................................................-->
       <div class="violations">
-        <button class="button button-full button-assertive">VIOLATIONS</button>
-         <!--INSERT DATA FIELDS-->
-
+        <ion-item class="button button-full button-assertive" disabled style="opacity: 1.0">
+          VIOLATIONS
+        </ion-item>
         <a href="#/page/newinspection/addviolation" class="button icon-left ion-plus-circled button-outline button-assertive button-medium">
           Add Violation
         </a>
+
+        <div>
+          <h5>Violations</h5>
+          <div ng-repeat="v in checkedV">
+            {{v}}
+          </div>
+        </div>
+
+        <div>
+          <h5>Corrective Actions</h5>
+          <div ng-repeat="ca in checkedCA">
+            {{ca}}
+          </div>
+        </div>
       </div>
 
       <!---.................................................................
       ...........................SIGNATURE..................................
       ...................................................................-->
       <div class="signature">
-        <button class="button button-full button-dark">SIGNATURE</button>
+        <ion-item class="button button-full button-dark" disabled style="opacity: 1.0">
+          SIGNATURE
+        </ion-item>
 
         <div class="sig row">
           <div class="col">
@@ -125,7 +153,9 @@
         </div>
       </div>
 
-      <a id="savecontinue" class="button icon-right ion-chevron-right button-balanced">Save & Continue</a>
+      <a id="savecontinue" class="button icon-right ion-chevron-right button-balanced">
+        Save & Continue
+      </a>
     </form>
   </ion-content>
 </ion-view>

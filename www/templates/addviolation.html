@@ -9,43 +9,50 @@
   <!-- Violations -->
   <ion-content class="padding">
     <div class="checkboxes ion-scroll">
-      <button class="button button-full button-assertive">CHOOSE VIOLATION</button>
-      <ion-scroll zooming="false" direction="y" style="width: device-width; height: 350px">
-        <div>
-          <form name="violations" ng-repeat="elem in vList">
-            <h5>{{elem.title}}</h5>
-            <ion-list>
-              <ion-item class="item item-checkbox checkbox-assertive" ng-repeat="violation in elem.violations">
-                {{violation}}
-                <label class="checkbox">
-                  <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-                </label>
-              </ion-item>
-            </ion-list>
-          </form>
-        </div>
+      <button class="button button-full button-assertive" disabled style="opacity: 1.0">
+        CHOOSE VIOLATION
+      </button>
+
+      <ion-scroll id="violationList" zooming="false" scrollbar-y="false">
+        <form name="violations" ng-repeat="vObj in vList">
+          <h5>{{vObj.title}}</h5>
+          <ion-list>
+            <button class="vItems item item-checkbox checkbox-assertive" ng-repeat="violation in vObj.violations">
+              {{violation.name}}
+              <label class="checkbox">
+                <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'" ng-click="toggleV({{violation}})" ng-checked="{{violation.checked}}">
+              </label>
+            </button>
+          </ion-list>
+        </form>
       </ion-scroll>
     </div>
 
     <!-- Corrective Actions -->
     <div class="correctiveaction">
-      <button class="button button-full button-energized">CORRECTIVE ACTION REQUIRED</button>
-      <form name="corrective action" ng-repeat="action in correctiveactions">
+      <button class="button button-full button-energized" disabled style="opacity: 1.0">
+        CORRECTIVE ACTION REQUIRED
+      </button>
+
+      <form name="corrective action" ng-repeat="action in caList">
         <ion-list>
-          <ion-item class="item item-checkbox checkbox-energized">
-          {{action}}
-          <label class="checkbox">
-            <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
-          </label>
+          <button class="caItems item item-checkbox checkbox-energized">
+            {{action.name}}
+            <label class="checkbox">
+              <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'" ng-click="toggleCA({{action}})" ng-checked="{{action.checked}}">
+            </label>
+          </button>
         </ion-list>
       </form>
     </div>
 
     <!-- Add Description -->
     <div class="description">
-      <button class="button button-full button-positive">ADD DESCRIPTION</button>
-      <div class="row">
+      <button class="button button-full button-positive" disabled style="opacity: 1.0">
+        ADD DESCRIPTION
+      </button>
 
+      <div class="row">
         <div class="col form-group">
           <li class="item item-checkbox checkbox-assertive">
             Red Item
@@ -89,7 +96,8 @@
 
         <div class="col form-group">
           <label class="item item-input item-stacked-label">
-            <span class="corr-input-label">Date Verified:</span><input type="time" class="form-control" ng-model="formData.timein" placeholder="">
+            <span class="corr-input-label">Date Verified:</span>
+            <input type="time" class="form-control" ng-model="formData.timein" placeholder="">
           </label>
         </div>
 
