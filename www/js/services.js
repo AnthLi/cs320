@@ -245,73 +245,13 @@ app.factory('Violations', function() {
 });
 
 app.factory('Forms', function() {
-  var forms = [{
-    estName: 'Apartment 101',
-    date: 'January 1, 1970',
-    address: '101 Complex Street, Amherst, MA 01003',
-    owner: 'Some guy',
-    phone: '1-800-COM-PLEX',
-    PIC: 'Some PIC',
-    permitno: '0001',
-    inspector: 'Some Inspector',
-    risklvl: '42',
-    prevInspDate: 'N/A',
-    timein: '00:00:00',
-    timeout: '00:00:01',
-    typeofOp: 'Residential',
-    typeofInsp: 'Routine'
-  }, {
-    estName: 'Restaurant ABC',
-    date: 'February 1, 1970',
-    address: '123 ABC Street, Amherst, MA 01003',
-    owner: 'XYZ',
-    phone: '1-234-567-8910',
-    PIC: 'XYZ',
-    permitno: '1234',
-    inspector: 'Gadget',
-    risklvl: '1',
-    prevInspDate: 'N/A',
-    timein: '00:00:00',
-    timeout: '00:00:01',
-    typeofOp: 'Food Service',
-    typeofInsp: 'Routine'
-  }, {
-    estName: 'Restaurant ABC',
-    date: 'March 1, 1970',
-    address: '123 ABC Street, Amherst, MA 01003',
-    owner: 'XYZ',
-    phone: '1-234-567-8910',
-    PIC: 'XYZ',
-    permitno: '1234',
-    inspector: 'Gadget',
-    risklvl: '1',
-    prevInspDate: 'February 1, 1970',
-    timein: '00:00:01',
-    timeout: '00:00:02',
-    typeofOp: 'Food Service',
-    typeofInsp: 'Re-Inspection'
-  }, {
-    estName: 'Apartment 101',
-    date: 'January 1, 1971',
-    address: '101 Complex Street, Amherst, MA 01003',
-    owner: 'Some guy',
-    phone: '1-800-COM-PLEX',
-    PIC: 'Some PIC',
-    permitno: '0001',
-    inspector: 'Some Inspector',
-    risklvl: '42',
-    prevInspDate: 'January 1, 1970',
-    timein: '00:00:00',
-    timeout: '00:00:01',
-    typeofOp: 'Residential',
-    typeofInsp: 'Re-inspection'
-  }];
+  var forms = [];
 
   return {
-    all: function() {
+    forms: function() {
       return forms;
     },
-    get: function(formName, date) {
+    getForm: function(formName, date) {
       for (var i = 0; i < forms.length; i++) {
         if (forms[i].estName === formName && forms[i].date === date) {
           return forms[i];
@@ -320,9 +260,9 @@ app.factory('Forms', function() {
 
       return null;
     },
-    add: function(form) {
+    addForm: function(form) {
       forms.push(form);
-      return null;
+      console.log(forms);
     }
   };
 });
@@ -337,10 +277,10 @@ app.factory('FoodCodes', function() {
   }];
 
   return {
-    all: function() {
+    foodCodes: function() {
       return foodCodes;
     },
-    get: function(foodCodePath) {
+    getFoodCode: function(foodCodePath) {
       for (var i = 0; i < foodCodes.length; i++) {
         if (foodCodes[i].path === foodCodePath) {
           return foodCodes[i];

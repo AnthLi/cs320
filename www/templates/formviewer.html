@@ -7,9 +7,11 @@
 	</ion-nav-bar>
 
 	<ion-content class="content">
-		<form id="new-form" ng-submit="processForm()">
+		<form id="new-form">
 			<div class="info">
-				<button class="button button-full button-positive">INSPECTION INFO</button>
+				<button class="button button-full button-positive" disabled style="opacity: 1.0">
+					INSPECTION INFO
+				</button>
 
 				<div class="row">
 					<div class="col form-group">
@@ -66,7 +68,7 @@
 					</div>
 
 					<div class="col form-group">
-						Previous Inspection Date:
+						Previous Inspection Date: <br>
 						{{form.prevInspDate}}
 					</div>
 				</div>
@@ -80,6 +82,12 @@
 					<div class="col form-group">
 						Time out: <br>
 						{{form.timeout}}
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col">
+						HACCP: {{form.HACCP}}
 					</div>
 				</div>
 
@@ -99,13 +107,22 @@
 			...........................VIOLATIONS.................................
 			...................................................................-->
 			<div class="violations">
-				<button class="button button-full button-assertive">VIOLATIONS</button>
-					List of Violations
-					<!-- Breaks needed to properly space bottom -->
-					<br>
-					<br>
-					<br>
+				<button class="button button-full button-assertive"  disabled style="opacity: 1.0">
+					VIOLATIONS
+				</button>
+				<div>
+					<h5>Violations</h5>
+					<div ng-repeat="v in form.violations">
+						{{v}}
+					</div>
+				</div>
 
+				<div>
+					<h5>Corrective Actions</h5>
+					<div ng-repeat="ca in form.corrActions">
+						{{ca}}
+					</div>
+				</div>
 			</div>
 		</form>
 	</ion-content>

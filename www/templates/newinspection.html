@@ -17,13 +17,13 @@
         <div class="row" ng-repeat="field in fields">
           <div class="col form-group">
             <label class="item item-input">
-              <input type="text" class="form-control" name="{{field.name[0]}}" ng-model="formData[field.model[0]]" placeholder="{{field.temp[0]}}">
+              <input type="text" class="form-control" name="{{field.name[0]}}" ng-model="formData[field.model[0]]" placeholder="{{field.temp[0]}}" required>
             </label>
           </div>
 
           <div class="col form-group">
             <label class="item item-input">
-              <input type="text" class="form-control" name="{{field.name[1]}}" ng-model="formData[field.model[1]]" placeholder="{{field.temp[1]}}">
+              <input type="text" class="form-control" name="{{field.name[1]}}" ng-model="formData[field.model[1]]" placeholder="{{field.temp[1]}}" required>
             </label>
           </div>
         </div>
@@ -52,7 +52,7 @@
 
         <div class="row">
           <div class="col form-group">
-            <ion-checkbox name="haccp" id="haccp" ng-model="formData.HACCP" ng-click="!formData.HACCP">
+            <ion-checkbox name="haccp" id="haccp" ng-model="haccp" ng-click="!haccp; formData.HACCP = 'Y'">
               HACCP
             </ion-checkbox>
           </div>
@@ -67,13 +67,13 @@
                 </div>
 
                 <select class="form-control" ng-model="formData.typeofOp">
+                  <option>Food Service</option>
                   <option>Retail</option>
-                  <option selected>Food Service</option>
                   <option>Residential Kitchen</option>
                   <option>Mobile</option>
                   <option>Temporary</option>
                   <option>Caterer</option>
-                  <option>Bed and Breakfast</option>
+                  <option>Bed & Breakfast</option>
                 </select>
               </label>
             </div>
@@ -89,8 +89,8 @@
                 </div>
 
                 <select class="form-control" ng-model="formData.typeofInsp">
+                  <option>Routine</option>
                   <option>Re-Inspection</option>
-                  <option selected>Routine</option>
                 </select>
               </label>
             </div>
@@ -147,7 +147,7 @@
         </div>
       </div>
 
-      <a id="savecontinue" class="button icon-right ion-chevron-right button-balanced">
+      <a id="savecontinue" class="button icon-right ion-chevron-right button-balanced" ng-click="processForm()">
         Save & Continue
       </a>
     </form>

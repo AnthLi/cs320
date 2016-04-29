@@ -9,7 +9,7 @@
   <!-- List of each Form -->
   <ion-content>
     <ion-list>
-      <ion-item class="item-icon-right" ng-repeat="form in forms | filter: {estName: query} | orderBy: 'estName'" href="#/page/forms/{{form.estName}}?date={{form.date}}">
+      <ion-item class="item-icon-right" ng-repeat="form in forms | filter: {estName: query} | orderBy: 'estName' track by $index" href="#/page/forms/{{form.estName}}?date={{form.date}}">
         <h2>{{form.estName}} - {{form.date}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
