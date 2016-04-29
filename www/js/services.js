@@ -6,70 +6,20 @@ app.factory('NewInspectionFields', function() {
   // hard-coding every single one of them, decreasing the amount of code
   // being written
   var newInspFields = [{
-    name: [
-      'estName',
-      'date'
-    ],
-    model: [
-      'estName',
-      'date'
-    ],
-    temp: [
-      'Name of Food Establishment',
-      'MM/DD/YYYY'
-    ]
+    model: ['estName', 'date'],
+    temp: ['Name of Food Establishment', 'MM/DD/YYYY']
   }, {
-    name: [
-      'address',
-      'owner'
-    ],
-    model: [
-      'address',
-      'owner'
-    ],
-    temp: [
-      'Address',
-      'Owner'
-    ]
+    model: ['address', 'owner'],
+    temp: ['Address', 'Owner']
   }, {
-    name: [
-      'phone',
-      'PIC'
-    ],
-    model: [
-      'phone',
-      'PIC'
-    ],
-    temp: [
-      'Telephone',
-      'Person In Charge'
-    ]
+    model: ['phone', 'PIC'],
+    temp: ['Telephone', 'Person In Charge']
   }, {
-    name: [
-      'permitno',
-      'inspector'
-    ],
-    model: [
-      'permitno',
-      'inspector'
-    ],
-    temp: [
-      'Permit No.',
-      'Inspector'
-    ]
+    model: ['permitno', 'inspector'],
+    temp: ['Permit No.', 'Inspector']
   }, {
-    name: [
-      'risklvl',
-      'prevInspDate'
-    ],
-    model: [
-      'risklvl',
-      'prevInspDate'
-    ],
-    temp: [
-      'Risk Level',
-      'Prev. Inspection Date'
-    ]
+    model: ['risklvl', 'prevInspDate'],
+    temp: ['Risk Level', 'Prev. Inspection Date']
   }];
 
   return {
@@ -265,6 +215,34 @@ app.factory('Forms', function() {
       console.log(forms);
     }
   };
+});
+
+app.factory('FormViewerFields', function() {
+  var fields = [{
+    name: ['Name', 'Date'],
+    model: ['estName', 'date']
+  }, {
+    name: ['Address', 'Owner'],
+    model: ['address', 'owner']
+  }, {
+    name: ['Permit No.', 'Inspector'],
+    model: ['permitno', 'inspector']
+  }, {
+    name: ['Risk', 'HACCP'],
+    model: ['risklvl', 'HACCP']
+  }, {
+    name: ['Time In', 'Time Out'],
+    model: ['timein', 'timeout']
+  }, {
+    name: ['Type of Operation(s)', 'Type of Inspection'],
+    model: ['typeofOp', 'typeofInsp']
+  }];
+
+  return {
+    fields: function() {
+      return fields;
+    }
+  }
 });
 
 app.factory('FoodCodes', function() {

@@ -110,8 +110,10 @@ app.controller('FormsCtrl', function($scope, Forms) {
   };
 });
 
-app.controller('FormViewerCtrl', function($scope, $stateParams, Forms) {
+app.controller('FormViewerCtrl', function($scope, $stateParams, Forms,
+  FormViewerFields) {
   $scope.form = Forms.getForm($stateParams.formName, $stateParams.date);
+  $scope.fields = FormViewerFields.fields();
 });
 
 // Same thing as FormsCtrl and FormViewerCtrl, but for the Food Codes instead

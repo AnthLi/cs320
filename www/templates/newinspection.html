@@ -17,13 +17,13 @@
         <div class="row" ng-repeat="field in fields">
           <div class="col form-group">
             <label class="item item-input">
-              <input type="text" class="form-control" name="{{field.name[0]}}" ng-model="formData[field.model[0]]" placeholder="{{field.temp[0]}}" required>
+              <input type="text" class="form-control" ng-model="formData[field.model[0]]" placeholder="{{field.temp[0]}}" required>
             </label>
           </div>
 
           <div class="col form-group">
             <label class="item item-input">
-              <input type="text" class="form-control" name="{{field.name[1]}}" ng-model="formData[field.model[1]]" placeholder="{{field.temp[1]}}" required>
+              <input type="text" class="form-control" ng-model="formData[field.model[1]]" placeholder="{{field.temp[1]}}" required>
             </label>
           </div>
         </div>
@@ -52,7 +52,7 @@
 
         <div class="row">
           <div class="col form-group">
-            <ion-checkbox name="haccp" id="haccp" ng-model="haccp" ng-click="!haccp; formData.HACCP = 'Y'">
+            <ion-checkbox id="haccp" ng-model="haccp" ng-click="!haccp; formData.HACCP = 'Y'">
               HACCP
             </ion-checkbox>
           </div>
@@ -63,7 +63,7 @@
             <div class="list">
               <label class="item item-input item-select">
                 <div class="input-label">
-                  Type of Operation:
+                  Type of Operation(s):
                 </div>
 
                 <select class="form-control" ng-model="formData.typeofOp">
@@ -147,9 +147,7 @@
         </div>
       </div>
 
-      <a id="savecontinue" class="button icon-right ion-chevron-right button-balanced" ng-click="processForm()">
-        Save & Continue
-      </a>
+      <input type="submit" id="savecontinue" class="button icon-right ion-chevron-right button-balanced" ng-click="processForm()" value="Save & Continue">
     </form>
   </ion-content>
 </ion-view>
