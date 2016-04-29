@@ -1,18 +1,44 @@
 <ion-view view-title="Forms">
-  <!-- Search bar header -->
-  <ion-header-bar class="bar-light bar-subheader">
-    <input id="formSearchBox" type="search" placeholder="Search existing forms..." ng-model="query">
-    <button id="formSearchClear" class="button button-icon ion-android-close input-button" ng-if="query.length" ng-click="clearSearch()">
-    </button>
-  </ion-header-bar>
+  <!-- Search bar -->
 
-  <!-- List of each Form -->
-  <ion-content>
-    <ion-list>
-      <ion-item class="item-icon-right" ng-repeat="form in forms | filter: {estName: query} | orderBy: 'estName'" href="#/page/forms/{{form.estName}}?date={{form.date}}">
+
+  <ion-content class="padding">
+  <div class="list list-inset">
+        <label class="item item-input">
+          <i class="icon ion-search placeholder-icon"></i>
+          <input id="formSearchBox" type="search" placeholder="Search existing forms . . ." ng-model="query">
+
+        <button id="formSearchClear" class="button button-icon ion-android-close input-button" ng-if="query.length" ng-click="clearSearch()">
+          </label>
+        </button
+    </div>
+</div>
+
+
+
+
+
+  <!-- List of each Form
+    <div class = "list card">
+      <ion-item class="item-icon-left item-icon-right" ng-repeat="form in forms | filter: {estName: query} | orderBy: 'estName'" href="#/page/forms/{{form.estName}}?date={{form.date}}">
+        <i class="icon ion-clipboard"></i>
         <h2>{{form.estName}} - {{form.date}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
-    </ion-list>
+    </div> -->
+
+    <div class="card">
+      <div class = ion-item class="item item-divider">
+      <ion-item ng-repeat="form in forms | filter: {estName: query} | orderBy: 'estName'" href="#/page/forms/{{form.estName}}?date={{form.date}}">
+        <h2>{{form.estName}}</h2>
+      <div class = ion-item class="item item-text-wrap">
+        {{form.date}}
+      </div>
+    </div>
+
+
+
+
+
   </ion-content>
 </ion-view>

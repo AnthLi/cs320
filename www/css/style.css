@@ -65,6 +65,17 @@ img{
   width: 100%;
 }
 
+.card{
+  font-family: Calibri;
+  font-size: 10px;
+}
+
+.card h2{
+  font-family: Calibri;
+  font-size: 18px;
+  font-weight: bold;
+}
+
 .checkboxes{
 	font-family: "Calibri";
 }
