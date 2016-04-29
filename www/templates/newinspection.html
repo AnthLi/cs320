@@ -17,13 +17,13 @@
         <div class="row" ng-repeat="field in fields">
           <div class="col form-group">
             <label class="item item-input">
-              <input type="text" class="form-control" ng-model="formData[field.model[0]]" placeholder="{{field.temp[0]}}" required>
+              <input type="text" class="form-control" ng-model="formData[field.model[0]]" placeholder="{{field.temp[0]}}">
             </label>
           </div>
 
           <div class="col form-group">
             <label class="item item-input">
-              <input type="text" class="form-control" ng-model="formData[field.model[1]]" placeholder="{{field.temp[1]}}" required>
+              <input type="text" class="form-control" ng-model="formData[field.model[1]]" placeholder="{{field.temp[1]}}" >
             </label>
           </div>
         </div>
@@ -35,7 +35,7 @@
                 Time In:
               </span>
 
-              <input type="time" class="form-control" ng-model="formData.timein" placeholder="" required>
+              <input type="time" class="form-control" ng-model="formData.timein" placeholder="">
             </label>
           </div>
 
@@ -45,7 +45,7 @@
                 Time Out:
               </span>
 
-              <input type="time" class="form-control" ng-model="formData.timeout" placeholder="" required>
+              <input type="time" class="form-control" ng-model="formData.timeout" placeholder="">
             </label>
           </div>
         </div>
@@ -147,7 +147,9 @@
         </div>
       </div>
 
-      <input type="submit" id="savecontinue" class="button icon-right ion-chevron-right button-balanced" ng-click="processForm()" value="Save & Continue">
+      <a id="savecontinue" class="button icon-right ion-chevron-right button-balanced" ng-click="processForm()" href="#/page/forms">
+        Save & Continue
+      </a>
     </form>
   </ion-content>
 </ion-view>

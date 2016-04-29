@@ -1,6 +1,6 @@
 var app = angular.module('inspectorGadget.services', []);
 
-app.factory('NewInspectionFields', function() {
+app.factory('NewInspection', function() {
   // The fields are paired together based on how the front-end shows it.
   // This is to help dynamically generate the input fields rather than
   // hard-coding every single one of them, decreasing the amount of code

@@ -3,8 +3,8 @@ var app = angular.module('inspectorGadget.controllers', []);
 app.controller('DashCtrl', function($scope) {});
 
 app.controller('NewInspectionCtrl', function($scope, $filter,
-  NewInspectionFields, Violations, Forms) {
-  $scope.fields = NewInspectionFields.newInspFields();
+  NewInspection, Violations, Forms) {
+  $scope.fields = NewInspection.newInspFields();
   // List of checked violations and corrective actions
   $scope.checkedV = Violations.checkedV();
   $scope.checkedCA = Violations.checkedCA();
@@ -44,6 +44,8 @@ app.controller('NewInspectionCtrl', function($scope, $filter,
     $scope.formData.corrActions = $scope.checkedCA;
     Forms.addForm($scope.formData);
   };
+
+
 });
 
 app.controller('AddViolationCtrl', function($scope, $stateParams, Violations) {
