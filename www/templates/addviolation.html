@@ -12,10 +12,10 @@
       <button class="button button-full button-assertive">CHOOSE VIOLATION</button>
       <ion-scroll zooming="false" direction="y" style="width: device-width; height: 350px">
         <div>
-          <form name="violations" ng-repeat="obj in violations">
-            <h5>{{obj.title}}</h5>
+          <form name="violations" ng-repeat="elem in vList">
+            <h5>{{elem.title}}</h5>
             <ion-list>
-              <ion-item class="item item-checkbox checkbox-assertive" ng-repeat="violation in obj.violations">
+              <ion-item class="item item-checkbox checkbox-assertive" ng-repeat="violation in elem.violations">
                 {{violation}}
                 <label class="checkbox">
                   <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'">

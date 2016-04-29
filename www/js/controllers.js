@@ -29,8 +29,10 @@ app.controller('NewInspectionCtrl', function($scope, NewInspectionFields) {
 });
 
 app.controller('AddViolationCtrl', function($scope, $stateParams, Violations) {
-  $scope.violations = Violations.allViolations();
-  $scope.correctiveactions = Violations.allCorrectiveActions();
+  // List of violations
+  $scope.vList = Violations.vList();
+  // List of corrective actions
+  $scope.caList = Violations.caList();
 });
 
 // Controller containing each Form accessible to the user. Once the user selects

@@ -80,7 +80,7 @@ app.factory('NewInspectionFields', function() {
 });
 
 app.factory('Violations', function() {
-  var violations = [{
+  var vList = [{
     title: 'FOOD PROTECTION MANAGEMENT',
     violations: [
       'PIC Assigned'
@@ -148,7 +148,7 @@ app.factory('Violations', function() {
     ]
   }];
 
-  var correctiveActions = [
+  var caList = [
     'Voluntary Compliance',
     'Re-inspection Scheduled',
     'Embargo',
@@ -160,11 +160,11 @@ app.factory('Violations', function() {
   ];
 
   return {
-    violations: function() {
-      return violations;
+    vList: function() {
+      return vList;
     },
-    correctiveActions: function() {
-      return correctiveActions;
+    caList: function() {
+      return caList;
     }
   };
 });
