@@ -7,91 +7,27 @@
 	</ion-nav-bar>
 
 	<ion-content class="content">
-		<form id="new-form" ng-submit="processForm()">
+		<form id="new-form">
 			<div class="info">
-				<button class="button button-full button-positive">INSPECTION INFO</button>
+				<button class="button button-full button-positive" disabled style="opacity: 1.0">
+					INSPECTION INFO
+				</button>
 
-				<div class="row">
+				<div class="row" ng-repeat="field in fields">
 					<div class="col form-group">
-						Name: <br>
-						{{form.estName}}
+						{{field.name[0]}} <br>
+						{{form[field.model[0]]}}
 					</div>
 
 					<div class="col form-group">
-						Date: <br>
-						{{form.date}}
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col form-group">
-						Address: <br>
-						{{form.address}}
-					</div>
-
-					<div class="col form-group">
-						Owner: <br>
-						{{form.owner}}
+						{{field.name[1]}} <br>
+						{{form[field.model[1]]}}
 					</div>
 				</div>
 
 				<div class="row">
 					<div class="col form-group">
-						Phone: <br>
-						{{form.phone}}
-					</div>
-
-					<div class="col form-group">
-						PIC: <br>
-						{{form.PIC}}
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col form-group">
-						Permit Number: <br>
-						{{form.permitno}}
-					</div>
-
-					<div class="col form-group">
-						Inspector: <br>
-						{{form.inspector}}
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col form-group">
-						Risk Level: <br>
-						{{form.risklvl}}
-					</div>
-
-					<div class="col form-group">
-						Previous Inspection Date:
-						{{form.prevInspDate}}
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col form-group">
-						Time in: <br>
-						{{form.timein}}
-					</div>
-
-					<div class="col form-group">
-						Time out: <br>
-						{{form.timeout}}
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col form-group">
-						Type of Operation: <br>
-						{{form.typeofOp}}
-					</div>
-
-					<div class="col form-group">
-						Type of Inspection: <br>
-						{{form.typeofInsp}}
+						Prev. Inspection Date: {{form.prevInspDate}}
 					</div>
 				</div>
 
@@ -99,13 +35,22 @@
 			...........................VIOLATIONS.................................
 			...................................................................-->
 			<div class="violations">
-				<button class="button button-full button-assertive">VIOLATIONS</button>
-					List of Violations
-					<!-- Breaks needed to properly space bottom -->
-					<br>
-					<br>
-					<br>
+				<button class="button button-full button-assertive"  disabled style="opacity: 1.0">
+					VIOLATIONS
+				</button>
+				<div>
+					<h5>Violations</h5>
+					<div ng-repeat="v in form.violations">
+						{{v}}
+					</div>
+				</div>
 
+				<div>
+					<h5>Corrective Actions</h5>
+					<div ng-repeat="ca in form.corrActions">
+						{{ca}}
+					</div>
+				</div>
 			</div>
 		</form>
 	</ion-content>

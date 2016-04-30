@@ -3,12 +3,13 @@ var app = angular.module('inspectorGadget.controllers', []);
 app.controller('DashCtrl', function($scope) {});
 
 app.controller('NewInspectionCtrl', function($scope, $filter,
-  NewInspectionFields, Violations) {
-  $scope.fields = NewInspectionFields.newInspFields();
+  NewInspection, Violations, Forms) {
+  $scope.fields = NewInspection.newInspFields();
   // List of checked violations and corrective actions
   $scope.checkedV = Violations.checkedV();
   $scope.checkedCA = Violations.checkedCA();
 
+  $scope.haccp = false;
   $scope.formData = {
     estName: '',
     date: '',
@@ -22,9 +23,11 @@ app.controller('NewInspectionCtrl', function($scope, $filter,
     prevInspDate: '',
     timein: '',
     timeout: '',
-    HACCP: false,
+    HACCP: 'N',
     typeofOp: '',
-    typeofInsp: ''
+    typeofInsp: '',
+    violations: [],
+    corrActions: []
   };
 
   // Format timein and timeout to only have hours, minutes, and AM/PM
@@ -37,8 +40,12 @@ app.controller('NewInspectionCtrl', function($scope, $filter,
   });
 
   $scope.processForm = function() {
-    //TODO: do something with the form data
+    $scope.formData.violations = $scope.checkedV;
+    $scope.formData.corrActions = $scope.checkedCA;
+    Forms.addForm($scope.formData);
   };
+
+
 });
 
 app.controller('AddViolationCtrl', function($scope, $stateParams, Violations) {
@@ -93,7 +100,7 @@ app.controller('AddViolationCtrl', function($scope, $stateParams, Violations) {
 // through and search the Form.
 app.controller('FormsCtrl', function($scope, Forms) {
   // All available forms to the user
-  $scope.forms = Forms.all();
+  $scope.forms = Forms.forms();
 
   // Source: http://goo.gl/r9dkjh
   // Search query based on user input, allowing the user to filter certain forms
@@ -105,18 +112,20 @@ app.controller('FormsCtrl', function($scope, Forms) {
   };
 });
 
-app.controller('FormViewerCtrl', function($scope, $stateParams, Forms) {
-  $scope.form = Forms.get($stateParams.formName, $stateParams.date);
+app.controller('FormViewerCtrl', function($scope, $stateParams, Forms,
+  FormViewerFields) {
+  $scope.form = Forms.getForm($stateParams.formName, $stateParams.date);
+  $scope.fields = FormViewerFields.fields();
 });
 
 // Same thing as FormsCtrl and FormViewerCtrl, but for the Food Codes instead
 app.controller('FoodCodesCtrl', function($scope, FoodCodes) {
   // Food Codes available for the user to search through
-  $scope.foodCodes = FoodCodes.all();
+  $scope.foodCodes = FoodCodes.foodCodes();
 });
 
 app.controller('FoodCodeViewerCtrl', function($scope, $stateParams, FoodCodes) {
-  $scope.foodCode = FoodCodes.get($stateParams.foodCodePath);
+  $scope.foodCode = FoodCodes.getFoodCode($stateParams.foodCodePath);
 
   // Gets the path to a Food Code for the user to search through
   $scope.getFormPath = function(path) {

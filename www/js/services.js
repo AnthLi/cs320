@@ -1,75 +1,25 @@
 var app = angular.module('inspectorGadget.services', []);
 
-app.factory('NewInspectionFields', function() {
+app.factory('NewInspection', function() {
   // The fields are paired together based on how the front-end shows it.
   // This is to help dynamically generate the input fields rather than
   // hard-coding every single one of them, decreasing the amount of code
   // being written
   var newInspFields = [{
-    name: [
-      'estName',
-      'date'
-    ],
-    model: [
-      'estName',
-      'date'
-    ],
-    temp: [
-      'Name of Food Establishment',
-      'MM/DD/YYYY'
-    ]
+    model: ['estName', 'date'],
+    temp: ['Name of Food Establishment', 'MM/DD/YYYY']
   }, {
-    name: [
-      'address',
-      'owner'
-    ],
-    model: [
-      'address',
-      'owner'
-    ],
-    temp: [
-      'Address',
-      'Owner'
-    ]
+    model: ['address', 'owner'],
+    temp: ['Address', 'Owner']
   }, {
-    name: [
-      'phone',
-      'PIC'
-    ],
-    model: [
-      'phone',
-      'PIC'
-    ],
-    temp: [
-      'Telephone',
-      'Person In Charge'
-    ]
+    model: ['phone', 'PIC'],
+    temp: ['Telephone', 'Person In Charge']
   }, {
-    name: [
-      'permitno',
-      'inspector'
-    ],
-    model: [
-      'permitno',
-      'inspector'
-    ],
-    temp: [
-      'Permit No.',
-      'Inspector'
-    ]
+    model: ['permitno', 'inspector'],
+    temp: ['Permit No.', 'Inspector']
   }, {
-    name: [
-      'risklvl',
-      'prevInspDate'
-    ],
-    model: [
-      'risklvl',
-      'prevInspDate'
-    ],
-    temp: [
-      'Risk Level',
-      'Prev. Inspection Date'
-    ]
+    model: ['risklvl', 'prevInspDate'],
+    temp: ['Risk Level', 'Prev. Inspection Date']
   }];
 
   return {
@@ -245,73 +195,13 @@ app.factory('Violations', function() {
 });
 
 app.factory('Forms', function() {
-  var forms = [{
-    estName: 'Apartment 101',
-    date: 'January 1, 1970',
-    address: '101 Complex Street, Amherst, MA 01003',
-    owner: 'Some guy',
-    phone: '1-800-COM-PLEX',
-    PIC: 'Some PIC',
-    permitno: '0001',
-    inspector: 'Some Inspector',
-    risklvl: '42',
-    prevInspDate: 'N/A',
-    timein: '00:00:00',
-    timeout: '00:00:01',
-    typeofOp: 'Residential',
-    typeofInsp: 'Routine'
-  }, {
-    estName: 'Restaurant ABC',
-    date: 'February 1, 1970',
-    address: '123 ABC Street, Amherst, MA 01003',
-    owner: 'XYZ',
-    phone: '1-234-567-8910',
-    PIC: 'XYZ',
-    permitno: '1234',
-    inspector: 'Gadget',
-    risklvl: '1',
-    prevInspDate: 'N/A',
-    timein: '00:00:00',
-    timeout: '00:00:01',
-    typeofOp: 'Food Service',
-    typeofInsp: 'Routine'
-  }, {
-    estName: 'Restaurant ABC',
-    date: 'March 1, 1970',
-    address: '123 ABC Street, Amherst, MA 01003',
-    owner: 'XYZ',
-    phone: '1-234-567-8910',
-    PIC: 'XYZ',
-    permitno: '1234',
-    inspector: 'Gadget',
-    risklvl: '1',
-    prevInspDate: 'February 1, 1970',
-    timein: '00:00:01',
-    timeout: '00:00:02',
-    typeofOp: 'Food Service',
-    typeofInsp: 'Re-Inspection'
-  }, {
-    estName: 'Apartment 101',
-    date: 'January 1, 1971',
-    address: '101 Complex Street, Amherst, MA 01003',
-    owner: 'Some guy',
-    phone: '1-800-COM-PLEX',
-    PIC: 'Some PIC',
-    permitno: '0001',
-    inspector: 'Some Inspector',
-    risklvl: '42',
-    prevInspDate: 'January 1, 1970',
-    timein: '00:00:00',
-    timeout: '00:00:01',
-    typeofOp: 'Residential',
-    typeofInsp: 'Re-inspection'
-  }];
+  var forms = [];
 
   return {
-    all: function() {
+    forms: function() {
       return forms;
     },
-    get: function(formName, date) {
+    getForm: function(formName, date) {
       for (var i = 0; i < forms.length; i++) {
         if (forms[i].estName === formName && forms[i].date === date) {
           return forms[i];
@@ -320,11 +210,39 @@ app.factory('Forms', function() {
 
       return null;
     },
-    add: function(form) {
+    addForm: function(form) {
       forms.push(form);
-      return null;
+      console.log(forms);
     }
   };
+});
+
+app.factory('FormViewerFields', function() {
+  var fields = [{
+    name: ['Name', 'Date'],
+    model: ['estName', 'date']
+  }, {
+    name: ['Address', 'Owner'],
+    model: ['address', 'owner']
+  }, {
+    name: ['Permit No.', 'Inspector'],
+    model: ['permitno', 'inspector']
+  }, {
+    name: ['Risk', 'HACCP'],
+    model: ['risklvl', 'HACCP']
+  }, {
+    name: ['Time In', 'Time Out'],
+    model: ['timein', 'timeout']
+  }, {
+    name: ['Type of Operation(s)', 'Type of Inspection'],
+    model: ['typeofOp', 'typeofInsp']
+  }];
+
+  return {
+    fields: function() {
+      return fields;
+    }
+  }
 });
 
 app.factory('FoodCodes', function() {
@@ -337,10 +255,10 @@ app.factory('FoodCodes', function() {
   }];
 
   return {
-    all: function() {
+    foodCodes: function() {
       return foodCodes;
     },
-    get: function(foodCodePath) {
+    getFoodCode: function(foodCodePath) {
       for (var i = 0; i < foodCodes.length; i++) {
         if (foodCodes[i].path === foodCodePath) {
           return foodCodes[i];
