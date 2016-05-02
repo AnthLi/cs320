@@ -46,7 +46,7 @@ violation = {
   isCrit = string // should be either C, N, or R
   description = string
   dateVerified = string
-  pics = []  // each element of this array should be a string containing a filepath
+  pictures = []  // each element of this array should be a string containing a filepath
 }
 ```  
 When passing objects, it is ok to leave some fields as null.  
