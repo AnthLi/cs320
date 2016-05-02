@@ -26,21 +26,27 @@ var addForm = function(formObj){
 		formObj.timeOut,
 		formObj.opType,
 		formObj.inspType,
-		formObj.haccp ];
+		formObj.haccp
+	];
 	var violations = formObj.violations;
+	var corrActions = formObj.corrActions;
 
-	var insertForm = function(){
-		var sqlstr = "INSERT INTO Form(name,owner,pic,inspector,address, \
-					town,state,zip,phone,permitNum,date,riskLvl, \
-					prevInspectDate,timeIn,timeOut,opType,inspType,haccp) \
-					VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		db.run(sqlstr,form,function(){
-			insertViolations(this.lastID);
+	var insertForm = function() {
+		var sqlstr = "INSERT INTO Form(name, owner, pic, inspector, address, \
+					town, state, zip, phone, permitNum, date, riskLvl, \
+					prevInspectDate, timeIn, timeOut, opType, inspType, haccp) \
+					VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		db.run(sqlstr, form, function() {
+			// Get the fid of the last inserted form and pass it to insertViolations
+			// and insertCorrActions.
+			var fid = this.lastID;
+			insertViolations(fid);
+			insertCorrActions(fid);
 		});
 	}
 
-	var insertViolations = function(fid){
-		for(var i=0;i<violations.length;i++){
+	var insertViolations = function(fid) {
+		for(var i=0;i<violations.length;i++) {
 			var violation = [
 				fid,
 				violations[i].tid,
@@ -48,21 +54,34 @@ var addForm = function(formObj){
 				violations[i].isCrit,
 				violations[i].description,
 				violations[i].dateVerified];
-		  var pictures = violations[i].pictures;
-		  
-			db.run("INSERT INTO Violation(fid,tid,codeRef,isCrit,description,dateVerified) \
-					VALUES(?,?,?,?,?,?)",violation,function(){
+			var pictures = violations[i].pictures;
+
+			db.run("INSERT INTO Violation(fid, tid, codeRef, isCrit, description, \
+				dateVerified) VALUES(?, ?, ?, ?, ?, ?)", violation, function(){
 				if(pictures){
-				  insertPictures(this.lastID, pictures);
+					insertPictures(this.lastID, pictures);
 				}
 			});
 		}
 	}
 
+	// Inser the corrective actions marked in the form
+	var insertCorrActions = function(fid) {
+		for (var i = 0; i < corrActions.length; i++) {
+			var corrAction = [
+				fid,
+				corrActions[i].description
+			];
+
+			db.run("INSERT INTO CorrectiveActions(fid, description) \
+				VALUES(?, ?)", corrAction);
+		}
+	}
+
 	var insertPictures = function(vid, pictures){
-	  for(var i=0;i<pictures.length;i++){
-	    db.run("INSERT INTO Picture(vid,filename) VALUES(?,?)",vid,pictures[i]);
-	  }
+		for(var i=0;i<pictures.length;i++){
+			db.run("INSERT INTO Picture(vid,filename) VALUES(?,?)",vid,pictures[i]);
+		}
 	}
 
 	db.serialize(insertForm());
@@ -72,38 +91,38 @@ var addForm = function(formObj){
 // search forms in the database
 // search on restaurant name, town, or inspection date
 var searchForm = function(formObj, callback){
-  
-  if(!formObj.name && !formObj.town && !formObj.date){
-    return;
-  }
-  if(typeof callback != 'function'){
-    return;
-  }
-  
-  sqlStr = "SELECT * \
-            FROM Form f \
-            INNER JOIN Violation v ON(v.fid=f.fid) \
-            INNER JOIN Vtype t ON(t.tid=v.tid) \
-            INNER JOIN Picture p ON(p.vid=v.vid) \
-            WHERE ";
 
-  if(formObj.name){
-    sqlStr += "f.name="+formObj.name;
-  }
-  if(formObj.town){
-    if(formObj.name){
-      sqlStr += " AND ";
-    }
-    sqlStr += "f.town="+formObj.town;
-  }
-  if(formObj.date){
-    if(formObj.town || formObj.name){
-      sqlStr += " AND ";
-    }
-    sqlStr += "f.date="+formObj.date;
-  }
+	if(!formObj.name && !formObj.town && !formObj.date){
+		return;
+	}
+	if(typeof callback != 'function'){
+		return;
+	}
 
-    db.all(sqlStr, [], callback);
+	sqlStr = "SELECT * \
+						FROM Form f \
+						INNER JOIN Violation v ON(v.fid=f.fid) \
+						INNER JOIN Vtype t ON(t.tid=v.tid) \
+						INNER JOIN Picture p ON(p.vid=v.vid) \
+						WHERE ";
+
+	if(formObj.name){
+		sqlStr += "f.name="+formObj.name;
+	}
+	if(formObj.town){
+		if(formObj.name){
+			sqlStr += " AND ";
+		}
+		sqlStr += "f.town="+formObj.town;
+	}
+	if(formObj.date){
+		if(formObj.town || formObj.name){
+			sqlStr += " AND ";
+		}
+		sqlStr += "f.date="+formObj.date;
+	}
+
+		db.all(sqlStr, [], callback);
 }
 
 module.exports = {

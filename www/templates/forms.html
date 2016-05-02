@@ -33,16 +33,16 @@
   <!-- List of each Form -->
   <ion-content>
     <ion-list>
-      <ion-item class="item-icon-right" ng-repeat="form in forms | filter: {estName: query} | orderBy: 'estName' track by $index" href="#/page/forms/{{form.estName}}?date={{form.date}}">
-        <h2>{{form.estName}} - {{form.date}}</h2>
+      <ion-item class="item-icon-right" ng-repeat="form in forms | filter: {name: query} | orderBy: 'name' track by $index" href="#/page/forms/{{form.name}}?date={{form.date}}">
+        <h2>{{form.name}} - {{form.date}}</h2>
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </div> -->
 
     <div class="card">
       <div class = ion-item class="item item-divider">
-      <ion-item ng-repeat="form in forms | filter: {estName: query} | orderBy: 'estName'" href="#/page/forms/{{form.estName}}?date={{form.date}}">
-        <h2>{{form.estName}}</h2>
+      <ion-item ng-repeat="form in forms | filter: {name: query} | orderBy: 'name'" href="#/page/forms/{{form.name}}?date={{form.date}}">
+        <h2>{{form.name}}</h2>
       <div class = ion-item class="item item-text-wrap">
         {{form.date}}
       </div>
