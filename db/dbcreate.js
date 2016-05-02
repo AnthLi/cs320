@@ -44,8 +44,10 @@ db.run("CREATE TABLE IF NOT EXISTS Vtype( \
 			type 	TEXT NOT NULL )");
 
 db.run("CREATE TABLE IF NOT EXISTS Picture( \
-			pid 		INTEGER PRIMARY KEY AUTOINCREMENT, \
-			filename	TEXT NOT NULL )");
+			pid 		  INTEGER PRIMARY KEY AUTOINCREMENT, \
+			vid       INTEGER NOT NULL, \
+			filename	TEXT NOT NULL, \
+			FOREIGN KEY(vid) REFERENCES Violation(vid) )");
 
 // Fill Vtype with necessary values
 db.run("INSERT INTO Vtype(tid,type) VALUES(1,'PIC Assigned')");
