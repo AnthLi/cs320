@@ -47,15 +47,21 @@ var addForm = function(formObj){
 				violations[i].isCrit,
 				violations[i].description,
 				violations[i].dateVerified];
+		  var pictures = violations[i].pictures;
+		  
 			db.run("INSERT INTO Violation(fid,tid,codeRef,isCrit,description,dateVerified) \
 					VALUES(?,?,?,?,?,?)",violation,function(){
-				insertPictures(this.lastID);
+				if(pictures){
+				  insertPictures(this.lastID, pictures);
+				}
 			});
 		}
 	}
 
-	var insertPictures = function(vid){
-		// TODO
+	var insertPictures = function(vid, pictures){
+	  for(var i=0;i<pictures.length;i++){
+	    db.run("INSERT INTO Picture(vid,filename) VALUES(?,?)",vid,pictures[i]);
+	  }
 	}
 
 	db.serialize(insertForm());
@@ -63,25 +69,40 @@ var addForm = function(formObj){
 
 
 // search forms in the database
-// TODO - search on restaurant name, town, or inspection date
-var searchForm = function(formObj){
-    // search by form_name
+// search on restaurant name, town, or inspection date
+var searchForm = function(formObj, callback){
+  
+  if(!formObj.name && !formObj.town && !formObj.date){
+    return;
+  }
+  if(typeof callback != 'function'){
+    return;
+  }
+  
+  sqlStr = "SELECT * \
+            FROM Form f \
+            INNER JOIN Violation v ON(v.fid=f.fid) \
+            INNER JOIN Vtype t ON(t.tid=v.tid) \
+            INNER JOIN Picture p ON(p.vid=v.vid) \
+            WHERE ";
 
-//	var searchArr = [];
-//	var sqlStr = "SELECT eid FROM Establishment WHERE ";
-//	if searchObj has name field {
-//		sqlStr += "name=?"
-//		searchArr += searchObj.name;
-//	}
-//	if searchObj has town field {
-//		sqlStr += "town=?";
-//		searchArr += searchObj.town;
-//	}
-//	...
+  if(formObj.name){
+    sqlStr += "f.name="+formObj.name;
+  }
+  if(formObj.town){
+    if(formObj.name){
+      sqlStr += " AND ";
+    }
+    sqlStr += "f.town="+formObj.town;
+  }
+  if(formObj.date){
+    if(formObj.town || formObj.name){
+      sqlStr += " AND ";
+    }
+    sqlStr += "f.date="+formObj.date;
+  }
 
-    db.all("SELECT * FROM Form WHERE name=?", formObj.name, function(err, rows){
-        // return all rows
-    });
+    db.all(sqlStr, [], callback);
 }
 
 module.exports = {
