@@ -11,7 +11,7 @@ db.addForm(object);
 ```  
 You can take a look at `test/dbfunctions_test.js` for a good example.
 
-# addForm(object)
+### addForm(object)
 
 The `addForm` function requires you to pass it a JavaScript object that follows the following format:
 
@@ -52,7 +52,7 @@ violation = {
 ```  
 When passing objects, it is ok to leave some fields as null.  
 
-# searchForm(object, callback(err, rows))
+### searchForm(object, callback(err, rows))
 
 This function takes two arguments, an object and a callback function. You can search for forms based on any combination of the fields 'name', 'town', and 'date'. The object you pass this function should look like this:
 ```javascript
@@ -64,7 +64,7 @@ This function takes two arguments, an object and a callback function. You can se
 ```  
 Any or all of these fields can be blank (note that if they are all blank, the function will do nothing). Once the database rows have been retrieved, the callback function will be called. If there was an error, the 'err' variable will not be blank. Otherwise, it will be null and 'rows' will be an array containing all the database rows returned by the search.
 
-### Important!  
+##### Important!  
 Due to the way SQLite is implemented, the database takes the form of a file called `db/inspections.db`. This database is in the github and is shared between all of us.  Be careful when merging changes on this file, as it can be blown up fairly easily.  If you do manage to screw up the database, just delete the file and then run the handy reset script:  
 ```bash
 $ ./db/resetdb.sh
