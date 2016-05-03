@@ -19,65 +19,70 @@ app.factory('DB', function($cordovaSQLite) {
   // Form table
   $cordovaSQLite.execute(db,
     'CREATE TABLE IF NOT EXISTS Form( \
-      fid              INTEGER PRIMARY KEY AUTOINCREMENT, \
-      name             TEXT NOT NULL, \
-      owner            TEXT, \
-      pic              TEXT, \
-      inspector        TEXT, \
-      address          TEXT, \
-      town             TEXT, \
-      state            TEXT, \
-      zip              TEXT, \
-      phone            TEXT, \
-      permitNum        TEXT, \
-      date             TEXT, \
-      riskLvl          TEXT, \
-      prevInspectDate  TEXT, \
-      timeIn           TEXT, \
-      timeOut          TEXT, \
-      opType           TEXT, \
-      inspType         TEXT, \
-      haccp            BOOLEAN)'
+      f_fid              INTEGER PRIMARY KEY AUTOINCREMENT, \
+      f_name             TEXT NOT NULL, \
+      f_owner            TEXT, \
+      f_pic              TEXT, \
+      f_inspector        TEXT, \
+      f_address          TEXT, \
+      f_town             TEXT, \
+      f_state            TEXT, \
+      f_zip              TEXT, \
+      f_phone            TEXT, \
+      f_permitNum        TEXT, \
+      f_date             TEXT, \
+      f_riskLvl          TEXT, \
+      f_prevInspectDate  TEXT, \
+      f_timeIn           TEXT, \
+      f_timeOut          TEXT, \
+      f_opType           TEXT, \
+      f_inspType         TEXT, \
+      f_haccp            BOOLEAN \
+    )'
   );
 
   // Violation table
   $cordovaSQLite.execute(db,
     'CREATE TABLE IF NOT EXISTS Violation( \
-      vid               INTEGER PRIMARY KEY AUTOINCREMENT, \
-      fid               INTEGER NOT NULL, \
-      tid               INTEGER NOT NULL, \
-      itemNum           INTEGER NOT NULL, \
-      codeRef           TEXT NOT NULL, \
-      isCrit            TEXT NOT NULL, \
-      description       TEXT NOT NULL, \
-      dateVerified      TEXT NOT NULL, \
-      FOREIGN KEY(fid)  REFERENCES Form(fid), \
-      FOREIGN KEY(tid)  REFERENCES Vtype(tid))'
+      v_vid               INTEGER PRIMARY KEY AUTOINCREMENT, \
+      v_fid               INTEGER NOT NULL, \
+      v_tid               INTEGER NOT NULL, \
+      v_itemNum           INTEGER NOT NULL, \
+      v_codeRef           TEXT NOT NULL, \
+      v_isCrit            TEXT NOT NULL, \
+      v_description       TEXT NOT NULL, \
+      v_dateVerified      TEXT NOT NULL, \
+      FOREIGN KEY(v_fid)  REFERENCES Form(f_fid), \
+      FOREIGN KEY(v_tid)  REFERENCES Vtype(f_tid) \
+    )'
   );
 
   // Corrective Action table
   $cordovaSQLite.execute(db,
     'CREATE TABLE IF NOT EXISTS CorrectiveAction( \
-      caid              INTEGER PRIMARY KEY AUTOINCREMENT, \
-      fid               INTEGER NOT NULL, \
-      description       TEXT NOT NULL, \
-      FOREIGN KEY(fid)  REFERENCES Form(fid))'
+      ca_caid              INTEGER PRIMARY KEY AUTOINCREMENT, \
+      ca_fid               INTEGER NOT NULL, \
+      ca_description       TEXT NOT NULL, \
+      FOREIGN KEY(ca_fid)  REFERENCES Form(f_fid) \
+    )'
   );
 
   // Violation type table
   $cordovaSQLite.execute(db,
     'CREATE TABLE IF NOT EXISTS Vtype( \
-      tid   INTEGER PRIMARY KEY, \
-      type  TEXT NOT NULL)'
+      vt_tid   INTEGER PRIMARY KEY, \
+      vt_type  TEXT NOT NULL \
+    )'
   );
 
   // Picture table
   $cordovaSQLite.execute(db,
     'CREATE TABLE IF NOT EXISTS Picture( \
-      pid               INTEGER PRIMARY KEY AUTOINCREMENT, \
-      vid               INTEGER NOT NULL, \
-      filename          TEXT NOT NULL, \
-      FOREIGN KEY(vid)  REFERENCES Violation(vid))'
+      p_pid               INTEGER PRIMARY KEY AUTOINCREMENT, \
+      p_vid               INTEGER NOT NULL, \
+      p_filename          TEXT NOT NULL, \
+      FOREIGN KEY(p_vid)  REFERENCES Violation(v_vid) \
+    )'
   );
 
   // Fill Vtype with necessary values

@@ -68,7 +68,7 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
 
     var insertPictures = function(vid, pictures){
       for(var i = 0; i < pictures.length; i++){
-        var q = 'INSERT INTO Picture(vid, filename) VALUES(?, ?)';
+        var q = 'INSERT INTO Picture(p_vid, p_filename) VALUES(?, ?)';
         $cordovaSQLite.execute(DB, q, [vid, pictures[i]]);
       }
     }
@@ -86,13 +86,13 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
         ];
         var pictures = violations[i].pictures;
 
-        var q = 'INSERT INTO Violation(fid, tid, itemNum, codeRef, isCrit, \
-          description, dateVerified) VALUES(?, ?, ?, ?, ?, ?, ?)'
+        var q = 'INSERT INTO Violation(v_fid, v_tid, v_itemNum, v_codeRef, \
+          v_isCrit, v_description, v_dateVerified) VALUES(?, ?, ?, ?, ?, ?, ?)';
         $cordovaSQLite.execute(DB, q, violation).then(function(res) {
           if (pictures) {
             insertPictures(res.insertId, pictures);
           }
-          console.log(res);
+          console.log('Violation:', res);
         }, function(err) {
           console.log(err);
         });
@@ -113,9 +113,9 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
       }
     }
 
-    var q = "INSERT INTO Form(name, owner, pic, inspector, address, town, \
-      state, zip, phone, permitNum, date, riskLvl, prevInspectDate, \
-      timeIn, timeOut, opType, inspType, haccp) \
+    var q = "INSERT INTO Form(f_name, f_owner, f_pic, f_inspector, f_address, \
+      f_town, f_state, f_zip, f_phone, f_permitNum, f_date, f_riskLvl, \
+      f_prevInspectDate, f_timeIn, f_timeOut, f_opType, f_inspType, f_haccp) \
       VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $cordovaSQLite.execute(DB, q, form).then(function(res) {
       // Get the fid of the last inserted form and pass it to
@@ -207,18 +207,18 @@ app.controller('FormsCtrl', function($scope, $cordovaSQLite, DB, Forms) {
   // All available forms to the user
   $scope.forms = Forms.forms();
 
-  var q = 'SELECT * FROM Form';
+  // var q = 'SELECT * FROM Form';
   var q = 'SELECT * FROM \
     Form f \
     LEFT OUTER JOIN Violation v \
-    ON f.fid = v.fid \
-    ORDER BY f.fid';
+    ON f.f_fid = v.v_fid \
+    ORDER BY f.f_fid';
   $cordovaSQLite.execute(DB, q).then(function(res) {
     var rows = res.rows;
-    console.log(rows);
+    console.log('Rows:', rows);
     for (var i = 0; i < rows.length; i++) {
       // Forms.addForm(rows[i]);
-      console.log(rows[i])
+      console.log('Row:', rows[i]);
     }
   }, function(err) {
     console.log(err);
