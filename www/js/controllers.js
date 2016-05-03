@@ -207,11 +207,18 @@ app.controller('FormsCtrl', function($scope, $cordovaSQLite, DB, Forms) {
   // All available forms to the user
   $scope.forms = Forms.forms();
 
-  var q = 'SELECT * FROM Form f';
-  $cordovaSQLite.execute(DB, q).then(function(fRes) {
-    var formRows = fRes.rows;
-    for (var i = 0; i < formRows.length; i++) {
-      Forms.addForm(rows[i]);
+  var q = 'SELECT * FROM Form';
+  var q = 'SELECT * FROM \
+    Form f \
+    LEFT OUTER JOIN Violation v \
+    ON f.fid = v.fid \
+    ORDER BY f.fid';
+  $cordovaSQLite.execute(DB, q).then(function(res) {
+    var rows = res.rows;
+    console.log(rows);
+    for (var i = 0; i < rows.length; i++) {
+      // Forms.addForm(rows[i]);
+      console.log(rows[i])
     }
   }, function(err) {
     console.log(err);
@@ -231,6 +238,8 @@ app.controller('FormViewerCtrl', function($scope, $stateParams, Forms,
   FormViewerFields) {
   $scope.form = Forms.getForm($stateParams.formName, $stateParams.date);
   $scope.fields = FormViewerFields.fields();
+
+  // var q = 'SELECT * FROM Form '
 
   // Set HACCP to say Yes/No rather than true/false
   if ($scope.form.haccp === true) {
