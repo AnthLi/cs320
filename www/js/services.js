@@ -6,9 +6,15 @@ app.factory('DB', function($cordovaSQLite) {
   if (window.cordova) {
     db = $cordovaSQLite.openDatabase('inspections.db');
   } else {
-    db = window.openDatabase('inspections.db', '1', 'inspections',
+    db = window.openDatabase('inspections.db', '', 'Inspections',
       1024 * 1024 * 100);
   }
+
+  // Drop the tables and start over
+  // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS Form');
+  // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS Violation');
+  // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS CorrectiveAction');
+  // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS Picture');
 
   // Form table
   $cordovaSQLite.execute(db,
@@ -40,12 +46,13 @@ app.factory('DB', function($cordovaSQLite) {
       vid               INTEGER PRIMARY KEY AUTOINCREMENT, \
       fid               INTEGER NOT NULL, \
       tid               INTEGER NOT NULL, \
-      codeRef           TEXT, \
+      itemNum           INTEGER NOT NULL, \
+      codeRef           TEXT NOT NULL, \
       isCrit            TEXT NOT NULL, \
       description       TEXT NOT NULL, \
-      dateVerified      TEXT, \
+      dateVerified      TEXT NOT NULL, \
       FOREIGN KEY(fid)  REFERENCES Form(fid), \
-      FOREIGN KEY(tid)  REFERENCES Vtype(tid)'
+      FOREIGN KEY(tid)  REFERENCES Vtype(tid))'
   );
 
   // Corrective Action table
@@ -54,14 +61,14 @@ app.factory('DB', function($cordovaSQLite) {
       caid              INTEGER PRIMARY KEY AUTOINCREMENT, \
       fid               INTEGER NOT NULL, \
       description       TEXT NOT NULL, \
-      FOREIGN KEY(fid)  REFERENCES Form(fid)'
+      FOREIGN KEY(fid)  REFERENCES Form(fid))'
   );
 
   // Violation type table
   $cordovaSQLite.execute(db,
     'CREATE TABLE IF NOT EXISTS Vtype( \
       tid   INTEGER PRIMARY KEY, \
-      type  TEXT NOT NULL'
+      type  TEXT NOT NULL)'
   );
 
   // Picture table
@@ -70,7 +77,7 @@ app.factory('DB', function($cordovaSQLite) {
       pid               INTEGER PRIMARY KEY AUTOINCREMENT, \
       vid               INTEGER NOT NULL, \
       filename          TEXT NOT NULL, \
-      FOREIGN KEY(vid)  REFERENCES Violation(vid)'
+      FOREIGN KEY(vid)  REFERENCES Violation(vid))'
   );
 
   // Fill Vtype with necessary values
@@ -134,150 +141,154 @@ app.factory('Violations', function() {
   var vList = [{
     title: 'FOOD PROTECTION MANAGEMENT',
     violations: [{
-      description: 'PIC Assigned',
+      name: 'PIC Assigned',
       checked: false
     }]
   }, {
     title: 'EMPLOYEE HEALTH',
     violations: [{
-      description: 'Reporting of Diseases by Food Employee and PIC',
+      name: 'Reporting of Diseases by Food Employee and PIC',
       checked: false
     }, {
-      description: 'Personnel with Infections Restricted/Excluded',
+      name: 'Personnel with Infections Restricted/Excluded',
       checked: false
     }]
   }, {
     title: 'FOOD FROM APPROVED SOURCE',
     violations: [{
-      description: 'Food and Water from Approved Source',
+      name: 'Food and Water from Approved Source',
       checked: false
     }, {
-      description: 'Receiving/Condition',
+      name: 'Receiving/Condition',
       checked: false
     }, {
-      description: 'Tags/Records/Accuracy of Ingredient Statements',
+      name: 'Tags/Records/Accuracy of Ingredient Statements',
       checked: false
     }, {
-      description: 'Conformance with Approved Procedures/HACCP Plans',
+      name: 'Conformance with Approved Procedures/HACCP Plans',
       checked: false
     }]
   }, {
     title: 'PROTECTION FROM CONTAMINATION',
     violations: [{
-      description: 'Separation/Segregation/Protection',
+      name: 'Separation/Segregation/Protection',
       checked: false
     }, {
-      description: 'Food Contact Surface Cleaning and Sanitizing',
+      name: 'Food Contact Surface Cleaning and Sanitizing',
       checked: false
     }, {
-      description: 'Proper Adequate Handwashing',
+      name: 'Proper Adequate Handwashing',
       checked: false
     }, {
-      description: 'Good Hygeinic Practices',
+      name: 'Good Hygeinic Practices',
       checked: false
     }, {
-      description: 'Prevention of Contamination',
+      name: 'Prevention of Contamination',
       checked: false
     }, {
-      description: 'Handwash Facilities',
+      name: 'Handwash Facilities',
       checked: false
     }]
   }, {
     title: 'PROTECTION FROM CHEMICALS',
     violations: [{
-      description: 'Approved Food or Color Additives',
+      name: 'Approved Food or Color Additives',
       checked: false
     }, {
-      description: 'Toxic Chemicals',
+      name: 'Toxic Chemicals',
       checked: false
     }]
   }, {
     title: 'TIME/TEMPERATURE CONTROLS',
     violations: [{
-      description: 'Cooking Temperature',
+      name: 'Cooking Temperature',
       checked: false
     }, {
-      description: 'Reheating',
+      name: 'Reheating',
       checked: false
     }, {
-      description: 'Cooling',
+      name: 'Cooling',
       checked: false
     }, {
-      description: 'Hot and Cold Holding',
+      name: 'Hot and Cold Holding',
       checked: false
     }, {
-      description: 'Time as a Public Health Control',
+      name: 'Time as a Public Health Control',
       checked: false
     }]
   }, {
     title: 'REQUIREMENTS FOR HIGHLY SUSCEPTIBLE POPULATIONS',
     violations: [{
-      description: 'Food and Food Preparation for HSP',
+      name: 'Food and Food Preparation for HSP',
       checked: false
     }]
   }, {
     title: 'CONSUMER ADVISORY',
     violations: [{
-      description: 'Posting of Consumer Advisories',
+      name: 'Posting of Consumer Advisories',
       checked: false
     }]
   }, {
     title: 'GOOD RETAIL PRACTICES (BLUE ITEMS)',
     violations: [{
-      description: 'Management and Personnel',
+      name: 'Management and Personnel',
       checked: false
     }, {
-      description: 'Food and Food Protection',
+      name: 'Food and Food Protection',
       checked: false
     }, {
-      description: 'Equipment and Utensils',
+      name: 'Equipment and Utensils',
       checked: false
     }, {
-      description: 'Water, Plumbing and Waste',
+      name: 'Water, Plumbing and Waste',
       checked: false
     }, {
-      description: 'Physical Facility',
+      name: 'Physical Facility',
       checked: false
     }, {
-      description: 'Poisonous or Toxic Material',
+      name: 'Poisonous or Toxic Material',
       checked: false
     }, {
-      description: 'Special Requirements',
+      name: 'Special Requirements',
       checked: false
     }, {
-      description: 'Other',
+      name: 'Other',
       checked: false
     }]
   }];
 
   var caList = [{
-    description: 'Voluntary Compliance',
+    name: 'Voluntary Compliance',
     checked: false
   }, {
-    description: 'Re-inspection Scheduled',
+    name: 'Re-inspection Scheduled',
     checked: false
   }, {
-    description: 'Embargo',
+    name: 'Embargo',
     checked: false
   }, {
-    description: 'Voluntary Disposal',
+    name: 'Voluntary Disposal',
     checked: false
   }, {
-    description: 'Employee Restriction/Exclusion',
+    name: 'Employee Restriction/Exclusion',
     checked: false
   }, {
-    description: 'Emergency Suspension',
+    name: 'Emergency Suspension',
     checked: false
   }, {
-    description: 'Emergency Closure',
+    name: 'Emergency Closure',
     checked: false
   }, {
-    description: 'Other',
+    name: 'Other',
     checked: false
   }];
 
+  // Lists of checked violations and corrective actions
   var checkedV = [];
   var checkedCA = [];
+
+  // Lists of detailed violations
+  var detailedVList = [];
 
   return {
     vList: function() {
@@ -291,24 +302,22 @@ app.factory('Violations', function() {
     },
     checkedCA: function() {
       return checkedCA;
+    },
+    detailedVList: function() {
+      return detailedVList;
     }
   };
 });
 
-app.factory('Forms', function($cordovaSQLite) {
+app.factory('Forms', function() {
+  var forms = [];
+
   return {
     forms: function() {
-      var q = 'SELECT * \
-        FROM Form f \
-        JOIN Violation v ON(v.fid = f.fid) \
-        JOIN Vtype t ON(t.tid = v.tid) \
-        JOIN Picture p ON(p.vid = v.vid) \
-        ORDER BY f.fid DESC';
-      $cordovaSQLite.execute(db, q).then(function(res) {
-        return res.rows;
-      }, function(err) {
-        return [];
-      });
+      return forms;
+    },
+    addForm: function(form) {
+      forms.push(form);
     },
     getForm: function(formName, date) {
       for (var i = 0; i < forms.length; i++) {
@@ -318,93 +327,6 @@ app.factory('Forms', function($cordovaSQLite) {
       }
 
       return null;
-    },
-    addForm: function(formObj) {
-      // var form = [
-      //   formObj.name,
-      //   formObj.owner,
-      //   formObj.pic,
-      //   formObj.inspector,
-      //   formObj.address,
-      //   formObj.town,
-      //   formObj.state,
-      //   formObj.zip,
-      //   formObj.phone,
-      //   formObj.permitNum,
-      //   formObj.date,
-      //   formObj.riskLvl,
-      //   formObj.prevInspectDate,
-      //   formObj.timeIn,
-      //   formObj.timeOut,
-      //   formObj.opType,
-      //   formObj.inspType,
-      //   formObj.haccp
-      // ];
-      // var violations = formObj.violations;
-      // var corrActions = formObj.corrActions;
-
-      // var insertForm = function() {
-      //   var q = "INSERT INTO Form(name, owner, pic, inspector, address, town, \
-      //     state, zip, phone, permitNum, date, riskLvl, prevInspectDate, \
-      //     timeIn, timeOut, opType, inspType, haccp) \
-      //     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-      //   $cordovaSQLite.execute(db, q, form).then(function(res) {
-      //     // Get the fid of the last inserted form and pass it to
-      //     // insertViolations and insertCorrActions.
-      //     var fid = this.lastID;
-      //     console.log('fid', this.lastID)
-      //     insertViolations(fid);
-      //     insertCorrActions(fid);
-      //   }, function(err) {
-      //     console.log(err);
-      //   });
-      // }
-
-      // var insertViolations = function(fid) {
-      //   for(var i = 0; i < violations.length; i++) {
-      //     var violation = [
-      //       fid,
-      //       violations[i].tid,
-      //       violations[i].codeRef,
-      //       violations[i].isCrit,
-      //       violations[i].description,
-      //       violations[i].dateVerified];
-      //     var pictures = violations[i].pictures;
-
-      //     var q = 'INSERT INTO Violation(fid, tid, codeRef, isCrit, \
-      //       description, dateVerified) VALUES(?, ?, ?, ?, ?, ?)'
-      //     $cordovaSQLite.execute(db, q, violation).then(function(res) {
-      //       if (pictures) {
-      //         insertPictures(this.lastID, pictures);
-      //       }
-      //     }, function(err) {
-      //       console.log(err);
-      //     });
-      //   }
-      // }
-
-      // // Inser the corrective actions marked in the form
-      // var insertCorrActions = function(fid) {
-      //   for (var i = 0; i < corrActions.length; i++) {
-      //     var corrAction = [
-      //       fid,
-      //       corrActions[i].description
-      //     ];
-
-      //     var q = 'INSERT INTO CorrectiveActions(fid, description) \
-      //       VALUES(?, ?)';
-      //     $cordovaSQLite.execute(db, q, corrAction);
-      //   }
-      // }
-
-      // var insertPictures = function(vid, pictures){
-      //   for(var i = 0; i < pictures.length; i++){
-      //     var q = 'INSERT INTO Picture(vid, filename) VALUES(?, ?)';
-      //     $cordovaSQLite.execute(db, q, [vid, pictures[i]]);
-      //   }
-      // }
-
-      // // db.serialize(insertForm());
     }
   };
 });

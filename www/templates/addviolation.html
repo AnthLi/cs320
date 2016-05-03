@@ -18,9 +18,9 @@
           <h5>{{vObj.title}}</h5>
           <ion-list>
             <button class="vItems item item-checkbox checkbox-assertive" ng-repeat="violation in vObj.violations">
-              {{violation.description}}
+              {{violation.name}}
               <label class="checkbox">
-                <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'" ng-click="toggleV({{violation}})" ng-checked="{{violation.checked}}">
+                <input type="checkbox"  ng-true-value="'YES'" ng-false-value="'NO'" ng-click="toggleV({{violation}})" ng-checked="{{violation.checked}}">
               </label>
             </button>
           </ion-list>
@@ -37,7 +37,7 @@
       <form name="corrective action" ng-repeat="action in caList">
         <ion-list>
           <button class="caItems item item-checkbox checkbox-energized">
-            {{action.description}}
+            {{action.name}}
             <label class="checkbox">
               <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'" ng-click="toggleCA({{action}})" ng-checked="{{action.checked}}">
             </label>
@@ -47,20 +47,17 @@
     </div>
 
     <!-- Add Photos-->
-
     <button class="button button-full button-balanced">ADD PHOTO</button>
-      <div class="photos">
-        <div class = "row">
-          <div class = "col">
-            <button class="button icon-left ion-ios-camera button-clear button-dark button-large center"><span class = "pics">Take Photo</span></button>
-          </div>
-          <div class = "col">
-            <button class="button icon-left ion-images button-clear button-dark button-large center"><span class = "pics">Choose From Gallery</span></button>
-          </div>
+    <div class="photos">
+      <div class = "row">
+        <div class = "col">
+          <button class="button icon-left ion-ios-camera button-clear button-dark button-large center"><span class = "pics">Take Photo</span></button>
+        </div>
+        <div class = "col">
+          <button class="button icon-left ion-images button-clear button-dark button-large center"><span class = "pics">Choose From Gallery</span></button>
         </div>
       </div>
     </div>
-
 
     <!-- Add Description -->
     <div class="description">
@@ -73,7 +70,7 @@
           <li class="item item-checkbox checkbox-assertive">
             Red Item
             <label class="checkbox">
-              <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
+              <input type="checkbox" ng-model="detailedV.status" ng-true-value="'Red Item'" ng-false-value="''">
             </label>
           </li>
         </div>
@@ -82,7 +79,7 @@
           <li class="item item-checkbox checkbox-energized">
             Critical Item
             <label class="checkbox">
-              <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
+              <input type="checkbox" ng-model="detailedV.status" ng-true-value="'Critical Item'" ng-false-value="''">
             </label>
           </li>
         </div>
@@ -91,7 +88,7 @@
           <li class="item item-checkbox checkbox-royal">
             Non-Critical
             <label class="checkbox">
-              <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'">
+              <input type="checkbox" ng-model="detailedV.status" ng-true-value="'Non-Critical Item'" ng-false-value="''">
             </label>
           </li>
         </div>
@@ -100,27 +97,31 @@
       <div class="row">
         <div class="col form-group">
           <label class="item item-input">
-            <input type="text" placeholder="Item No.">
+            <input type="text" ng-model="detailedV.itemNum" placeholder="Item No.">
           </label>
         </div>
 
         <div class="col form-group">
           <label class="item item-input">
-            <input type="text" placeholder="Code Ref.">
+            <input type="text" ng-model="detailedV.codeRef" placeholder="Code Ref.">
           </label>
         </div>
 
         <div class="col form-group">
           <label class="item item-input item-stacked-label">
             <span class="corr-input-label">Date Verified:</span>
-            <input type="time" class="form-control" ng-model="formData.timein" placeholder="">
+            <input type="date" class="form-control" ng-model="detailedV.dateVerified" placeholder="">
           </label>
         </div>
       </div>
 
-        <label class="item item-input">
-          <input type="text" placeholder="Tap to add description">
-        </label>
-      </div>
+      <label class="item item-input">
+        <input type="text" ng-model="detailedV.description" placeholder="DESCRIPTION OF VIOLATION/PLAN OF CORRECTION">
+      </label>
+
+      <button id="addViolation" class="button icon-right ion-chevron-right button-balanced" ng-click="addViolation()">
+        Add Another Detailed Violation
+      </button>
+    </div>
   </ion-content>
 </ion-view>
