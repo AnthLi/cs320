@@ -296,11 +296,19 @@ app.factory('Violations', function() {
 });
 
 app.factory('Forms', function($cordovaSQLite) {
-  var forms = [];
-
   return {
     forms: function() {
-      return forms;
+      var q = 'SELECT * \
+        FROM Form f \
+        JOIN Violation v ON(v.fid = f.fid) \
+        JOIN Vtype t ON(t.tid = v.tid) \
+        JOIN Picture p ON(p.vid = v.vid) \
+        ORDER BY f.fid DESC';
+      $cordovaSQLite.execute(db, q).then(function(res) {
+        return res.rows;
+      }, function(err) {
+        return [];
+      });
     },
     getForm: function(formName, date) {
       for (var i = 0; i < forms.length; i++) {
@@ -312,86 +320,91 @@ app.factory('Forms', function($cordovaSQLite) {
       return null;
     },
     addForm: function(formObj) {
-      var form = [
-        formObj.name,
-        formObj.owner,
-        formObj.pic,
-        formObj.inspector,
-        formObj.address,
-        formObj.town,
-        formObj.state,
-        formObj.zip,
-        formObj.phone,
-        formObj.permitNum,
-        formObj.date,
-        formObj.riskLvl,
-        formObj.prevInspectDate,
-        formObj.timeIn,
-        formObj.timeOut,
-        formObj.opType,
-        formObj.inspType,
-        formObj.haccp
-      ];
-      var violations = formObj.violations;
-      var corrActions = formObj.corrActions;
+      // var form = [
+      //   formObj.name,
+      //   formObj.owner,
+      //   formObj.pic,
+      //   formObj.inspector,
+      //   formObj.address,
+      //   formObj.town,
+      //   formObj.state,
+      //   formObj.zip,
+      //   formObj.phone,
+      //   formObj.permitNum,
+      //   formObj.date,
+      //   formObj.riskLvl,
+      //   formObj.prevInspectDate,
+      //   formObj.timeIn,
+      //   formObj.timeOut,
+      //   formObj.opType,
+      //   formObj.inspType,
+      //   formObj.haccp
+      // ];
+      // var violations = formObj.violations;
+      // var corrActions = formObj.corrActions;
 
-      var insertForm = function() {
-        var q = "INSERT INTO Form(name, owner, pic, inspector, address, \
-              town, state, zip, phone, permitNum, date, riskLvl, \
-              prevInspectDate, timeIn, timeOut, opType, inspType, haccp) \
-              VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        $cordovaSQLite.execute(db, q, form, function() {
-          // Get the fid of the last inserted form and pass it to
-          // insertViolations and insertCorrActions.
-          var fid = this.lastID;
-          insertViolations(fid);
-          insertCorrActions(fid);
-        });
-      }
+      // var insertForm = function() {
+      //   var q = "INSERT INTO Form(name, owner, pic, inspector, address, town, \
+      //     state, zip, phone, permitNum, date, riskLvl, prevInspectDate, \
+      //     timeIn, timeOut, opType, inspType, haccp) \
+      //     VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      //   $cordovaSQLite.execute(db, q, form).then(function(res) {
+      //     // Get the fid of the last inserted form and pass it to
+      //     // insertViolations and insertCorrActions.
+      //     var fid = this.lastID;
+      //     console.log('fid', this.lastID)
+      //     insertViolations(fid);
+      //     insertCorrActions(fid);
+      //   }, function(err) {
+      //     console.log(err);
+      //   });
+      // }
 
-      var insertViolations = function(fid) {
-        for(var i = 0; i < violations.length; i++) {
-          var violation = [
-            fid,
-            violations[i].tid,
-            violations[i].codeRef,
-            violations[i].isCrit,
-            violations[i].description,
-            violations[i].dateVerified];
-          var pictures = violations[i].pictures;
+      // var insertViolations = function(fid) {
+      //   for(var i = 0; i < violations.length; i++) {
+      //     var violation = [
+      //       fid,
+      //       violations[i].tid,
+      //       violations[i].codeRef,
+      //       violations[i].isCrit,
+      //       violations[i].description,
+      //       violations[i].dateVerified];
+      //     var pictures = violations[i].pictures;
 
-          var q = 'INSERT INTO Violation(fid, tid, codeRef, isCrit, \
-            description, dateVerified) VALUES(?, ?, ?, ?, ?, ?)'
-          $cordovaSQLite.execute(db, q, violation, function() {
-            if (pictures) {
-              insertPictures(this.lastID, pictures);
-            }
-          });
-        }
-      }
+      //     var q = 'INSERT INTO Violation(fid, tid, codeRef, isCrit, \
+      //       description, dateVerified) VALUES(?, ?, ?, ?, ?, ?)'
+      //     $cordovaSQLite.execute(db, q, violation).then(function(res) {
+      //       if (pictures) {
+      //         insertPictures(this.lastID, pictures);
+      //       }
+      //     }, function(err) {
+      //       console.log(err);
+      //     });
+      //   }
+      // }
 
-      // Inser the corrective actions marked in the form
-      var insertCorrActions = function(fid) {
-        for (var i = 0; i < corrActions.length; i++) {
-          var corrAction = [
-            fid,
-            corrActions[i].description
-          ];
+      // // Inser the corrective actions marked in the form
+      // var insertCorrActions = function(fid) {
+      //   for (var i = 0; i < corrActions.length; i++) {
+      //     var corrAction = [
+      //       fid,
+      //       corrActions[i].description
+      //     ];
 
-          var q = 'INSERT INTO CorrectiveActions(fid, description) \
-            VALUES(?, ?)';
-          $cordovaSQLite.execute(db, q, corrAction);
-        }
-      }
+      //     var q = 'INSERT INTO CorrectiveActions(fid, description) \
+      //       VALUES(?, ?)';
+      //     $cordovaSQLite.execute(db, q, corrAction);
+      //   }
+      // }
 
-      var insertPictures = function(vid, pictures){
-        for(var i = 0; i < pictures.length; i++){
-          var q = 'INSERT INTO Picture(vid, filename) VALUES(?, ?)';
-          $cordovaSQLite.execute(db, q, [vid, pictures[i]]);
-        }
-      }
+      // var insertPictures = function(vid, pictures){
+      //   for(var i = 0; i < pictures.length; i++){
+      //     var q = 'INSERT INTO Picture(vid, filename) VALUES(?, ?)';
+      //     $cordovaSQLite.execute(db, q, [vid, pictures[i]]);
+      //   }
+      // }
 
-      // db.serialize(insertForm());
+      // // db.serialize(insertForm());
     }
   };
 });

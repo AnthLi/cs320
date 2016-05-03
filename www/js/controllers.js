@@ -2,8 +2,8 @@ var app = angular.module('inspectorGadget.controllers', []);
 
 app.controller('DashCtrl', function($scope) {});
 
-app.controller('NewInspectionCtrl', function($scope, $filter,
-  NewInspection, Violations, Forms) {
+app.controller('NewInspectionCtrl', function($scope, $filter, $cordovaSQLite,
+  NewInspection, Violations, Forms, DB) {
   $scope.fields = NewInspection.newInspectFields();
   // List of checked violations and corrective actions
   $scope.checkedV = Violations.checkedV();
@@ -41,7 +41,93 @@ app.controller('NewInspectionCtrl', function($scope, $filter,
   $scope.processForm = function() {
     $scope.formData.violations = $scope.checkedV;
     $scope.formData.corrActions = $scope.checkedCA;
-    Forms.addForm($scope.formData);
+    // Forms.addForm($scope.formData);
+
+    var form = [
+      $scope.formData.name,
+      $scope.formData.owner,
+      $scope.formData.pic,
+      $scope.formData.inspector,
+      $scope.formData.address,
+      $scope.formData.town,
+      $scope.formData.state,
+      $scope.formData.zip,
+      $scope.formData.phone,
+      $scope.formData.permitNum,
+      $scope.formData.date,
+      $scope.formData.riskLvl,
+      $scope.formData.prevInspectDate,
+      $scope.formData.timeIn,
+      $scope.formData.timeOut,
+      $scope.formData.opType,
+      $scope.formData.inspType,
+      $scope.formData.haccp
+    ];
+    var violations = $scope.formData.violations;
+    var corrActions = $scope.formData.corrActions;
+
+    var insertForm = function() {
+      var q = "INSERT INTO Form(name, owner, pic, inspector, address, town, \
+        state, zip, phone, permitNum, date, riskLvl, prevInspectDate, \
+        timeIn, timeOut, opType, inspType, haccp) \
+        VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+      $cordovaSQLite.execute(db, q, form).then(function(res) {
+        // Get the fid of the last inserted form and pass it to
+        // insertViolations and insertCorrActions.
+        var fid = this.lastID;
+        console.log('fid', this.lastID)
+        insertViolations(fid);
+        insertCorrActions(fid);
+      }, function(err) {
+        console.log(err);
+      });
+    }
+
+    var insertViolations = function(fid) {
+      for(var i = 0; i < violations.length; i++) {
+        var violation = [
+          fid,
+          violations[i].tid,
+          violations[i].codeRef,
+          violations[i].isCrit,
+          violations[i].description,
+          violations[i].dateVerified];
+        var pictures = violations[i].pictures;
+
+        var q = 'INSERT INTO Violation(fid, tid, codeRef, isCrit, \
+          description, dateVerified) VALUES(?, ?, ?, ?, ?, ?)'
+        $cordovaSQLite.execute(db, q, violation).then(function(res) {
+          if (pictures) {
+            insertPictures(this.lastID, pictures);
+          }
+        }, function(err) {
+          console.log(err);
+        });
+      }
+    }
+
+    // Inser the corrective actions marked in the form
+    var insertCorrActions = function(fid) {
+      for (var i = 0; i < corrActions.length; i++) {
+        var corrAction = [
+          fid,
+          corrActions[i].description
+        ];
+
+        var q = 'INSERT INTO CorrectiveActions(fid, description) \
+          VALUES(?, ?)';
+        $cordovaSQLite.execute(db, q, corrAction);
+      }
+    }
+
+    var insertPictures = function(vid, pictures){
+      for(var i = 0; i < pictures.length; i++){
+        var q = 'INSERT INTO Picture(vid, filename) VALUES(?, ?)';
+        $cordovaSQLite.execute(db, q, [vid, pictures[i]]);
+      }
+    }
+
+    // db.serialize(insertForm());
   };
 });
 
