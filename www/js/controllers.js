@@ -205,39 +205,14 @@ app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
 // through and search the Form.
 app.controller('FormsCtrl', function($scope, $cordovaSQLite, DB, Forms) {
   // All available forms to the user
-  $scope.forms = [];
-  var q = 'SELECT * \
-    FROM Form f \
-    JOIN Violation v ON(v.fid = f.fid) \
-    JOIN Vtype t ON(t.tid = v.tid) \
-    JOIN Picture p ON(p.vid = v.vid) \
-    ORDER BY f.fid DESC';
-  $cordovaSQLite.execute(db, q).then(function(res) {
-    console.log(res.rows);
-    $scope.form = res.rows
-  }, function(err) {
-    console.log(err);
-  });
+  $scope.forms = Forms.forms();
 
-  // var q = 'SELECT * \
-  //   FROM Form f \
-  //   JOIN Violation v ON f.fid = v.fid \
-  //   JOIN Vtype t on v.tid = t.tid \
-  //   JOIN Picture p ON t.vid = p.vid';
-
-  // var q = 'SELECT * FROM Form';
-  var q = 'SELECT * FROM Violation';
-  // $cordovaSQLite.execute(DB, q).then(function(res) {
-  //   var rows = res.rows;
-  //   for (var i = 0; i < res.rows.length; i++) {
-  //     Forms.addForm(res.rows[i]);
-  //   }
-  // }, function(err) {
-  //   console.log(err);
-  // });
-
-  $cordovaSQLite.execute(DB, q).then(function(res) {
-    console.log(res);
+  var q = 'SELECT * FROM Form f';
+  $cordovaSQLite.execute(DB, q).then(function(fRes) {
+    var formRows = fRes.rows;
+    for (var i = 0; i < formRows.length; i++) {
+      Forms.addForm(rows[i]);
+    }
   }, function(err) {
     console.log(err);
   });
