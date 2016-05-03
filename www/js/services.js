@@ -347,13 +347,24 @@ app.factory('Forms', function() {
       // Don't add duplicate forms with the same name and date
       var exists = false;
       for (var i = 0; i < forms.length; i++) {
-        if (forms[i].name === form.name && forms[i].date === form.date) {
+        var f = forms[i];
+        if (f.f_name === form.f_name && f.f_date === form.f_date) {
           exists = true;
         }
       }
 
       if (!exists) {
         forms.push(form);
+      }
+    },
+    addViolationsToForm: function(violations) {
+      var exists = false;
+      for (var i = 0; i < forms.length; i++) {
+        for (var j = 0; j < violations.length; j++) {
+          if (forms[i].f_fid === violations[j].v_fid) {
+
+          }
+        }
       }
     },
     getForm: function(formName, date) {

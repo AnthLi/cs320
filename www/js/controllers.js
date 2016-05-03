@@ -213,28 +213,15 @@ app.controller('FormsCtrl', function($scope, $cordovaSQLite, DB, Forms) {
   $cordovaSQLite.execute(DB, q).then(function(res) {
     var rows = res.rows;
     for (var i = 0; i < rows.length; i++) {
-      // console.log('Row:', rows[i]);
+      Forms.addForm(rows[i]);
 
-      Forms.addForm({
-        name: rows[i].f_name,
-        date: rows[i].f_date,
-        address: rows[i].f_address,
-        owner: rows[i].f_owner,
-        phone: rows[i].f_phone,
-        pic: rows[i].f_pic,
-        permitNum: rows[i].f_permitNum,
-        inspector: rows[i].f_inspector,
-        riskLvl: rows[i].f_riskLvl,
-        prevInspectDate: rows[i].f_prevInspectDate,
-        timeIn: rows[i].f_timeIn,
-        timeOut: rows[i].f_timeOut,
-        haccp: rows[i].f_haccp,
-        typeofOp: rows[i].f_opType,
-        typeofInsp: rows[i].f_inspType
+      var q = 'SELECT * FROM Violation v WHERE v.v_fid = ?';
+      $cordovaSQLite.execute(DB, q, [rows[i].v_fid]).then(function(res) {
+        var rows = res.rows;
+        Forms.addViolationsToForm(rows);
+      }, function(err) {
+        console.log(err);
       });
-
-      // var q = 'SELECT * FROM Violation v WHERE v.fid = ?';
-      // $cordovaSQLite.execute(DB, q, rows[i].)
     }
   }, function(err) {
     console.log(err);
