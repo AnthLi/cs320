@@ -1,6 +1,5 @@
 /**
  * Provide public functions for interacting with the database
- * The file howToAccessData.md contains usage instructions for this file
  */
 
 var sqlite3 = require('sqlite3');
