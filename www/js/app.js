@@ -1,5 +1,6 @@
 var app = angular.module('inspectorGadget', [
   'ionic',
+  'ngCordova',
   'inspectorGadget.controllers',
   'inspectorGadget.services'
 ]);

@@ -39,7 +39,7 @@ db.run("CREATE TABLE IF NOT EXISTS Violation( \
 			FOREIGN KEY(fid)	REFERENCES Form(fid), \
 			FOREIGN KEY(tid)	REFERENCES Vtype(tid) )");
 
-db.run("CREATE TABLE IF NOT EXISTS CorrectiveActions( \
+db.run("CREATE TABLE IF NOT EXISTS CorrectiveAction( \
 			caid							INTEGER PRIMARY KEY AUTOINCREMENT, \
 			fid								INTEGER NOT NULL, \
 			description				TEXT NOT NULL, \
