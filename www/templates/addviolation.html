@@ -18,7 +18,7 @@
           <h5>{{vObj.title}}</h5>
           <ion-list>
             <button class="vItems item item-checkbox checkbox-assertive" ng-repeat="violation in vObj.violations">
-              {{violation.description}}
+              {{violation.name}}
               <label class="checkbox">
                 <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'" ng-click="toggleV({{violation}})" ng-checked="{{violation.checked}}">
               </label>
@@ -37,7 +37,7 @@
       <form name="corrective action" ng-repeat="action in caList">
         <ion-list>
           <button class="caItems item item-checkbox checkbox-energized">
-            {{action.description}}
+            {{action.name}}
             <label class="checkbox">
               <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'" ng-click="toggleCA({{action}})" ng-checked="{{action.checked}}">
             </label>

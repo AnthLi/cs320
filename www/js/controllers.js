@@ -4,25 +4,26 @@ app.controller('DashCtrl', function($scope) {});
 
 app.controller('NewInspectionCtrl', function($scope, $filter,
   NewInspection, Violations, Forms) {
-  $scope.fields = NewInspection.newInspectFields();
+  $scope.fields = NewInspection.newInspFields();
   // List of checked violations and corrective actions
   $scope.checkedV = Violations.checkedV();
   $scope.checkedCA = Violations.checkedCA();
 
+  $scope.haccp = false;
   $scope.formData = {
-    name: '',
+    estName: '',
     date: '',
     address: '',
     owner: '',
     phone: '',
-    pic: '',
-    permitNum: '',
+    PIC: '',
+    permitno: '',
     inspector: '',
-    riskLvl: '',
-    prevInspectDate: '',
-    timeIn: '',
-    timeOut: '',
-    haccp: false,
+    risklvl: '',
+    prevInspDate: '',
+    timein: '',
+    timeout: '',
+    HACCP: 'N',
     typeofOp: '',
     typeofInsp: '',
     violations: [],
@@ -30,12 +31,12 @@ app.controller('NewInspectionCtrl', function($scope, $filter,
   };
 
   // Format timein and timeout to only have hours, minutes, and AM/PM
-  $scope.$watch('formData.timeIn', function(time) {
-    $scope.formData.timeIn = $filter('date')(time, 'hh:mm a');
+  $scope.$watch('formData.timein', function(time) {
+    $scope.formData.timein = $filter('date')(time, 'hh:mm a');
   });
 
-  $scope.$watch('formData.timeOut', function(time) {
-    $scope.formData.timeOut = $filter('date')(time, 'hh:mm a');
+  $scope.$watch('formData.timeout', function(time) {
+    $scope.formData.timeout = $filter('date')(time, 'hh:mm a');
   });
 
   $scope.processForm = function() {
@@ -43,6 +44,8 @@ app.controller('NewInspectionCtrl', function($scope, $filter,
     $scope.formData.corrActions = $scope.checkedCA;
     Forms.addForm($scope.formData);
   };
+
+
 });
 
 app.controller('AddViolationCtrl', function($scope, $stateParams, Violations) {
@@ -125,7 +128,7 @@ app.controller('FoodCodeViewerCtrl', function($scope, $stateParams, FoodCodes) {
   $scope.foodCode = FoodCodes.getFoodCode($stateParams.foodCodePath);
 
   // Gets the path to a Food Code for the user to search through
-  $scope.getFoodCodePath = function(path) {
+  $scope.getFormPath = function(path) {
     var formViewerURL = 'lib/pdfjs-dist/web/viewer.html?file=';
     var formURL = '/foodcodes/';
     if (ionic.Platform.isIOS()) {

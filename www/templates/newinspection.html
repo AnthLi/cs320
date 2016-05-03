@@ -3,7 +3,7 @@
     <!---.................................................................
     ...........................INSPECTION INFO............................
     ...................................................................-->
-    <form id="new-form">
+    <form id="new-form" ng-submit="processForm()">
       <div class="info">
         <ion-item class="button button-full button-positive" disabled style="opacity: 1.0">
           INSPECTION INFO
@@ -35,7 +35,7 @@
                 Time In:
               </span>
 
-              <input type="time" class="form-control" ng-model="formData.timeIn" placeholder="">
+              <input type="time" class="form-control" ng-model="formData.timein" placeholder="">
             </label>
           </div>
 
@@ -45,14 +45,14 @@
                 Time Out:
               </span>
 
-              <input type="time" class="form-control" ng-model="formData.timeOut" placeholder="">
+              <input type="time" class="form-control" ng-model="formData.timeout" placeholder="">
             </label>
           </div>
         </div>
 
         <div class="row">
           <div class="col form-group">
-            <ion-checkbox id="haccp" ng-model="formData.haccp" ng-click="!formData.haccp">
+            <ion-checkbox id="haccp" ng-model="haccp" ng-click="!haccp; formData.HACCP = 'Y'">
               HACCP
             </ion-checkbox>
           </div>
