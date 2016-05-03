@@ -9,26 +9,7 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
   $scope.checkedV = Violations.checkedV();
   $scope.checkedCA = Violations.checkedCA();
   $scope.detailedVList = Violations.detailedVList();
-
-  $scope.formData = {
-    name: '',
-    date: '',
-    address: '',
-    owner: '',
-    phone: '',
-    pic: '',
-    permitNum: '',
-    inspector: '',
-    riskLvl: '',
-    prevInspectDate: '',
-    timeIn: '',
-    timeOut: '',
-    haccp: false,
-    typeofOp: '',
-    typeofInsp: '',
-    violations: [],
-    corrActions: []
-  };
+  $scope.formData = Forms.formData();
 
   // Format timein and timeout to only have hours, minutes, and AM/PM
   $scope.$watch('formData.timeIn', function(time) {
@@ -107,7 +88,7 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
           corrActions[i].description
         ];
 
-        var q = 'INSERT INTO CorrectiveActions(fid, description) \
+        var q = 'INSERT INTO CorrectiveActions(ca_fid, ca_description) \
           VALUES(?, ?)';
         $cordovaSQLite.execute(DB, q, corrAction);
       }
@@ -132,7 +113,8 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
 app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
   Violations) {
   // Lists of violations and corrective actions
-  $scope.vList = Violations.vList();
+  $scope.redVList = Violations.redVList();
+  $scope.blueVList = Violations.blueVList();
   $scope.caList = Violations.caList();
   // Lists of checked violations and corrective actions
   $scope.checkedV = Violations.checkedV();
@@ -162,13 +144,25 @@ app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
     }
 
     // Maybe think of a more efficient way to do this...?
-    for (var i = 0; i < $scope.vList.length; i++) {
-      for (var j = 0; j < $scope.vList[i].violations.length; j++) {
-        if ($scope.vList[i].violations[j].name === v.name) {
-          if ($scope.vList[i].violations[j].checked) {
-            $scope.vList[i].violations[j].checked = false;
+    for (var i = 0; i < $scope.redVList.length; i++) {
+      for (var j = 0; j < $scope.redVList[i].violations.length; j++) {
+        if ($scope.redVList[i].violations[j].name === v.name) {
+          if ($scope.redVList[i].violations[j].checked) {
+            $scope.redVList[i].violations[j].checked = false;
           } else {
-            $scope.vList[i].violations[j].checked = true;
+            $scope.redVList[i].violations[j].checked = true;
+          }
+        }
+      }
+    }
+
+    for (var i = 0; i < $scope.blueVList.length; i++) {
+      for (var j = 0; j < $scope.blueVList[i].violations.length; j++) {
+        if ($scope.blueVList[i].violations[j].name === v.name) {
+          if ($scope.blueVList[i].violations[j].checked) {
+            $scope.blueVList[i].violations[j].checked = false;
+          } else {
+            $scope.blueVList[i].violations[j].checked = true;
           }
         }
       }
@@ -207,18 +201,40 @@ app.controller('FormsCtrl', function($scope, $cordovaSQLite, DB, Forms) {
   // All available forms to the user
   $scope.forms = Forms.forms();
 
-  // var q = 'SELECT * FROM Form';
   var q = 'SELECT * FROM \
     Form f \
-    LEFT OUTER JOIN Violation v \
-    ON f.f_fid = v.v_fid \
+    LEFT OUTER JOIN Violation v ON f.f_fid = v.v_fid \
     ORDER BY f.f_fid';
+  // var q = 'SELECT * FROM \
+  //   Form f \
+  //   LEFT OUTER JOIN Violation v ON f.f_fid = v.v_fid \
+  //   LEFT OUTER JOIN Vtype vt ON v.v_tid = vt.vt_tid \
+  //   ORDER BY f.f_fid';
   $cordovaSQLite.execute(DB, q).then(function(res) {
     var rows = res.rows;
-    console.log('Rows:', rows);
     for (var i = 0; i < rows.length; i++) {
-      // Forms.addForm(rows[i]);
-      console.log('Row:', rows[i]);
+      // console.log('Row:', rows[i]);
+
+      Forms.addForm({
+        name: rows[i].f_name,
+        date: rows[i].f_date,
+        address: rows[i].f_address,
+        owner: rows[i].f_owner,
+        phone: rows[i].f_phone,
+        pic: rows[i].f_pic,
+        permitNum: rows[i].f_permitNum,
+        inspector: rows[i].f_inspector,
+        riskLvl: rows[i].f_riskLvl,
+        prevInspectDate: rows[i].f_prevInspectDate,
+        timeIn: rows[i].f_timeIn,
+        timeOut: rows[i].f_timeOut,
+        haccp: rows[i].f_haccp,
+        typeofOp: rows[i].f_opType,
+        typeofInsp: rows[i].f_inspType
+      });
+
+      // var q = 'SELECT * FROM Violation v WHERE v.fid = ?';
+      // $cordovaSQLite.execute(DB, q, rows[i].)
     }
   }, function(err) {
     console.log(err);
@@ -238,8 +254,6 @@ app.controller('FormViewerCtrl', function($scope, $stateParams, Forms,
   FormViewerFields) {
   $scope.form = Forms.getForm($stateParams.formName, $stateParams.date);
   $scope.fields = FormViewerFields.fields();
-
-  // var q = 'SELECT * FROM Form '
 
   // Set HACCP to say Yes/No rather than true/false
   if ($scope.form.haccp === true) {

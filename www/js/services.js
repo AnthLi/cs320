@@ -14,6 +14,7 @@ app.factory('DB', function($cordovaSQLite) {
   // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS Form');
   // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS Violation');
   // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS CorrectiveAction');
+  // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS Vtype');
   // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS Picture');
 
   // Form table
@@ -86,29 +87,42 @@ app.factory('DB', function($cordovaSQLite) {
   );
 
   // Fill Vtype with necessary values
+  var types = [
+    "'PIC Assigned / Knowledgeable / Duties'",
+    "'Reporting of Diseases by Food Employee and PIC'",
+    "'Personnel with Infections Restricted / Excluded'",
+    "'Food and Water from Approved Source'",
+    "'Receiving / Condition'",
+    "'Tags / Records / Accuracy of Ingredient Statements'",
+    "'Conformance with Approved Procedures / HACCP Plans'",
+    "'Separation / Segregation / Protection'",
+    "'Food Contact Surface Cleaning and Sanitizing'",
+    "'Proper Adquate Handwashing'",
+    "'Good Hygenic Practices'",
+    "'Prevention of Contamination'",
+    "'Handwash Facilities'",
+    "'Approved Food or Color Additives'",
+    "'Toxic Chemicals'",
+    "'Cooking Temperature'",
+    "'Reheating'",
+    "'Cooling'",
+    "'Hot and Cold Holding'",
+    "'Time as a Public Health Control'",
+    "'Food and Food Preparation for HSP'",
+    "'Posting of Consumer Advisories'",
+    "'Management and Personnel'",
+    "'Food and Food Protection'",
+    "'Equipment and Utensils'",
+    "'Water, Plumbing and Waste'",
+    "'Physical Facility'",
+    "'Poisonous or Toxic Material'",
+    "'Special Requirements'",
+    "'Other'"
+  ];
   var q = 'INSERT INTO Vtype VALUES(';
-  $cordovaSQLite.execute(db, q + "1, 'PIC Assigned')");
-  $cordovaSQLite.execute(db, q + "2, 'Reporting of Diseases by Food Employee and PIC')");
-  $cordovaSQLite.execute(db, q + "3, 'Personnel with Infections Restricted/Excluded')");
-  $cordovaSQLite.execute(db, q + "4, 'Food and Water from Approved Source')");
-  $cordovaSQLite.execute(db, q + "5, 'Receiving/Condition')");
-  $cordovaSQLite.execute(db, q + "6, 'Tags/Records/Accuracy of Ingredient Statements')");
-  $cordovaSQLite.execute(db, q + "7, 'Conformance with Approved Procedures/HACCP Plans')");
-  $cordovaSQLite.execute(db, q + "8, 'Separation/Segregation/Protection')");
-  $cordovaSQLite.execute(db, q + "9, 'Food Contact Surface Cleaning and Sanitizing')");
-  $cordovaSQLite.execute(db, q + "10, 'Proper Adquate Handwashing')");
-  $cordovaSQLite.execute(db, q + "11, 'Good Hygenic Practices')");
-  $cordovaSQLite.execute(db, q + "12, 'Prevention of Contamination')");
-  $cordovaSQLite.execute(db, q + "13, 'Handwash Facilities')");
-  $cordovaSQLite.execute(db, q + "14, 'Approved Food or Color Additives')");
-  $cordovaSQLite.execute(db, q + "15, 'Toxic Chemicals')");
-  $cordovaSQLite.execute(db, q + "16, 'Cooking Temperature')");
-  $cordovaSQLite.execute(db, q + "17, 'Reheating')");
-  $cordovaSQLite.execute(db, q + "18, 'Cooling')");
-  $cordovaSQLite.execute(db, q + "19, 'Hot and Cold Holding')");
-  $cordovaSQLite.execute(db, q + "20, 'Time as a Public Health Control')");
-  $cordovaSQLite.execute(db, q + "21, 'Food and Food Preparation for HSP')");
-  $cordovaSQLite.execute(db, q + "22, 'Posting of Consumer Advisories')");
+  for (var i = 0; i < types.length; i++) {
+    $cordovaSQLite.execute(db, q + String(i + 1) + ', ' + types[i] + ')');
+  }
 
   return db;
 });
@@ -143,7 +157,7 @@ app.factory('NewInspection', function() {
 });
 
 app.factory('Violations', function() {
-  var vList = [{
+  var redVList = [{
     title: 'FOOD PROTECTION MANAGEMENT',
     violations: [{
       name: 'PIC Assigned',
@@ -155,7 +169,7 @@ app.factory('Violations', function() {
       name: 'Reporting of Diseases by Food Employee and PIC',
       checked: false
     }, {
-      name: 'Personnel with Infections Restricted/Excluded',
+      name: 'Personnel with Infections Restricted / Excluded',
       checked: false
     }]
   }, {
@@ -164,19 +178,19 @@ app.factory('Violations', function() {
       name: 'Food and Water from Approved Source',
       checked: false
     }, {
-      name: 'Receiving/Condition',
+      name: 'Receiving / Condition',
       checked: false
     }, {
-      name: 'Tags/Records/Accuracy of Ingredient Statements',
+      name: 'Tags / Records / Accuracy of Ingredient Statements',
       checked: false
     }, {
-      name: 'Conformance with Approved Procedures/HACCP Plans',
+      name: 'Conformance with Approved Procedures / HACCP Plans',
       checked: false
     }]
   }, {
     title: 'PROTECTION FROM CONTAMINATION',
     violations: [{
-      name: 'Separation/Segregation/Protection',
+      name: 'Separation / Segregation / Protection',
       checked: false
     }, {
       name: 'Food Contact Surface Cleaning and Sanitizing',
@@ -204,7 +218,7 @@ app.factory('Violations', function() {
       checked: false
     }]
   }, {
-    title: 'TIME/TEMPERATURE CONTROLS',
+    title: 'TIME/TEMPERATURE CONTROLS (Potentially Hazardous Foods)',
     violations: [{
       name: 'Cooking Temperature',
       checked: false
@@ -222,7 +236,7 @@ app.factory('Violations', function() {
       checked: false
     }]
   }, {
-    title: 'REQUIREMENTS FOR HIGHLY SUSCEPTIBLE POPULATIONS',
+    title: 'REQUIREMENTS FOR HIGHLY SUSCEPTIBLE POPULATIONS (HSP)',
     violations: [{
       name: 'Food and Food Preparation for HSP',
       checked: false
@@ -233,7 +247,9 @@ app.factory('Violations', function() {
       name: 'Posting of Consumer Advisories',
       checked: false
     }]
-  }, {
+  }];
+
+  var blueVList = [{
     title: 'GOOD RETAIL PRACTICES (BLUE ITEMS)',
     violations: [{
       name: 'Management and Personnel',
@@ -296,8 +312,11 @@ app.factory('Violations', function() {
   var detailedVList = [];
 
   return {
-    vList: function() {
-      return vList;
+    redVList: function() {
+      return redVList;
+    },
+    blueVList: function() {
+      return blueVList;
     },
     caList: function() {
       return caList;
@@ -318,11 +337,24 @@ app.factory('Forms', function() {
   var forms = [];
 
   return {
+    formData: function() {
+      return formData;
+    },
     forms: function() {
       return forms;
     },
     addForm: function(form) {
-      forms.push(form);
+      // Don't add duplicate forms with the same name and date
+      var exists = false;
+      for (var i = 0; i < forms.length; i++) {
+        if (forms[i].name === form.name && forms[i].date === form.date) {
+          exists = true;
+        }
+      }
+
+      if (!exists) {
+        forms.push(form);
+      }
     },
     getForm: function(formName, date) {
       for (var i = 0; i < forms.length; i++) {

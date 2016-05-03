@@ -13,14 +13,28 @@
         CHOOSE VIOLATION
       </button>
 
+      <!-- Red Item Violations -->
       <ion-scroll id="violationList" zooming="false" scrollbar-y="false">
-        <form name="violations" ng-repeat="vObj in vList">
+        <form name="violations" ng-repeat="vObj in redVList">
           <h5>{{vObj.title}}</h5>
           <ion-list>
             <button class="vItems item item-checkbox checkbox-assertive" ng-repeat="violation in vObj.violations">
               {{violation.name}}
               <label class="checkbox">
-                <input type="checkbox"  ng-true-value="'YES'" ng-false-value="'NO'" ng-click="toggleV({{violation}})" ng-checked="{{violation.checked}}">
+                <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'" ng-click="toggleV({{violation}})" ng-checked="{{violation.checked}}">
+              </label>
+            </button>
+          </ion-list>
+        </form>
+
+        <!-- Blue Item Violations -->
+        <form name="violations" ng-repeat="vObj in blueVList">
+          <h5>{{vObj.title}}</h5>
+          <ion-list>
+            <button class="vItems item item-checkbox checkbox-positive" ng-repeat="violation in vObj.violations">
+              {{violation.name}}
+              <label class="checkbox">
+                <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'" ng-click="toggleV({{violation}})" ng-checked="{{violation.checked}}">
               </label>
             </button>
           </ion-list>

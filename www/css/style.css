@@ -49,9 +49,10 @@ img{
 }
 
 #violationList {
-  overflow: hidden;
   width: 100%;
   height: 350px;
+  margin: 0;
+  padding: 0;
 }
 
 .corr-input-label{
