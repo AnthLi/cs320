@@ -181,9 +181,21 @@ app.controller('AddViolationCtrl', function($scope, $stateParams, Violations) {
 // Controller containing each Form accessible to the user. Once the user selects
 // a Form, it will direct him to the Form Viewer page where he/she can scroll
 // through and search the Form.
-app.controller('FormsCtrl', function($scope, Forms) {
+app.controller('FormsCtrl', function($scope, $cordovaSQLite, Forms) {
   // All available forms to the user
-  $scope.forms = Forms.forms();
+  $scope.forms = [];
+  var q = 'SELECT * \
+    FROM Form f \
+    JOIN Violation v ON(v.fid = f.fid) \
+    JOIN Vtype t ON(t.tid = v.tid) \
+    JOIN Picture p ON(p.vid = v.vid) \
+    ORDER BY f.fid DESC';
+  $cordovaSQLite.execute(db, q).then(function(res) {
+    console.log(res.rows);
+    $scope.form = res.rows
+  }, function(err) {
+    console.log(err);
+  });
 
   // Source: http://goo.gl/r9dkjh
   // Search query based on user input, allowing the user to filter certain forms
