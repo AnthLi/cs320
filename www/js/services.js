@@ -42,9 +42,9 @@ app.factory('DB', function($cordovaSQLite) {
       f_inspType         TEXT, \
       f_haccp            BOOLEAN \
     )'
-  ).then(res => {
+  ).then(function(res) {
     // console.log('Form table created');
-  }, err => {
+  }, function(err) {
     console.log('Form table:', err);
   });
 
@@ -60,9 +60,9 @@ app.factory('DB', function($cordovaSQLite) {
       v_dateVerified      TEXT NOT NULL, \
       FOREIGN KEY(v_fid) REFERENCES Form(f_fid) \
     )'
-  ).then(res => {
+  ).then(function(res) {
     // console.log('Violation table successfully created');
-  }, err => {
+  }, function(err) {
     console.log('Violation table:', err);
   });
 
@@ -72,9 +72,9 @@ app.factory('DB', function($cordovaSQLite) {
       vt_tid   INTEGER PRIMARY KEY, \
       vt_type  TEXT NOT NULL \
     )'
-  ).then(res => {
+  ).then(function(res) {
     // console.log('Vtype table successfully created');
-  }, err => {
+  }, function(err) {
     console.log('Vtype table:', err);
   });
 
@@ -86,9 +86,9 @@ app.factory('DB', function($cordovaSQLite) {
       FOREIGN KEY(fv_fid) REFERENCES Form(f_fid), \
       FOREIGN KEY(fv_tid) REFERENCES Vtype(vt_tid) \
     )'
-  ).then(res => {
+  ).then(function(res) {
     // console.log('Form_Vtype table successfully created');
-  }, err => {
+  }, function(err) {
     console.log('Form_Vtype table:', err);
   });
 
@@ -98,9 +98,9 @@ app.factory('DB', function($cordovaSQLite) {
       ca_caid         INTEGER PRIMARY KEY AUTOINCREMENT, \
       ca_description  TEXT NOT NULL \
     )'
-  ).then(res => {
+  ).then(function(res) {
     // console.log('CorrectiveAction table successfully created');
-  }, err => {
+  }, function(err) {
     console.log('CorrectiveAction table:', err);
   });
 
@@ -113,9 +113,9 @@ app.factory('DB', function($cordovaSQLite) {
       FOREIGN KEY(fc_fid) REFERENCES Form(f_fid), \
       FOREIGN KEY(fc_caid) REFERENCES CorrectiveAction(ca_caid) \
     )'
-  ).then(res => {
+  ).then(function(res) {
     // console.log('Form_CA table successfully created');
-  }, err => {
+  }, function(err) {
     console.log('Form_CA table:', err);
   });
 
@@ -127,9 +127,9 @@ app.factory('DB', function($cordovaSQLite) {
       p_filename          TEXT NOT NULL, \
       FOREIGN KEY(p_vid) REFERENCES Violation(v_vid) \
     )'
-  ).then(res => {
+  ).then(function(res) {
     // console.log('Picture table successfully created');
-  }, err => {
+  }, function(err) {
     console.log('Picture table:', err);
   });
 
@@ -168,7 +168,7 @@ app.factory('DB', function($cordovaSQLite) {
   ];
   var vQ = 'INSERT INTO Vtype VALUES(';
   var i = 1;
-  _.each(vTypes, type => {
+  _.each(vTypes, function(type) {
     $cordovaSQLite.execute(db, vQ + String(i++) + ', ' + type + ')');
   });
 
@@ -185,14 +185,14 @@ app.factory('DB', function($cordovaSQLite) {
   ];
   var caQ = 'INSERT INTO CorrectiveAction VALUES('
   i = 1;
-  _.each(caValues, val => {
+  _.each(caValues, function(val) {
     $cordovaSQLite.execute(db, caQ + String(i++) + ', ' + val + ')');
   });
 
   return db;
 });
 
-app.factory('NewInspection', () => {
+app.factory('NewInspection', function() {
   // The fields are paired together based on how the front-end shows it.
   // This is to help dynamically generate the input fields rather than
   // hard-coding every single one of them, decreasing the amount of code
@@ -215,13 +215,13 @@ app.factory('NewInspection', () => {
   }];
 
   return {
-    newInspectFields: () => {
+    newInspectFields: function() {
       return newInspectFields;
     }
   }
 });
 
-app.factory('Forms', () => {
+app.factory('Forms', function() {
   // Lists of checked violations and corrective actions
   var checkedV = [];
   var checkedCA = [];
@@ -230,14 +230,14 @@ app.factory('Forms', () => {
   var forms = [];
 
   return {
-    checkedV: () => {
+    checkedV: function() {
       return checkedV;
     },
-    addV: v => {
+    addV: function(v) {
       checkedV.push(v);
     },
     // Remove the given violation from the list of checked violations
-    removeV: v => {
+    removeV: function(v) {
       var index = 0;
       for (var i = 0; i < checkedV.length; i++) {
         if (checkedV[i].tid === v.tid) {
@@ -247,15 +247,15 @@ app.factory('Forms', () => {
 
       checkedV.splice(index, 1);
     },
-    checkedCA: () => {
+    checkedCA: function() {
       return checkedCA;
     },
-    addCA: ca => {
+    addCA: function(ca) {
       checkedCA.push(ca);
     },
     // Remove the given corrective action from the list of checked corrective
     // actions
-    removeCA: ca => {
+    removeCA: function(ca) {
       var index = 0;
       for (var i = 0; i < checkedCA.length; i++) {
         if (checkedCA[i].caid === ca.caid) {
@@ -265,19 +265,19 @@ app.factory('Forms', () => {
 
       checkedCA.splice(index, 1);
     },
-    detailedVList: () => {
+    detailedVList: function() {
       return detailedVList;
     },
-    addDetailedV: (dv) => {
+    addDetailedV: function(dv) {
       detailedVList.push(dv);
     },
-    forms: () => {
+    forms: function() {
       return forms;
     },
-    addForm: form => {
+    addForm: function(form) {
       // Don't add duplicate forms with the same name and date
       var exists = false;
-      _.each(forms, f => {
+      _.each(forms, function(f) {
         if (f.f_name === form.f_name && f.f_date === form.f_date) {
           exists = true;
         }
@@ -290,20 +290,20 @@ app.factory('Forms', () => {
         forms.push(form);
       }
     },
-    addViolationsToForm: (fid, violations) => {
-      _.each(forms, f => {
+    addViolationsToForm: function(fid, violations) {
+      _.each(forms, function(f) {
         if (f.f_fid === fid) {
           f.violations.push(violations[0].vt_type);
         }
       });
     },
-    addCorrActionsToForm: (fid, corrAction) => {
-      _.each(forms, f => {
+    addCorrActionsToForm: function(fid, corrAction) {
+      _.each(forms, function(f) {
         f.corrActions.push(corrAction[0].ca_description);
       });
     },
-    addDetailedViolationToForm: (fid, detailedViolation) => {
-      _.each(forms, f => {
+    addDetailedViolationToForm: function(fid, detailedViolation) {
+      _.each(forms, function(f) {
         if (f.f_fid === fid) {
           f.detailedViolations.push({
             v_itemNum: detailedViolation.v_itemNum,
@@ -315,9 +315,9 @@ app.factory('Forms', () => {
         }
       });
     },
-    getForm: (formName, date) => {
+    getForm: function(formName, date) {
       var form = null;
-      _.each(forms, f => {
+      _.each(forms, function(f) {
         if (f.f_name === formName && f.f_date === date) {
           form = f;
         }
@@ -328,7 +328,7 @@ app.factory('Forms', () => {
   };
 });
 
-app.factory('Violations', () => {
+app.factory('Violations', function() {
   var redVList = [{
     title: 'FOOD PROTECTION MANAGEMENT',
     violations: [{
@@ -515,19 +515,19 @@ app.factory('Violations', () => {
   }];
 
   return {
-    redVList: () => {
+    redVList: function() {
       return redVList;
     },
-    blueVList: () => {
+    blueVList: function() {
       return blueVList;
     },
-    caList: () => {
+    caList: function() {
       return caList;
     }
   };
 });
 
-app.factory('FormViewerFields', () => {
+app.factory('FormViewerFields', function() {
   var fields = [{
     name: ['Name', 'Date'],
     model: ['f_name', 'f_date']
@@ -549,13 +549,13 @@ app.factory('FormViewerFields', () => {
   }];
 
   return {
-    fields: () => {
+    fields: function() {
       return fields;
     }
   }
 });
 
-app.factory('FoodCodes', () => {
+app.factory('FoodCodes', function() {
   var foodCodes = [{
     path: '1999_fda_food_code.pdf',
     name: '1999 FDA Food Code'
@@ -565,12 +565,12 @@ app.factory('FoodCodes', () => {
   }];
 
   return {
-    foodCodes: () => {
+    foodCodes: function() {
       return foodCodes;
     },
-    getFoodCode: foodCodePath => {
+    getFoodCode: function(foodCodePath) {
       var foodCode = null;
-      _.each(foodCodes, fc => {
+      _.each(foodCodes, function(fc) {
         if (fc.path === foodCodePath) {
           foodCode = fc;
         }

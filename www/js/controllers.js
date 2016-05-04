@@ -30,15 +30,15 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
   };
 
   // Format timein and timeout to only have hours, minutes, and AM/PM
-  $scope.$watch('formData.timeIn', time => {
+  $scope.$watch('formData.timeIn', function(time) {
     $scope.formData.timeIn = $filter('date')(time, 'hh:mm a');
   });
 
-  $scope.$watch('formData.timeOut', time => {
+  $scope.$watch('formData.timeOut', function(time) {
     $scope.formData.timeOut = $filter('date')(time, 'hh:mm a');
   });
 
-  $scope.processForm = () => {
+  $scope.processForm = function() {
     var form = [
       $scope.formData.name,
       $scope.formData.owner,
@@ -63,23 +63,23 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
     var corrActions = $scope.checkedCA;
     var detailedVList = $scope.detailedVList;
 
-    var insertPictures = (vid, pictures) => {
-      _.each(pictures, picture => {
+    var insertPictures = function(vid, pictures) {
+      _.each(pictures, function(picture) {
         var q = 'INSERT INTO Picture(p_vid, p_filename) VALUES(?, ?)';
         $cordovaSQLite.execute(DB, q, [vid, picture]);
       });
     }
 
-    var insertViolations = fid => {
+    var insertViolations = function(fid) {
       // Insert the violation types marked in the form
-      _.each(violations, v => {
+      _.each(violations, function(v) {
         var q = 'INSERT INTO Form_Vtype(fv_fid, fv_tid) VALUES(?, ?)';
-        $cordovaSQLite.execute(DB, q, [fid, v.tid]).then(res => {
+        $cordovaSQLite.execute(DB, q, [fid, v.tid]).then(function(res) {
         });
       });
 
       // Insert the detailed violations in the form
-      _.each(detailedVList, dv => {
+      _.each(detailedVList, function(dv) {
         var dvAttrs = [
           fid,
           dv.itemNum,
@@ -95,8 +95,8 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
     }
 
     // Insert the corrective actions marked in the form
-    var insertCorrActions = fid => {
-      _.each(corrActions, ca => {
+    var insertCorrActions = function(fid) {
+      _.each(corrActions, function(ca) {
         var q = 'INSERT INTO Form_CA(fc_fid, fc_caid) VALUES(?, ?)';
         $cordovaSQLite.execute(DB, q, [fid, ca.caid]);
       });
@@ -106,7 +106,7 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
       f_town, f_state, f_zip, f_phone, f_permitNum, f_date, f_riskLvl, \
       f_prevInspectDate, f_timeIn, f_timeOut, f_opType, f_inspType, f_haccp) \
       VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    $cordovaSQLite.execute(DB, q, form).then(res => {
+    $cordovaSQLite.execute(DB, q, form).then(function(res) {
       // Get the fid of the last inserted form and pass it to
       // insertViolations and insertCorrActions.
       var fid = res.insertId;
@@ -133,18 +133,18 @@ app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
   }
 
   // Format the date to only be MM-dd-yyyy
-  $scope.$watch('detailedV.dateVerified', time => {
+  $scope.$watch('detailedV.dateVerified', function(time) {
     $scope.detailedV.dateVerified = $filter('date')(time, 'MM-dd-yyyy');
   });
 
   // Toggle a violation by adding or removing it from the list of checked off
   // violations, and mark it as checked or unchecked.
-  $scope.toggleV = violation => {
+  $scope.toggleV = function(violation) {
     if (Forms.checkedV().length < 1) {
       Forms.addV(violation);
     } else {
       var exists = false;
-      _.each(Forms.checkedV(), v => {
+      _.each(Forms.checkedV(), function(v) {
         if (v.tid === violation.tid) {
           exists = true;
         }
@@ -157,8 +157,8 @@ app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
       }
     }
 
-    _.each($scope.redVList, v => {
-      _.each(v.violations, elem => {
+    _.each($scope.redVList, function(v) {
+      _.each(v.violations, function(elem) {
         if (elem.tid === violation.tid) {
           if (elem.checked) {
             elem.checked = false;
@@ -169,8 +169,8 @@ app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
       });
     });
 
-    _.each($scope.blueVList, v => {
-      _.each(v.violations, elem => {
+    _.each($scope.blueVList, function(v) {
+      _.each(v.violations, function(elem) {
         if (elem.tid === violation.tid) {
           if (elem.checked) {
             elem.checked = false;
@@ -184,12 +184,12 @@ app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
 
   // Toggle a corrective action by adding or removing it from the list of
   // checked off corrective actions, and mark it as checked or unchecked.
-  $scope.toggleCA = corrAction => {
+  $scope.toggleCA = function(corrAction) {
     if (Forms.checkedCA().length < 1) {
       Forms.addCA(corrAction);
     } else {
       var exists = false;
-      _.each(Forms.checkedCA(), ca => {
+      _.each(Forms.checkedCA(), function(ca) {
         if (ca.caid === corrAction.caid) {
           exists = true;
         }
@@ -202,7 +202,7 @@ app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
       }
     }
 
-    _.each($scope.caList, ca => {
+    _.each($scope.caList, function(ca) {
       if (ca.caid === corrAction.caid) {
         if (ca.checked) {
           ca.checked = false;
@@ -213,7 +213,7 @@ app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
     });
   }
 
-  $scope.addViolation = () => {
+  $scope.addViolation = function() {
     Forms.addDetailedV($scope.detailedV);
   }
 });
@@ -230,15 +230,15 @@ app.controller('FormsCtrl', function($scope, $cordovaSQLite, DB, Forms) {
     Form f \
     LEFT OUTER JOIN Form_Vtype fv ON f.f_fid = fv.fv_fid \
     ORDER BY f.f_fid';
-  $cordovaSQLite.execute(DB, q).then(res => {
+  $cordovaSQLite.execute(DB, q).then(function(res) {
     var rows = res.rows;
-    _.each(rows, row => {
+    _.each(rows, function(row) {
       Forms.addForm(row);
 
       // Get each violation type from the database and add it to each of their
       // respective forms
       q = 'SELECT * FROM Vtype vt WHERE vt.vt_tid = ?';
-      $cordovaSQLite.execute(DB, q, [row.fv_tid]).then(res => {
+      $cordovaSQLite.execute(DB, q, [row.fv_tid]).then(function(res) {
         rows = res.rows;
         if (rows.length > 0) {
           Forms.addViolationsToForm(row.f_fid, rows);
@@ -252,11 +252,11 @@ app.controller('FormsCtrl', function($scope, $cordovaSQLite, DB, Forms) {
     Form f \
     LEFT OUTER JOIN Form_CA fc ON f.f_fid = fc.fc_fid \
     ORDER BY f.f_fid';
-  $cordovaSQLite.execute(DB, q).then(res => {
+  $cordovaSQLite.execute(DB, q).then(function(res) {
     var rows = res.rows;
-    _.each(rows, row => {
+    _.each(rows, function(row) {
       q = 'SELECT * FROM CorrectiveAction ca WHERE ca.ca_caid = ?';
-      $cordovaSQLite.execute(DB, q, [row.fc_caid]).then(res => {
+      $cordovaSQLite.execute(DB, q, [row.fc_caid]).then(function(res) {
         rows = res.rows;
         if (rows.length > 0) {
           Forms.addCorrActionsToForm(row.f_fid, rows);
@@ -271,9 +271,9 @@ app.controller('FormsCtrl', function($scope, $cordovaSQLite, DB, Forms) {
     Form f \
     LEFT OUTER JOIN Violation v ON f.f_fid = v.v_fid \
     ORDER BY f.f_fid';
-  $cordovaSQLite.execute(DB, q).then(res => {
+  $cordovaSQLite.execute(DB, q).then(function(res) {
     var rows = res.rows;
-    _.each(rows, row => {
+    _.each(rows, function(row) {
       if (row.v_fid) {
         Forms.addDetailedViolationToForm(row.f_fid, row);
       }
@@ -285,7 +285,7 @@ app.controller('FormsCtrl', function($scope, $cordovaSQLite, DB, Forms) {
   $scope.query = '';
 
   // Clears the search bar when triggered by the user
-  $scope.clearSearch = () => {
+  $scope.clearSearch = function() {
     $scope.query = '';
   };
 });
@@ -313,7 +313,7 @@ app.controller('FoodCodeViewerCtrl', function($scope, $stateParams, FoodCodes) {
   $scope.foodCode = FoodCodes.getFoodCode($stateParams.foodCodePath);
 
   // Gets the path to a Food Code for the user to search through
-  $scope.getFoodCodePath = path => {
+  $scope.getFoodCodePath = function(path) {
     var formViewerURL = 'lib/pdfjs-dist/web/viewer.html?file=';
     var formURL = '/foodcodes/';
     if (ionic.Platform.isIOS()) {
