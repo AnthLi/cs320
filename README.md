@@ -24,6 +24,7 @@ $ npm install -g cordova ionic
 Lastly, install all dependencies:
 ```bash
 $ npm install
+$ ionic state reset
 ```
 
 To simply run this app in a browser:

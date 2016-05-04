@@ -12,7 +12,7 @@
 
     <div class="card">
       <div class = ion-item class="item item-divider">
-      <ion-item ng-repeat="form in forms | filter: {f_name: query} | orderBy: 'f_name'" href="#/page/forms/{{form.f_name}}?date={{form.f_date}}">
+      <ion-item ng-repeat="form in forms | filter: {f_name: query} | reverse" href="#/page/forms/{{form.f_name}}?date={{form.f_date}}">
         <h2>{{form.f_name}}</h2>
       <div class = ion-item class="item item-text-wrap">
         {{form.f_date}}

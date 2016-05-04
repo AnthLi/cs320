@@ -120,14 +120,15 @@ app.factory('DB', function($cordovaSQLite) {
     "'Other'"
   ];
   var q = 'INSERT INTO Vtype VALUES(';
-  for (var i = 0; i < types.length; i++) {
-    $cordovaSQLite.execute(db, q + String(i + 1) + ', ' + types[i] + ')');
-  }
+  var i = 1;
+  _.each(types, type => {
+    $cordovaSQLite.execute(db, q + String(i++) + ', ' + type + ')');
+  });
 
   return db;
 });
 
-app.factory('NewInspection', function() {
+app.factory('NewInspection', () => {
   // The fields are paired together based on how the front-end shows it.
   // This is to help dynamically generate the input fields rather than
   // hard-coding every single one of them, decreasing the amount of code
@@ -150,13 +151,13 @@ app.factory('NewInspection', function() {
   }];
 
   return {
-    newInspectFields: function() {
+    newInspectFields: () => {
       return newInspectFields;
     }
   }
 });
 
-app.factory('Violations', function() {
+app.factory('Violations', () => {
   var redVList = [{
     title: 'FOOD PROTECTION MANAGEMENT',
     violations: [{
@@ -312,102 +313,105 @@ app.factory('Violations', function() {
   var detailedVList = [];
 
   return {
-    redVList: function() {
+    redVList: () => {
       return redVList;
     },
-    blueVList: function() {
+    blueVList: () => {
       return blueVList;
     },
-    caList: function() {
+    caList: () => {
       return caList;
     },
-    checkedV: function() {
+    checkedV: () => {
       return checkedV;
     },
-    checkedCA: function() {
+    checkedCA: () => {
       return checkedCA;
     },
-    detailedVList: function() {
+    detailedVList: () => {
       return detailedVList;
     }
   };
 });
 
-app.factory('Forms', function() {
+app.factory('Forms', () => {
   var forms = [];
 
   return {
-    formData: function() {
-      return formData;
-    },
-    forms: function() {
+    forms: () => {
       return forms;
     },
-    addForm: function(form) {
+    addForm: form => {
       // Don't add duplicate forms with the same name and date
       var exists = false;
-      for (var i = 0; i < forms.length; i++) {
-        var f = forms[i];
+      _.each(forms, f => {
         if (f.f_name === form.f_name && f.f_date === form.f_date) {
           exists = true;
         }
-      }
+      });
 
       if (!exists) {
         forms.push(form);
       }
     },
-    addViolationsToForm: function(violations) {
-      var exists = false;
-      for (var i = 0; i < forms.length; i++) {
-        for (var j = 0; j < violations.length; j++) {
-          if (forms[i].f_fid === violations[j].v_fid) {
-
+    addViolationsToForm: violations => {
+      var added = [];
+      _.each(forms, f => {
+        _.each(violations, v => {
+          if (f.f_fid === v.v_fid) {
+            added.push(v.v_tid);
           }
-        }
-      }
-    },
-    getForm: function(formName, date) {
-      for (var i = 0; i < forms.length; i++) {
-        if (forms[i].name === formName && forms[i].date === date) {
-          return forms[i];
-        }
-      }
+        });
+      });
 
-      return null;
+      _.each(added, tid => {
+        console.log(tid);
+        // var q = 'SELECT * FROM Vtype vt WHERE vt.tid '
+        // $cordovaSQLite.execute
+      });
+    },
+    getForm: (formName, date) => {
+      var form = null;
+      _.each(forms, f => {
+        if (f.f_name === formName && f.f_date === date) {
+          form = f;
+        }
+      });
+
+      return form;
     }
   };
 });
 
-app.factory('FormViewerFields', function() {
+app.factory('FormViewerFields', () => {
   var fields = [{
     name: ['Name', 'Date'],
-    model: ['name', 'date']
+    model: ['f_name', 'f_date']
   }, {
     name: ['Address', 'Owner'],
-    model: ['address', 'owner']
+    model: ['f_address', 'f_owner']
   }, {
     name: ['Permit No.', 'Inspector'],
-    model: ['permitNum', 'inspector']
+    model: ['f_permitNum', 'f_inspector']
   }, {
     name: ['Risk', 'HACCP'],
-    model: ['riskLvl', 'haccp']
+    model: ['f_riskLvl', 'f_haccp']
   }, {
     name: ['Time In', 'Time Out'],
-    model: ['timeIn', 'timeOut']
+    model: ['f_timeIn', 'f_timeOut']
   }, {
     name: ['Type of Operation(s)', 'Type of Inspection'],
-    model: ['typeofOp', 'typeofInsp']
+    model: ['f_opType', 'f_inspType']
   }];
 
   return {
-    fields: function() {
+    fields: () => {
       return fields;
     }
   }
 });
 
-app.factory('FoodCodes', function() {
+app.factory('FoodCodes', () => {
   var foodCodes = [{
     path: '1999_fda_food_code.pdf',
     name: '1999 FDA Food Code'
@@ -417,17 +421,18 @@ app.factory('FoodCodes', function() {
   }];
 
   return {
-    foodCodes: function() {
+    foodCodes: () => {
       return foodCodes;
     },
-    getFoodCode: function(foodCodePath) {
-      for (var i = 0; i < foodCodes.length; i++) {
-        if (foodCodes[i].path === foodCodePath) {
-          return foodCodes[i];
+    getFoodCode: foodCodePath => {
+      var foodCode = null;
+      _.each(foodCodes, fc => {
+        if (fc.path === foodCodePath) {
+          foodCode = fc;
         }
-      }
+      });
 
-      return null;
+      return foodCode;
     }
   };
 });
