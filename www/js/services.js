@@ -302,7 +302,9 @@ app.factory('Forms', function() {
     },
     addCorrActionsToForm: function(fid, corrAction) {
       _.each(forms, function(f) {
-        f.corrActions.push(corrAction[0].ca_description);
+        if (f.f_fid === fid) {
+          f.corrActions.push(corrAction[0].ca_description);
+        }
       });
     },
     addDetailedViolationToForm: function(fid, detailedViolation) {

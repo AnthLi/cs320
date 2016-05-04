@@ -2,7 +2,7 @@ var app = angular.module('inspectorGadget.controllers', []);
 
 app.controller('DashCtrl', function($scope) {});
 
-app.controller('NewInspectionCtrl', function($scope, $filter, $state,
+app.controller('NewInspectionCtrl', function($scope, $filter, $location,
   $cordovaSQLite, DB, NewInspection, Forms, Violations) {
   $scope.fields = NewInspection.newInspectFields();
   // Lists of checked violations and corrective actions
@@ -112,6 +112,8 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
       var fid = res.insertId;
       insertViolations(fid);
       insertCorrActions(fid);
+
+      $location.path('/page/forms');
     });
   };
 });
@@ -122,8 +124,6 @@ app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
   $scope.redVList = Violations.redVList();
   $scope.blueVList = Violations.blueVList();
   $scope.caList = Violations.caList();
-  // List of detailed violations
-  $scope.detailedVList = Forms.detailedVList();
   $scope.detailedV = {
     itemNum: '',
     codeRef: '',
@@ -302,9 +302,10 @@ app.controller('FormViewerCtrl', function($scope, $stateParams, $ionicPopup,
     $scope.form.f_haccp = 'No';
   }
 
+  /* TODO: figure out how to print the current form */
   $scope.print = function() {
     if($cordovaPrinter.isAvailable()) {
-      $cordovaPrinter.print(/* TODO: figure out how to print this form */)
+      $cordovaPrinter.print('');
     } else {
       $ionicPopup.alert({
         title: 'Error',
