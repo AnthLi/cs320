@@ -3,12 +3,12 @@ var app = angular.module('inspectorGadget.controllers', []);
 app.controller('DashCtrl', function($scope) {});
 
 app.controller('NewInspectionCtrl', function($scope, $filter, $state,
-  $cordovaSQLite, DB, NewInspection, Violations, Forms) {
+  $cordovaSQLite, DB, NewInspection, Forms, Violations) {
   $scope.fields = NewInspection.newInspectFields();
-  // List of checked violations and corrective actions
-  $scope.checkedV = Violations.checkedV();
-  $scope.checkedCA = Violations.checkedCA();
-  $scope.detailedVList = Violations.detailedVList();
+  // Lists of checked violations and corrective actions
+  $scope.checkedV = Forms.checkedV();
+  $scope.checkedCA = Forms.checkedCA();
+  $scope.detailedVList = Forms.detailedVList();
   $scope.formData = {
     name: '',
     date: '',
@@ -39,9 +39,9 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
   });
 
   $scope.processForm = () => {
-    $scope.formData.violations = $scope.checkedV;
-    $scope.formData.corrActions = $scope.checkedCA;
-
+    var violations = $scope.formData.violations = Forms.checkedV();
+    var corrActions = $scope.formData.corrActions = Forms.checkedCA();
+    var detailedVList = $scope.formData.detailedVList = Forms.detailedVList();
     var form = [
       $scope.formData.name,
       $scope.formData.owner,
@@ -62,8 +62,6 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
       $scope.formData.inspType,
       $scope.formData.haccp
     ];
-    var violations = $scope.formData.violations;
-    var corrActions = $scope.formData.corrActions;
 
     var insertPictures = (vid, pictures) => {
       _.each(pictures, picture => {
@@ -76,7 +74,6 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
       _.each(violations, v => {
         var violation = [
           fid,
-          v.tid,
           v.itemNum,
           v.codeRef,
           v.isCrit,
@@ -85,8 +82,8 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
         ];
         var pictures = v.pictures;
 
-        var q = 'INSERT INTO Violation(v_fid, v_tid, v_itemNum, v_codeRef, \
-          v_isCrit, v_description, v_dateVerified) VALUES(?, ?, ?, ?, ?, ?, ?)';
+        var q = 'INSERT INTO Violation(v_fid, v_itemNum, v_codeRef, \
+          v_isCrit, v_description, v_dateVerified) VALUES(?, ?, ?, ?, ?, ?)';
         $cordovaSQLite.execute(DB, q, violation).then(res => {
           if (pictures) {
             insertPictures(res.insertId, pictures);
@@ -96,6 +93,8 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
           console.log(err);
         });
       });
+
+      console.log($scope.detailedVList);
     }
 
     // Inser the corrective actions marked in the form
@@ -129,16 +128,13 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
 });
 
 app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
-  Violations) {
+  Forms, Violations) {
   // Lists of violations and corrective actions
   $scope.redVList = Violations.redVList();
   $scope.blueVList = Violations.blueVList();
   $scope.caList = Violations.caList();
-  // Lists of checked violations and corrective actions
-  $scope.checkedV = Violations.checkedV();
-  $scope.checkedCA = Violations.checkedCA();
   // List of detailed violations
-  $scope.detailedVList = Violations.detailedVList();
+  $scope.detailedVList = Forms.detailedVList();
   $scope.detailedV = {
     itemNum: '',
     codeRef: '',
@@ -154,16 +150,27 @@ app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
 
   // Toggle a violation by adding or removing it from the list of checked off
   // violations, and mark it as checked or unchecked.
-  $scope.toggleV = v => {
-    if ($scope.checkedV.indexOf(v.name) < 0) {
-      $scope.checkedV.push(v.name);
+  $scope.toggleV = violation => {
+    if (Forms.checkedV().length < 1) {
+      Forms.addV(violation);
     } else {
-      $scope.checkedV.splice($scope.checkedV.indexOf(v.name), 1);
+      var exists = false;
+      _.each(Forms.checkedV(), elem => {
+        if (elem.tid === violation.tid) {
+          exists = true;
+        }
+      });
+
+      if (exists) {
+        Forms.addV(violation);
+      } else {
+        Forms.removeV(violation);
+      }
     }
 
     _.each($scope.redVList, vElem => {
       _.each(vElem.violations, eElem => {
-        if (eElem.name === v.name) {
+        if (eElem.tid === violation.tid) {
           if (eElem.checked) {
             eElem.checked = false;
           } else {
@@ -175,7 +182,7 @@ app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
 
     _.each($scope.blueVList, vElem => {
       _.each(vElem.violations, eElem => {
-        if (eElem.name === v.name) {
+        if (eElem.tid === violation.tid) {
           if (eElem.checked) {
             eElem.checked = false;
           } else {
@@ -188,15 +195,29 @@ app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
 
   // Toggle a corrective action by adding or removing it from the list of
   // checked off corrective actions, and mark it as checked or unchecked.
-  $scope.toggleCA = ca => {
-    if ($scope.checkedCA.indexOf(ca.name) < 0) {
-      $scope.checkedCA.push(ca.name);
+  $scope.toggleCA = corrAction => {
+    if (Forms.checkedCA().length < 1) {
+      Forms.checkedCA().push(corrAction);
     } else {
-      $scope.checkedCA.splice($scope.checkedCA.indexOf(ca.name), 1);
+      _.each(Forms.checkedCA(), elem => {
+        if (elem.name !== corrAction.name) {
+          Forms.checkedCA().push(corrAction);
+        } else {
+          // Filter out the corrective action that was unchecked
+          var temp = [];
+          _.each(Forms.checkedCA(), elem => {
+            if (elem.name !== corrAction.name) {
+              temp.push(elem);
+            }
+          });
+
+          $scope.checkedCA = Forms.checkedCA() = temp;
+        }
+      });
     }
 
     _.each($scope.caList, elem => {
-      if (elem.name === ca.name) {
+      if (elem.name === corrAction.name) {
         if (elem.checked) {
           elem.checked = false;
         } else {

@@ -10,14 +10,14 @@ app.constant('_',
   window._
 );
 
-app.filter('reverse', function() {
-  return function(items) {
+app.filter('reverse', () => {
+  return items => {
     return items.slice().reverse();
   }
 });
 
 app.run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
+  $ionicPlatform.ready(() => {
     // Hide the accessory bar by default (remove this to show the accessory bar
     // above the keyboard for form inputs)
     if (window.cordova && window.cordova.plugins &&

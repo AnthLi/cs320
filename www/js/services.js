@@ -13,8 +13,9 @@ app.factory('DB', function($cordovaSQLite) {
   // Drop the tables and start over
   // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS Form');
   // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS Violation');
-  // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS CorrectiveAction');
   // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS Vtype');
+  // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS Form_Vtype');
+  // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS CorrectiveAction');
   // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS Picture');
 
   // Form table
@@ -40,33 +41,29 @@ app.factory('DB', function($cordovaSQLite) {
       f_inspType         TEXT, \
       f_haccp            BOOLEAN \
     )'
-  );
+  ).then(res => {
+    // console.log('Form table created');
+  }, err => {
+    console.log('Form table:', err);
+  });
 
   // Violation table
   $cordovaSQLite.execute(db,
     'CREATE TABLE IF NOT EXISTS Violation( \
       v_vid               INTEGER PRIMARY KEY AUTOINCREMENT, \
       v_fid               INTEGER NOT NULL, \
-      v_tid               INTEGER NOT NULL, \
       v_itemNum           INTEGER NOT NULL, \
       v_codeRef           TEXT NOT NULL, \
       v_isCrit            TEXT NOT NULL, \
       v_description       TEXT NOT NULL, \
       v_dateVerified      TEXT NOT NULL, \
-      FOREIGN KEY(v_fid)  REFERENCES Form(f_fid), \
-      FOREIGN KEY(v_tid)  REFERENCES Vtype(f_tid) \
+      FOREIGN KEY(v_fid) REFERENCES Form(f_fid) \
     )'
-  );
-
-  // Corrective Action table
-  $cordovaSQLite.execute(db,
-    'CREATE TABLE IF NOT EXISTS CorrectiveAction( \
-      ca_caid              INTEGER PRIMARY KEY AUTOINCREMENT, \
-      ca_fid               INTEGER NOT NULL, \
-      ca_description       TEXT NOT NULL, \
-      FOREIGN KEY(ca_fid)  REFERENCES Form(f_fid) \
-    )'
-  );
+  ).then(res => {
+    // console.log('Violation table successfully created');
+  }, err => {
+    console.log('Violation table:', err);
+  });
 
   // Violation type table
   $cordovaSQLite.execute(db,
@@ -74,7 +71,52 @@ app.factory('DB', function($cordovaSQLite) {
       vt_tid   INTEGER PRIMARY KEY, \
       vt_type  TEXT NOT NULL \
     )'
-  );
+  ).then(res => {
+    // console.log('Vtype table successfully created');
+  }, err => {
+    console.log('Vtype table:', err);
+  });
+
+  // Table containing the relations between each form and their violations
+  $cordovaSQLite.execute(db,
+    'CREATE TABLE IF NOT EXISTS Form_Vtype( \
+      fv_fid INTEGER NOT NULL, \
+      fv_tid INTEGER NOT NULL, \
+      FOREIGN KEY(fv_fid) REFERENCES Form(f_fid), \
+      FOREIGN KEY(fv_tid) REFERENCES Vtype(vt_tid) \
+    )'
+  ).then(res => {
+    // console.log('Form_Vtype table successfully created');
+  }, err => {
+    console.log('Form_Vtype table:', err);
+  });
+
+  // Corrective Action table
+  $cordovaSQLite.execute(db,
+    'CREATE TABLE IF NOT EXISTS CorrectiveAction( \
+      ca_caid              INTEGER PRIMARY KEY AUTOINCREMENT, \
+      ca_description       TEXT NOT NULL \
+    )'
+  ).then(res => {
+    // console.log('CorrectiveAction table successfully created');
+  }, err => {
+    console.log('CorrectiveAction table:', err);
+  });
+
+  // Table containing the relations between each form and their corrective
+  // actions
+  $cordovaSQLite.execute(db,
+    'CREATE TABLE IF NOT EXISTS Form_CA( \
+      fc_fid INTEGER NOT NULL, \
+      fc_caid INTEGER NOT NULL, \
+      FOREIGN KEY(fc_fid) REFERENCES Form(f_fid), \
+      FOREIGN KEY(fc_caid) REFERENCES CorrectiveAction(ca_caid) \
+    )'
+  ).then(res => {
+    // console.log('Form_CA table successfully created');
+  }, err => {
+    console.log('Form_CA table:', err);
+  });
 
   // Picture table
   $cordovaSQLite.execute(db,
@@ -82,9 +124,13 @@ app.factory('DB', function($cordovaSQLite) {
       p_pid               INTEGER PRIMARY KEY AUTOINCREMENT, \
       p_vid               INTEGER NOT NULL, \
       p_filename          TEXT NOT NULL, \
-      FOREIGN KEY(p_vid)  REFERENCES Violation(v_vid) \
+      FOREIGN KEY(p_vid) REFERENCES Violation(v_vid) \
     )'
-  );
+  ).then(res => {
+    // console.log('Picture table successfully created');
+  }, err => {
+    console.log('Picture table:', err);
+  });
 
   // Fill Vtype with necessary values
   var types = [
@@ -157,187 +203,50 @@ app.factory('NewInspection', () => {
   }
 });
 
-app.factory('Violations', () => {
-  var redVList = [{
-    title: 'FOOD PROTECTION MANAGEMENT',
-    violations: [{
-      name: 'PIC Assigned',
-      checked: false
-    }]
-  }, {
-    title: 'EMPLOYEE HEALTH',
-    violations: [{
-      name: 'Reporting of Diseases by Food Employee and PIC',
-      checked: false
-    }, {
-      name: 'Personnel with Infections Restricted / Excluded',
-      checked: false
-    }]
-  }, {
-    title: 'FOOD FROM APPROVED SOURCE',
-    violations: [{
-      name: 'Food and Water from Approved Source',
-      checked: false
-    }, {
-      name: 'Receiving / Condition',
-      checked: false
-    }, {
-      name: 'Tags / Records / Accuracy of Ingredient Statements',
-      checked: false
-    }, {
-      name: 'Conformance with Approved Procedures / HACCP Plans',
-      checked: false
-    }]
-  }, {
-    title: 'PROTECTION FROM CONTAMINATION',
-    violations: [{
-      name: 'Separation / Segregation / Protection',
-      checked: false
-    }, {
-      name: 'Food Contact Surface Cleaning and Sanitizing',
-      checked: false
-    }, {
-      name: 'Proper Adequate Handwashing',
-      checked: false
-    }, {
-      name: 'Good Hygeinic Practices',
-      checked: false
-    }, {
-      name: 'Prevention of Contamination',
-      checked: false
-    }, {
-      name: 'Handwash Facilities',
-      checked: false
-    }]
-  }, {
-    title: 'PROTECTION FROM CHEMICALS',
-    violations: [{
-      name: 'Approved Food or Color Additives',
-      checked: false
-    }, {
-      name: 'Toxic Chemicals',
-      checked: false
-    }]
-  }, {
-    title: 'TIME/TEMPERATURE CONTROLS (Potentially Hazardous Foods)',
-    violations: [{
-      name: 'Cooking Temperature',
-      checked: false
-    }, {
-      name: 'Reheating',
-      checked: false
-    }, {
-      name: 'Cooling',
-      checked: false
-    }, {
-      name: 'Hot and Cold Holding',
-      checked: false
-    }, {
-      name: 'Time as a Public Health Control',
-      checked: false
-    }]
-  }, {
-    title: 'REQUIREMENTS FOR HIGHLY SUSCEPTIBLE POPULATIONS (HSP)',
-    violations: [{
-      name: 'Food and Food Preparation for HSP',
-      checked: false
-    }]
-  }, {
-    title: 'CONSUMER ADVISORY',
-    violations: [{
-      name: 'Posting of Consumer Advisories',
-      checked: false
-    }]
-  }];
-
-  var blueVList = [{
-    title: 'GOOD RETAIL PRACTICES (BLUE ITEMS)',
-    violations: [{
-      name: 'Management and Personnel',
-      checked: false
-    }, {
-      name: 'Food and Food Protection',
-      checked: false
-    }, {
-      name: 'Equipment and Utensils',
-      checked: false
-    }, {
-      name: 'Water, Plumbing and Waste',
-      checked: false
-    }, {
-      name: 'Physical Facility',
-      checked: false
-    }, {
-      name: 'Poisonous or Toxic Material',
-      checked: false
-    }, {
-      name: 'Special Requirements',
-      checked: false
-    }, {
-      name: 'Other',
-      checked: false
-    }]
-  }];
-
-  var caList = [{
-    name: 'Voluntary Compliance',
-    checked: false
-  }, {
-    name: 'Re-inspection Scheduled',
-    checked: false
-  }, {
-    name: 'Embargo',
-    checked: false
-  }, {
-    name: 'Voluntary Disposal',
-    checked: false
-  }, {
-    name: 'Employee Restriction/Exclusion',
-    checked: false
-  }, {
-    name: 'Emergency Suspension',
-    checked: false
-  }, {
-    name: 'Emergency Closure',
-    checked: false
-  }, {
-    name: 'Other',
-    checked: false
-  }];
-
+app.factory('Forms', () => {
   // Lists of checked violations and corrective actions
   var checkedV = [];
   var checkedCA = [];
-
   // Lists of detailed violations
   var detailedVList = [];
+  var forms = [];
 
   return {
-    redVList: () => {
-      return redVList;
-    },
-    blueVList: () => {
-      return blueVList;
-    },
-    caList: () => {
-      return caList;
-    },
     checkedV: () => {
       return checkedV;
+    },
+    addV: v => {
+      checkedV.push(v);
+    },
+    removeV: v => {
+      var index = 0;
+      for (var i = 0; i < checkedV.length; i++) {
+        if (checkedV[i].tid === v.tid) {
+          index = i;
+        }
+      }
+
+      checkedV.splice(index, 1);
     },
     checkedCA: () => {
       return checkedCA;
     },
+    addCA: ca => {
+      checkedCA.push(ca);
+    },
+    removeCA: ca => {
+      var index = 0;
+      for (var i = 0; i < checkedCA.length; i++) {
+        if (checkedCA[i].tid === v.tid) {
+          index = i;
+        }
+      }
+
+      checkedCA.splice(index, 1);
+    },
     detailedVList: () => {
       return detailedVList;
-    }
-  };
-});
-
-app.factory('Forms', () => {
-  var forms = [];
-
-  return {
+    },
     forms: () => {
       return forms;
     },
@@ -379,6 +288,197 @@ app.factory('Forms', () => {
       });
 
       return form;
+    }
+  };
+});
+
+app.factory('Violations', () => {
+  var redVList = [{
+    title: 'FOOD PROTECTION MANAGEMENT',
+    violations: [{
+      name: 'PIC Assigned',
+      tid: 1,
+      checked: false
+    }]
+  }, {
+    title: 'EMPLOYEE HEALTH',
+    violations: [{
+      name: 'Reporting of Diseases by Food Employee and PIC',
+      tid: 2,
+      checked: false
+    }, {
+      name: 'Personnel with Infections Restricted / Excluded',
+      tid: 3,
+      checked: false
+    }]
+  }, {
+    title: 'FOOD FROM APPROVED SOURCE',
+    violations: [{
+      name: 'Food and Water from Approved Source',
+      tid: 4,
+      checked: false
+    }, {
+      name: 'Receiving / Condition',
+      tid: 5,
+      checked: false
+    }, {
+      name: 'Tags / Records / Accuracy of Ingredient Statements',
+      tid: 6,
+      checked: false
+    }, {
+      name: 'Conformance with Approved Procedures / HACCP Plans',
+      tid: 7,
+      checked: false
+    }]
+  }, {
+    title: 'PROTECTION FROM CONTAMINATION',
+    violations: [{
+      name: 'Separation / Segregation / Protection',
+      tid: 8,
+      checked: false
+    }, {
+      name: 'Food Contact Surface Cleaning and Sanitizing',
+      tid: 9,
+      checked: false
+    }, {
+      name: 'Proper Adequate Handwashing',
+      tid: 10,
+      checked: false
+    }, {
+      name: 'Good Hygeinic Practices',
+      tid: 11,
+      checked: false
+    }, {
+      name: 'Prevention of Contamination',
+      tid: 12,
+      checked: false
+    }, {
+      name: 'Handwash Facilities',
+      tid: 13,
+      checked: false
+    }]
+  }, {
+    title: 'PROTECTION FROM CHEMICALS',
+    violations: [{
+      name: 'Approved Food or Color Additives',
+      tid: 14,
+      checked: false
+    }, {
+      name: 'Toxic Chemicals',
+      tid: 15,
+      checked: false
+    }]
+  }, {
+    title: 'TIME/TEMPERATURE CONTROLS (Potentially Hazardous Foods)',
+    violations: [{
+      name: 'Cooking Temperature',
+      tid: 16,
+      checked: false
+    }, {
+      name: 'Reheating',
+      tid: 17,
+      checked: false
+    }, {
+      name: 'Cooling',
+      tid: 18,
+      checked: false
+    }, {
+      name: 'Hot and Cold Holding',
+      tid: 19,
+      checked: false
+    }, {
+      name: 'Time as a Public Health Control',
+      tid: 20,
+      checked: false
+    }]
+  }, {
+    title: 'REQUIREMENTS FOR HIGHLY SUSCEPTIBLE POPULATIONS (HSP)',
+    violations: [{
+      name: 'Food and Food Preparation for HSP',
+      tid: 21,
+      checked: false
+    }]
+  }, {
+    title: 'CONSUMER ADVISORY',
+    violations: [{
+      name: 'Posting of Consumer Advisories',
+      tid: 22,
+      checked: false
+    }]
+  }];
+
+  var blueVList = [{
+    title: 'GOOD RETAIL PRACTICES (BLUE ITEMS)',
+    violations: [{
+      name: 'Management and Personnel',
+      tid: 23,
+      checked: false
+    }, {
+      name: 'Food and Food Protection',
+      tid: 24,
+      checked: false
+    }, {
+      name: 'Equipment and Utensils',
+      tid: 25,
+      checked: false
+    }, {
+      name: 'Water, Plumbing and Waste',
+      tid: 26,
+      checked: false
+    }, {
+      name: 'Physical Facility',
+      tid: 27,
+      checked: false
+    }, {
+      name: 'Poisonous or Toxic Material',
+      tid: 28,
+      checked: false
+    }, {
+      name: 'Special Requirements',
+      tid: 29,
+      checked: false
+    }, {
+      name: 'Other',
+      tid: 30,
+      checked: false
+    }]
+  }];
+
+  var caList = [{
+    name: 'Voluntary Compliance',
+    checked: false
+  }, {
+    name: 'Re-inspection Scheduled',
+    checked: false
+  }, {
+    name: 'Embargo',
+    checked: false
+  }, {
+    name: 'Voluntary Disposal',
+    checked: false
+  }, {
+    name: 'Employee Restriction/Exclusion',
+    checked: false
+  }, {
+    name: 'Emergency Suspension',
+    checked: false
+  }, {
+    name: 'Emergency Closure',
+    checked: false
+  }, {
+    name: 'Other',
+    checked: false
+  }];
+
+  return {
+    redVList: () => {
+      return redVList;
+    },
+    blueVList: () => {
+      return blueVList;
+    },
+    caList: () => {
+      return caList;
     }
   };
 });
