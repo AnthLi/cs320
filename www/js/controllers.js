@@ -23,8 +23,8 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $location,
     timeIn: '',
     timeOut: '',
     haccp: false,
-    typeofOp: '',
-    typeofInsp: '',
+    opType: '',
+    inspType: '',
     violations: [],
     corrActions: []
   };
