@@ -290,8 +290,8 @@ app.controller('FormsCtrl', function($scope, $cordovaSQLite, DB, Forms) {
   };
 });
 
-app.controller('FormViewerCtrl', function($scope, $stateParams, Forms,
-  FormViewerFields) {
+app.controller('FormViewerCtrl', function($scope, $stateParams, $ionicPopup,
+  $cordovaPrinter, Forms, FormViewerFields) {
   $scope.form = Forms.getForm($stateParams.formName, $stateParams.date);
   $scope.fields = FormViewerFields.fields();
 
@@ -300,6 +300,17 @@ app.controller('FormViewerCtrl', function($scope, $stateParams, Forms,
     $scope.form.f_haccp = 'Yes';
   } else {
     $scope.form.f_haccp = 'No';
+  }
+
+  $scope.print = function() {
+    if($cordovaPrinter.isAvailable()) {
+      $cordovaPrinter.print(/* TODO: figure out how to print this form */)
+    } else {
+      $ionicPopup.alert({
+        title: 'Error',
+        template: 'Printing is not available'
+      });
+    }
   }
 });
 

@@ -26,7 +26,11 @@
       "locator": "https://github.com/litehelpers/Cordova-sqlite-storage.git",
       "id": "cordova-sqlite-storage"
     },
-    "cordova-plugin-camera"
+    "cordova-plugin-camera",
+    {
+      "locator": "https://github.com/katzer/cordova-plugin-printer.git",
+      "id": "de.appplant.cordova.plugin.printer"
+    }
   ],
   "cordovaPlatforms": [
     "ios"
