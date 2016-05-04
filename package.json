@@ -25,7 +25,8 @@
     {
       "locator": "https://github.com/litehelpers/Cordova-sqlite-storage.git",
       "id": "cordova-sqlite-storage"
-    }
+    },
+    "cordova-plugin-camera"
   ],
   "cordovaPlatforms": [
     "ios"

@@ -8,17 +8,16 @@
   padding-top: 50px;
 }
 
-
 .photos img {
-	display: inline-block;
-	width: 125px;
-	height: 125px;
+  display: inline-block;
+  width: 125px;
+  height: 125px;
 }
 
 .center{
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 .pics{
@@ -76,11 +75,11 @@ img{
 }
 
 .checkboxes{
-	font-family: "Calibri";
+  font-family: "Calibri";
 }
 
 .correctiveaction{
-	font-family: "Calibri";
+  font-family: "Calibri";
 }
 
 #savecontinue, #addViolation {

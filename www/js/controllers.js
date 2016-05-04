@@ -323,3 +323,29 @@ app.controller('FoodCodeViewerCtrl', function($scope, $stateParams, FoodCodes) {
     return formViewerURL + formURL + path;
   };
 });
+
+// Controller for taking a picture
+app.controller('PictureCtrl', function($scope, $ionicPopup, $cordovaCamera) {
+  $scope.takePicture = function() {
+    var option = {
+      quality: 100,
+      destinationType : Camera.DestinationType.DATA_URL,
+      sourceType : Camera.PictureSourceType.CAMERA,
+      allowEdit : true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 300,
+      targetHeight: 300,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: false
+    };
+
+    $cordovaCamera.getPicture(options).then(function(imageData) {
+      $scope.imgURI = 'data:image/jpeg;base64' + imageData;
+    }, function(err) {
+      $ionicPopup.alert({
+        title: 'Error',
+        template: err
+      });
+    });
+  }
+});

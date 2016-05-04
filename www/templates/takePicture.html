@@ -1,0 +1,14 @@
+<ion-view view-title="Take A Picture">
+  <!-- Back button -->
+  <ion-nav-bar>
+    <ion-nav-back-button id="backButton" class="button-clear">
+      <i class="ion-chevron-left"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+  <ion-content class="padding">
+    <img ng-show="imgURI !== undefined" ng-src="{{imgURI}}">
+    <img ng-show="imgURI === undefined" ng-src="{{imgURI}}">
+    <button class="button button-balanced" ng-click="takePicture()">Take Picture</button>
+  </ion-content>
+</ion-view>

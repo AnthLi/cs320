@@ -5,7 +5,7 @@ var app = angular.module('inspectorGadget', [
   'inspectorGadget.services'
 ]);
 
-// Underscore.js
+// lodash
 app.constant('_',
   window._
 );
@@ -77,6 +77,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
       'page-newinspection': {
         templateUrl: 'templates/addViolation.html',
         controller: 'AddViolationCtrl'
+      }
+    }
+  })
+
+  .state('page.takepicture', {
+    url: '/newinspection/addviolation/takepicture',
+    views: {
+      'page-newinspection': {
+        templateUrl: 'templates/takePicture.html',
+        controller: 'PictureCtrl'
       }
     }
   })

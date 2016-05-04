@@ -105,26 +105,29 @@
         <ion-item class="button button-full button-assertive" disabled style="opacity: 1.0">
           VIOLATIONS
         </ion-item>
-        <a href="#/page/newinspection/addviolation" class="button icon-left ion-plus-circled button-outline button-assertive button-medium">
-          Add Violation
-        </a>
 
         <div>
-          <h4>Violations</h4>
+          <div class="input-label">
+            Violations
+          </div>
           <div ng-repeat="v in checkedV track by $index">
             {{v.name}}
           </div>
         </div>
 
         <div>
-          <h4>Corrective Actions</h4>
+          <div class="input-label">
+            Corrective Actions
+          </div>
           <div ng-repeat="ca in checkedCA track by $index">
             {{ca.name}}
           </div>
         </div>
 
         <div>
-          <h4>Detailed Violations</h4>
+          <div class="input-label">
+            Detailed Violations
+          </div>
           <div ng-repeat="dv in detailedVList track by $index">
             Item No.: {{dv.itemNum}} <br>
             Code Reference: {{dv.codeRef}} <br>
@@ -133,6 +136,10 @@
             Date Verified: {{dv.itemNum}} <br><br>
           </div>
         </div>
+
+        <a href="#/page/newinspection/addviolation" class="button icon-left ion-plus-circled button-outline button-assertive button-medium">
+          Add Violation
+        </a>
       </div>
 
       <!---.................................................................

@@ -4,7 +4,10 @@ var db = null;
 app.factory('DB', function($cordovaSQLite) {
   // Detect whether the user is in on mobile (prod) or a desktop browser (dev)
   if (window.cordova) {
-    db = $cordovaSQLite.openDatabase('inspections.db');
+    db = $cordovaSQLite.openDB({
+      name: 'inspections.db',
+      iosDatabaseLocation: 'default'
+    });
   } else {
     db = window.openDatabase('inspections.db', '', 'Inspections',
       1024 * 1024 * 100);
