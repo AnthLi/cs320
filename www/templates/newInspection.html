@@ -66,7 +66,7 @@
                   Type of Operation(s):
                 </div>
 
-                <select class="form-control" ng-model="formData.typeofOp">
+                <select class="form-control" ng-model="formData.opType">
                   <option>Food Service</option>
                   <option>Retail</option>
                   <option>Residential Kitchen</option>
@@ -88,7 +88,7 @@
                   Type of Inspection:
                 </div>
 
-                <select class="form-control" ng-model="formData.typeofInsp">
+                <select class="form-control" ng-model="formData.inspType">
                   <option>Routine</option>
                   <option>Re-Inspection</option>
                 </select>
@@ -147,6 +147,7 @@
         <div class="sig row">
           <div class="col">
             <div class="sigline">
+              <signature-pad accept="accept" clear="clear" height="100" width="100%"></signature-pad>
               ____________________________________________________<br>
               Inspector's Signature
             </div>
@@ -154,6 +155,7 @@
 
           <div class="col">
             <div class="sigline">
+              <signature-pad accept="accept" clear="clear" height="100" width="100%"></signature-pad>
               ____________________________________________________<br>
               Print
             </div>
@@ -161,6 +163,7 @@
 
           <div class="col">
             <div class="sigline">
+              <signature-pad accept="accept" clear="clear" height="100" width="100%"></signature-pad>
               ____________________________________________________<br>
               PIC's Signature
             </div>
@@ -168,12 +171,16 @@
 
           <div class="col">
             <div class="sigline">
+              <signature-pad accept="accept" clear="clear" height="100" width="100%"></signature-pad>
               ____________________________________________________<br>
               Print
             </div>
           </div>
         </div>
       </div>
+
+      <!-- <button ng-click="clear()">Clear signature</button>
+      <button ng-click="signature = accept()">Sign</button> -->
 
       <a id="savecontinue" class="button icon-right ion-chevron-right button-balanced" ng-click="processForm()">
         Save & Continue
