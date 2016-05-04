@@ -6,14 +6,14 @@
       <label class="item item-input">
         <i class="icon ion-search placeholder-icon"></i>
         <input id="formSearchBox" type="search" placeholder="Search existing forms . . ." ng-model="query">
-
         <button id="formSearchClear" class="button button-icon ion-android-close input-button" ng-if="query.length" ng-click="clearSearch()"></button>
       </label>
     </div>
 
     <div class="card">
       <div class = ion-item class="item item-divider">
-        <ion-item ng-repeat="form in forms | filter: {f_name: query} | reverse" href="#/page/forms/{{form.f_name}}?date={{form.f_date}}">
+        <ion-item  class="item item-icon-left" ng-repeat="form in forms | filter: {f_name: query} | reverse" href="#/page/forms/{{form.f_name}}?date={{form.f_date}}">
+          <i class = "icon ion-clipboard"></i>
           <h2>{{form.f_name}}</h2>
           <div class = ion-item class="item item-text-wrap">
             {{form.f_date}}
