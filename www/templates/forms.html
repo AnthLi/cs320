@@ -20,13 +20,35 @@
     <div class = "list card">
       <ion-item class="item-icon-left item-icon-right" ng-repeat="form in forms | filter: {estName: query} | orderBy: 'estName'" href="#/page/forms/{{form.estName}}?date={{form.date}}">
         <i class="icon ion-clipboard"></i>
+<<<<<<< HEAD
         <h2>{{form.estName}} - {{form.date}}</h2>
+=======
+=======
+  <!-- Search bar header -->
+  <ion-header-bar class="bar-light bar-subheader">
+    <input id="formSearchBox" type="search" placeholder="Search existing forms..." ng-model="query">
+    <button id="formSearchClear" class="button button-icon ion-android-close input-button" ng-if="query.length" ng-click="clearSearch()">
+    </button>
+  </ion-header-bar>
+
+  <!-- List of each Form -->
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-icon-right" ng-repeat="form in forms | filter: {name: query} | orderBy: 'name' track by $index" href="#/page/forms/{{form.name}}?date={{form.date}}">
+        <h2>{{form.name}} - {{form.date}}</h2>
+>>>>>>> 61c2e8eb7503a18d48ca13304f680d27d70ccccd
         <i class="icon ion-chevron-right icon-accessory"></i>
       </ion-item>
     </div>
 
 <!--
     <div class="card">
+<<<<<<< HEAD
+=======
+      <div class = ion-item class="item item-divider">
+      <ion-item ng-repeat="form in forms | filter: {name: query} | orderBy: 'name'" href="#/page/forms/{{form.name}}?date={{form.date}}">
+        <h2>{{form.name}}</h2>
+>>>>>>> 61c2e8eb7503a18d48ca13304f680d27d70ccccd
       <div class = ion-item class="item item-text-wrap">
         <ion-item ng-repeat="form in forms | filter: {estName: query} | orderBy: 'estName'" href="#/page/forms/{{form.estName}}?date={{form.date}}">
           <h2>{{form.estName}} : {{form.date}}</h2>

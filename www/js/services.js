@@ -5,26 +5,26 @@ app.factory('NewInspection', function() {
   // This is to help dynamically generate the input fields rather than
   // hard-coding every single one of them, decreasing the amount of code
   // being written
-  var newInspFields = [{
-    model: ['estName', 'date'],
-    temp: ['Name of Food Establishment', 'MM/DD/YYYY']
+  var newInspectFields = [{
+    temp: ['Name of Food Establishment', 'MM/DD/YYYY'],
+    model: ['name', 'date']
   }, {
-    model: ['address', 'owner'],
-    temp: ['Address', 'Owner']
+    temp: ['Address', 'Owner'],
+    model: ['address', 'owner']
   }, {
-    model: ['phone', 'PIC'],
-    temp: ['Telephone', 'Person In Charge']
+    temp: ['Telephone', 'Person In Charge'],
+    model: ['phone', 'pic']
   }, {
-    model: ['permitno', 'inspector'],
-    temp: ['Permit No.', 'Inspector']
+    temp: ['Permit No.', 'Inspector'],
+    model: ['permitNum', 'inspector']
   }, {
-    model: ['risklvl', 'prevInspDate'],
-    temp: ['Risk Level', 'Prev. Inspection Date']
+    temp: ['Risk Level', 'Prev. Inspection Date'],
+    model: ['riskLvl', 'prevInspectDate']
   }];
 
   return {
-    newInspFields: function() {
-      return newInspFields;
+    newInspectFields: function() {
+      return newInspectFields;
     }
   }
 });
@@ -33,145 +33,145 @@ app.factory('Violations', function() {
   var vList = [{
     title: 'FOOD PROTECTION MANAGEMENT',
     violations: [{
-      name: 'PIC Assigned',
+      description: 'PIC Assigned',
       checked: false
     }]
   }, {
     title: 'EMPLOYEE HEALTH',
     violations: [{
-      name: 'Reporting of Diseases by Food Employee and PIC',
+      description: 'Reporting of Diseases by Food Employee and PIC',
       checked: false
     }, {
-      name: 'Personnel with Infections Restricted/Excluded',
+      description: 'Personnel with Infections Restricted/Excluded',
       checked: false
     }]
   }, {
     title: 'FOOD FROM APPROVED SOURCE',
     violations: [{
-      name: 'Food and Water from Approved Source',
+      description: 'Food and Water from Approved Source',
       checked: false
     }, {
-      name: 'Receiving/Condition',
+      description: 'Receiving/Condition',
       checked: false
     }, {
-      name: 'Tags/Records/Accuracy of Ingredient Statements',
+      description: 'Tags/Records/Accuracy of Ingredient Statements',
       checked: false
     }, {
-      name: 'Conformance with Approved Procedures/HACCP Plans',
+      description: 'Conformance with Approved Procedures/HACCP Plans',
       checked: false
     }]
   }, {
     title: 'PROTECTION FROM CONTAMINATION',
     violations: [{
-      name: 'Separation/Segregation/Protection',
+      description: 'Separation/Segregation/Protection',
       checked: false
     }, {
-      name: 'Food Contact Surface Cleaning and Sanitizing',
+      description: 'Food Contact Surface Cleaning and Sanitizing',
       checked: false
     }, {
-      name: 'Proper Adequate Handwashing',
+      description: 'Proper Adequate Handwashing',
       checked: false
     }, {
-      name: 'Good Hygeinic Practices',
+      description: 'Good Hygeinic Practices',
       checked: false
     }, {
-      name: 'Prevention of Contamination',
+      description: 'Prevention of Contamination',
       checked: false
     }, {
-      name: 'Handwash Facilities',
+      description: 'Handwash Facilities',
       checked: false
     }]
   }, {
     title: 'PROTECTION FROM CHEMICALS',
     violations: [{
-      name: 'Approved Food or Color Additives',
+      description: 'Approved Food or Color Additives',
       checked: false
     }, {
-      name: 'Toxic Chemicals',
+      description: 'Toxic Chemicals',
       checked: false
     }]
   }, {
     title: 'TIME/TEMPERATURE CONTROLS',
     violations: [{
-      name: 'Cooking Temperature',
+      description: 'Cooking Temperature',
       checked: false
     }, {
-      name: 'Reheating',
+      description: 'Reheating',
       checked: false
     }, {
-      name: 'Cooling',
+      description: 'Cooling',
       checked: false
     }, {
-      name: 'Hot and Cold Holding',
+      description: 'Hot and Cold Holding',
       checked: false
     }, {
-      name: 'Time as a Public Health Control',
+      description: 'Time as a Public Health Control',
       checked: false
     }]
   }, {
     title: 'REQUIREMENTS FOR HIGHLY SUSCEPTIBLE POPULATIONS',
     violations: [{
-      name: 'Food and Food Preparation for HSP',
+      description: 'Food and Food Preparation for HSP',
       checked: false
     }]
   }, {
     title: 'CONSUMER ADVISORY',
     violations: [{
-      name: 'Posting of Consumer Advisories',
+      description: 'Posting of Consumer Advisories',
       checked: false
     }]
   }, {
     title: 'GOOD RETAIL PRACTICES (BLUE ITEMS)',
     violations: [{
-      name: 'Management and Personnel',
+      description: 'Management and Personnel',
       checked: false
     }, {
-      name: 'Food and Food Protection',
+      description: 'Food and Food Protection',
       checked: false
     }, {
-      name: 'Equipment and Utensils',
+      description: 'Equipment and Utensils',
       checked: false
     }, {
-      name: 'Water, Plumbing and Waste',
+      description: 'Water, Plumbing and Waste',
       checked: false
     }, {
-      name: 'Physical Facility',
+      description: 'Physical Facility',
       checked: false
     }, {
-      name: 'Poisonous or Toxic Material',
+      description: 'Poisonous or Toxic Material',
       checked: false
     }, {
-      name: 'Special Requirements',
+      description: 'Special Requirements',
       checked: false
     }, {
-      name: 'Other',
+      description: 'Other',
       checked: false
     }]
   }];
 
   var caList = [{
-    name: 'Voluntary Compliance',
+    description: 'Voluntary Compliance',
     checked: false
   }, {
-    name: 'Re-inspection Scheduled',
+    description: 'Re-inspection Scheduled',
     checked: false
   }, {
-    name: 'Embargo',
+    description: 'Embargo',
     checked: false
   }, {
-    name: 'Voluntary Disposal',
+    description: 'Voluntary Disposal',
     checked: false
   }, {
-    name: 'Employee Restriction/Exclusion',
+    description: 'Employee Restriction/Exclusion',
     checked: false
   }, {
-    name: 'Emergency Suspension',
+    description: 'Emergency Suspension',
     checked: false
   }, {
-    name: 'Emergency Closure',
+    description: 'Emergency Closure',
     checked: false
   }, {
-    name: 'Other',
+    description: 'Other',
     checked: false
   }];
 
@@ -203,7 +203,7 @@ app.factory('Forms', function() {
     },
     getForm: function(formName, date) {
       for (var i = 0; i < forms.length; i++) {
-        if (forms[i].estName === formName && forms[i].date === date) {
+        if (forms[i].name === formName && forms[i].date === date) {
           return forms[i];
         }
       }
@@ -212,7 +212,6 @@ app.factory('Forms', function() {
     },
     addForm: function(form) {
       forms.push(form);
-      console.log(forms);
     }
   };
 });
@@ -220,19 +219,19 @@ app.factory('Forms', function() {
 app.factory('FormViewerFields', function() {
   var fields = [{
     name: ['Name', 'Date'],
-    model: ['estName', 'date']
+    model: ['name', 'date']
   }, {
     name: ['Address', 'Owner'],
     model: ['address', 'owner']
   }, {
     name: ['Permit No.', 'Inspector'],
-    model: ['permitno', 'inspector']
+    model: ['permitNum', 'inspector']
   }, {
     name: ['Risk', 'HACCP'],
-    model: ['risklvl', 'HACCP']
+    model: ['riskLvl', 'haccp']
   }, {
     name: ['Time In', 'Time Out'],
-    model: ['timein', 'timeout']
+    model: ['timeIn', 'timeOut']
   }, {
     name: ['Type of Operation(s)', 'Type of Inspection'],
     model: ['typeofOp', 'typeofInsp']
