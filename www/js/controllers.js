@@ -71,27 +71,34 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
     }
 
     var insertViolations = fid => {
+      // Insert the violation types marked in the form
       _.each(violations, v => {
         var q = 'INSERT INTO Form_Vtype(fv_fid, fv_tid) VALUES(?, ?)';
         $cordovaSQLite.execute(DB, q, [fid, v.tid]).then(res => {
-        }, err => {
-          console.log(err);
         });
       });
 
-      console.log('Detailed Violations List:', $scope.detailedVList);
+      // Insert the detailed violations in the form
+      _.each(detailedVList, dv => {
+        var dvAttrs = [
+          fid,
+          dv.itemNum,
+          dv.codeRef,
+          dv.isCrit,
+          dv.description,
+          dv.dateVerified
+        ];
+        var q = 'INSERT INTO Violation(v_fid, v_itemNum, v_codeRef, v_isCrit, \
+          v_description, v_dateVerified) VALUES(?, ?, ?, ?, ?, ?)';
+          $cordovaSQLite.execute(DB, q, dvAttrs);
+      });
     }
 
-    // Inser the corrective actions marked in the form
+    // Insert the corrective actions marked in the form
     var insertCorrActions = fid => {
       _.each(corrActions, ca => {
-        var corrAction = [
-          fid,
-          ca.description
-        ];
-
         var q = 'INSERT INTO Form_CA(fc_fid, fc_caid) VALUES(?, ?)';
-        $cordovaSQLite.execute(DB, q, corrAction);
+        $cordovaSQLite.execute(DB, q, [fid, ca.caid]);
       });
     }
 
@@ -105,8 +112,6 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
       var fid = res.insertId;
       insertViolations(fid);
       insertCorrActions(fid);
-    }, err => {
-      console.log(err);
     });
   };
 });
@@ -122,7 +127,7 @@ app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
   $scope.detailedV = {
     itemNum: '',
     codeRef: '',
-    status: '',
+    isCrit: '',
     description: '',
     dateVerified: ''
   }
@@ -180,7 +185,6 @@ app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
   // Toggle a corrective action by adding or removing it from the list of
   // checked off corrective actions, and mark it as checked or unchecked.
   $scope.toggleCA = corrAction => {
-    console.log(corrAction);
     if (Forms.checkedCA().length < 1) {
       Forms.addCA(corrAction);
     } else {
@@ -210,7 +214,7 @@ app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
   }
 
   $scope.addViolation = () => {
-    $scope.detailedVList.push($scope.detailedV);
+    Forms.addDetailedV($scope.detailedV);
   }
 });
 
@@ -221,16 +225,7 @@ app.controller('FormsCtrl', function($scope, $cordovaSQLite, DB, Forms) {
   // All available forms to the user
   $scope.forms = Forms.forms();
 
-  // Test query
-  // var q = 'SELECT * FROM CorrectiveAction';
-  // $cordovaSQLite.execute(DB, q).then(res => {
-  //   _.each(res.rows, row => {
-  //     console.log(row);
-  //   });
-  // }, err => {
-  //   console.log(err);
-  // });
-
+  // Get every violation type for each form and add it to its respective form
   var q = 'SELECT * FROM \
     Form f \
     LEFT OUTER JOIN Form_Vtype fv ON f.f_fid = fv.fv_fid \
@@ -248,24 +243,41 @@ app.controller('FormsCtrl', function($scope, $cordovaSQLite, DB, Forms) {
         if (rows.length > 0) {
           Forms.addViolationsToForm(row.f_fid, rows);
         }
-      }, err => {
-        console.log(err);
       });
+    });
+  });
 
-      // Get each corrective action from the database and add it to each of
-      // their respective forms
+  // Get every corrective action for each form and add it to its respective form
+  q = 'SELECT * FROM \
+    Form f \
+    LEFT OUTER JOIN Form_CA fc ON f.f_fid = fc.fc_fid \
+    ORDER BY f.f_fid';
+  $cordovaSQLite.execute(DB, q).then(res => {
+    var rows = res.rows;
+    _.each(rows, row => {
       q = 'SELECT * FROM CorrectiveAction ca WHERE ca.ca_caid = ?';
-      $cordovaSQLite.execute(DB, q, [row.fv_tid]).then(res => {
+      $cordovaSQLite.execute(DB, q, [row.fc_caid]).then(res => {
         rows = res.rows;
         if (rows.length > 0) {
           Forms.addCorrActionsToForm(row.f_fid, rows);
         }
-      }, err => {
-        console.log(err);
       });
     });
-  }, err => {
-    console.log(err);
+  });
+
+  // Get every detailed violation for each form and add it to its respective
+  // form
+  q = 'SELECT * FROM \
+    Form f \
+    LEFT OUTER JOIN Violation v ON f.f_fid = v.v_fid \
+    ORDER BY f.f_fid';
+  $cordovaSQLite.execute(DB, q).then(res => {
+    var rows = res.rows;
+    _.each(rows, row => {
+      if (row.v_fid) {
+        Forms.addDetailedViolationToForm(row.f_fid, row);
+      }
+    });
   });
 
   // Source: http://goo.gl/r9dkjh

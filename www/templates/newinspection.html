@@ -110,23 +110,27 @@
         </a>
 
         <div>
-          <h5>Violations</h5>
+          <h4>Violations</h4>
           <div ng-repeat="v in checkedV track by $index">
             {{v.name}}
           </div>
         </div>
 
         <div>
-          <h5>Corrective Actions</h5>
+          <h4>Corrective Actions</h4>
           <div ng-repeat="ca in checkedCA track by $index">
             {{ca.name}}
           </div>
         </div>
 
         <div>
-          <h5>Detailed Violations</h5>
-          <div ng-repeat="dV in detailedVList track by $index">
-            {{dV}}
+          <h4>Detailed Violations</h4>
+          <div ng-repeat="dv in detailedVList track by $index">
+            Item No.: {{dv.itemNum}} <br>
+            Code Reference: {{dv.codeRef}} <br>
+            Critial: {{dv.isCrit}} <br>
+            Description: {{dv.description}} <br>
+            Date Verified: {{dv.itemNum}} <br><br>
           </div>
         </div>
       </div>

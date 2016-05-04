@@ -55,7 +55,11 @@
         <div>
           <h5>Detailed Violations</h5>
           <div ng-repeat="dv in form.detailedViolations">
-            {{dv}}
+            Item No.: {{dv.v_itemNum}} <br>
+            Code Reference: {{dv.v_codeRef}} <br>
+            Critial: {{dv.v_isCrit}} <br>
+            Description: {{dv.v_description}} <br>
+            Date Verified: {{dv.v_itemNum}} <br><br>
           </div>
         </div>
       </div>

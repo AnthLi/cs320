@@ -258,7 +258,7 @@ app.factory('Forms', () => {
     removeCA: ca => {
       var index = 0;
       for (var i = 0; i < checkedCA.length; i++) {
-        if (checkedCA[i].tid === ca.tid) {
+        if (checkedCA[i].caid === ca.caid) {
           index = i;
         }
       }
@@ -286,6 +286,7 @@ app.factory('Forms', () => {
       if (!exists) {
         form.violations = [];
         form.corrActions = [];
+        form.detailedViolations = [];
         forms.push(form);
       }
     },
@@ -299,6 +300,19 @@ app.factory('Forms', () => {
     addCorrActionsToForm: (fid, corrAction) => {
       _.each(forms, f => {
         f.corrActions.push(corrAction[0].ca_description);
+      });
+    },
+    addDetailedViolationToForm: (fid, detailedViolation) => {
+      _.each(forms, f => {
+        if (f.f_fid === fid) {
+          f.detailedViolations.push({
+            v_itemNum: detailedViolation.v_itemNum,
+            v_codeRef: detailedViolation.v_codeRef,
+            v_isCrit: detailedViolation.v_isCrit,
+            v_description: detailedViolation.v_description,
+            v_dateVerified: detailedViolation.v_dateVerified
+          });
+        }
       });
     },
     getForm: (formName, date) => {
