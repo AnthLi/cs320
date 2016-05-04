@@ -107,27 +107,21 @@
         </ion-item>
 
         <div>
-          <div class="input-label">
-            Violations
-          </div>
+          <h4>Violations</h4>
           <div ng-repeat="v in checkedV track by $index">
             {{v.name}}
           </div>
         </div>
 
         <div>
-          <div class="input-label">
-            Corrective Actions
-          </div>
+          <h4>Corrective Actions</h4>
           <div ng-repeat="ca in checkedCA track by $index">
             {{ca.name}}
           </div>
         </div>
 
         <div>
-          <div class="input-label">
-            Detailed Violations
-          </div>
+          <h4>Detailed Violations</h4>
           <div ng-repeat="dv in detailedVList track by $index">
             Item No.: {{dv.itemNum}} <br>
             Code Reference: {{dv.codeRef}} <br>
@@ -152,15 +146,31 @@
 
         <div class="sig row">
           <div class="col">
-            <button class="sigline button icon-left ion-android-close button-clear button-stable button-medium">
-              ________________________________________
-            </button>
+            <div class="sigline">
+              ____________________________________________________<br>
+              Inspector's Signature
+            </div>
           </div>
 
           <div class="col">
-            <button class="sigline button icon-left ion-android-close button-clear button-stable button-medium">
-              ________________________________________
-            </button>
+            <div class="sigline">
+              ____________________________________________________<br>
+              Print
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="sigline">
+              ____________________________________________________<br>
+              PIC's Signature
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="sigline">
+              ____________________________________________________<br>
+              Print
+            </div>
           </div>
         </div>
       </div>
