@@ -16,6 +16,7 @@ app.factory('DB', function($cordovaSQLite) {
   // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS Vtype');
   // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS Form_Vtype');
   // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS CorrectiveAction');
+  // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS Form_CA');
   // $cordovaSQLite.execute(db, 'DROP TABLE IF EXISTS Picture');
 
   // Form table
@@ -94,8 +95,8 @@ app.factory('DB', function($cordovaSQLite) {
   // Corrective Action table
   $cordovaSQLite.execute(db,
     'CREATE TABLE IF NOT EXISTS CorrectiveAction( \
-      ca_caid              INTEGER PRIMARY KEY AUTOINCREMENT, \
-      ca_description       TEXT NOT NULL \
+      ca_caid         INTEGER PRIMARY KEY AUTOINCREMENT, \
+      ca_description  TEXT NOT NULL \
     )'
   ).then(res => {
     // console.log('CorrectiveAction table successfully created');
@@ -133,7 +134,7 @@ app.factory('DB', function($cordovaSQLite) {
   });
 
   // Fill Vtype with necessary values
-  var types = [
+  var vTypes = [
     "'PIC Assigned / Knowledgeable / Duties'",
     "'Reporting of Diseases by Food Employee and PIC'",
     "'Personnel with Infections Restricted / Excluded'",
@@ -165,10 +166,27 @@ app.factory('DB', function($cordovaSQLite) {
     "'Special Requirements'",
     "'Other'"
   ];
-  var q = 'INSERT INTO Vtype VALUES(';
+  var vQ = 'INSERT INTO Vtype VALUES(';
   var i = 1;
-  _.each(types, type => {
-    $cordovaSQLite.execute(db, q + String(i++) + ', ' + type + ')');
+  _.each(vTypes, type => {
+    $cordovaSQLite.execute(db, vQ + String(i++) + ', ' + type + ')');
+  });
+
+  // Fill CorreciveAction with necessary values
+  var caValues = [
+    "'Voluntary Compliance'",
+    "'Re-inspection Scheduled'",
+    "'Embargo'",
+    "'Voluntary Disposal'",
+    "'Employee Restriction/Exclusion'",
+    "'Emergency Suspension'",
+    "'Emergency Closure'",
+    "'Other'"
+  ];
+  var caQ = 'INSERT INTO CorrectiveAction VALUES('
+  i = 1;
+  _.each(caValues, val => {
+    $cordovaSQLite.execute(db, caQ + String(i++) + ', ' + val + ')');
   });
 
   return db;
@@ -218,6 +236,7 @@ app.factory('Forms', () => {
     addV: v => {
       checkedV.push(v);
     },
+    // Remove the given violation from the list of checked violations
     removeV: v => {
       var index = 0;
       for (var i = 0; i < checkedV.length; i++) {
@@ -234,10 +253,12 @@ app.factory('Forms', () => {
     addCA: ca => {
       checkedCA.push(ca);
     },
+    // Remove the given corrective action from the list of checked corrective
+    // actions
     removeCA: ca => {
       var index = 0;
       for (var i = 0; i < checkedCA.length; i++) {
-        if (checkedCA[i].tid === v.tid) {
+        if (checkedCA[i].tid === ca.tid) {
           index = i;
         }
       }
@@ -246,6 +267,9 @@ app.factory('Forms', () => {
     },
     detailedVList: () => {
       return detailedVList;
+    },
+    addDetailedV: (dv) => {
+      detailedVList.push(dv);
     },
     forms: () => {
       return forms;
@@ -260,23 +284,21 @@ app.factory('Forms', () => {
       });
 
       if (!exists) {
+        form.violations = [];
+        form.corrActions = [];
         forms.push(form);
       }
     },
-    addViolationsToForm: violations => {
-      var added = [];
+    addViolationsToForm: (fid, violations) => {
       _.each(forms, f => {
-        _.each(violations, v => {
-          if (f.f_fid === v.v_fid) {
-            added.push(v.v_tid);
-          }
-        });
+        if (f.f_fid === fid) {
+          f.violations.push(violations[0].vt_type);
+        }
       });
-
-      _.each(added, tid => {
-        console.log(tid);
-        // var q = 'SELECT * FROM Vtype vt WHERE vt.tid '
-        // $cordovaSQLite.execute
+    },
+    addCorrActionsToForm: (fid, corrAction) => {
+      _.each(forms, f => {
+        f.corrActions.push(corrAction[0].ca_description);
       });
     },
     getForm: (formName, date) => {
@@ -446,27 +468,35 @@ app.factory('Violations', () => {
 
   var caList = [{
     name: 'Voluntary Compliance',
+    caid: 1,
     checked: false
   }, {
     name: 'Re-inspection Scheduled',
+    caid: 2,
     checked: false
   }, {
     name: 'Embargo',
+    caid: 3,
     checked: false
   }, {
     name: 'Voluntary Disposal',
+    caid: 4,
     checked: false
   }, {
     name: 'Employee Restriction/Exclusion',
+    caid: 5,
     checked: false
   }, {
     name: 'Emergency Suspension',
+    caid: 6,
     checked: false
   }, {
     name: 'Emergency Closure',
+    caid: 7,
     checked: false
   }, {
     name: 'Other',
+    caid: 8,
     checked: false
   }];
 

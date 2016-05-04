@@ -21,7 +21,7 @@
             <button class="vItems item item-checkbox checkbox-assertive" ng-repeat="violation in vObj.violations">
               {{violation.name}}
               <label class="checkbox">
-                <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'" ng-click="toggleV({{violation}})" ng-checked="{{violation.checked}}">
+                <input type="checkbox" ng-click="toggleV({{violation}})" ng-checked="{{violation.checked}}">
               </label>
             </button>
           </ion-list>
@@ -34,7 +34,7 @@
             <button class="vItems item item-checkbox checkbox-positive" ng-repeat="violation in vObj.violations">
               {{violation.name}}
               <label class="checkbox">
-                <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'" ng-click="toggleV({{violation}})" ng-checked="{{violation.checked}}">
+                <input type="checkbox" ng-click="toggleV({{violation}})" ng-checked="{{violation.checked}}">
               </label>
             </button>
           </ion-list>
@@ -53,7 +53,7 @@
           <button class="caItems item item-checkbox checkbox-energized">
             {{action.name}}
             <label class="checkbox">
-              <input type="checkbox" ng-true-value="'YES'" ng-false-value="'NO'" ng-click="toggleCA({{action}})" ng-checked="{{action.checked}}">
+              <input type="checkbox" ng-click="toggleCA({{action}})" ng-checked="{{action.checked}}">
             </label>
           </button>
         </ion-list>
@@ -63,12 +63,12 @@
     <!-- Add Photos-->
     <button class="button button-full button-balanced">ADD PHOTO</button>
     <div class="photos">
-      <div class = "row">
-        <div class = "col">
-          <button class="button icon-left ion-ios-camera button-clear button-dark button-large center"><span class = "pics">Take Photo</span></button>
+      <div class="row">
+        <div class="col">
+          <button class="button icon-left ion-ios-camera button-clear button-dark button-large center"><span class="pics">Take Photo</span></button>
         </div>
-        <div class = "col">
-          <button class="button icon-left ion-images button-clear button-dark button-large center"><span class = "pics">Choose From Gallery</span></button>
+        <div class="col">
+          <button class="button icon-left ion-images button-clear button-dark button-large center"><span class="pics">Choose From Gallery</span></button>
         </div>
       </div>
     </div>

@@ -39,9 +39,6 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
   });
 
   $scope.processForm = () => {
-    var violations = $scope.formData.violations = Forms.checkedV();
-    var corrActions = $scope.formData.corrActions = Forms.checkedCA();
-    var detailedVList = $scope.formData.detailedVList = Forms.detailedVList();
     var form = [
       $scope.formData.name,
       $scope.formData.owner,
@@ -62,6 +59,9 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
       $scope.formData.inspType,
       $scope.formData.haccp
     ];
+    var violations = $scope.checkedV;
+    var corrActions = $scope.checkedCA;
+    var detailedVList = $scope.detailedVList;
 
     var insertPictures = (vid, pictures) => {
       _.each(pictures, picture => {
@@ -72,29 +72,14 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
 
     var insertViolations = fid => {
       _.each(violations, v => {
-        var violation = [
-          fid,
-          v.itemNum,
-          v.codeRef,
-          v.isCrit,
-          v.description,
-          v.dateVerified
-        ];
-        var pictures = v.pictures;
-
-        var q = 'INSERT INTO Violation(v_fid, v_itemNum, v_codeRef, \
-          v_isCrit, v_description, v_dateVerified) VALUES(?, ?, ?, ?, ?, ?)';
-        $cordovaSQLite.execute(DB, q, violation).then(res => {
-          if (pictures) {
-            insertPictures(res.insertId, pictures);
-          }
-          console.log('Violation:', res);
+        var q = 'INSERT INTO Form_Vtype(fv_fid, fv_tid) VALUES(?, ?)';
+        $cordovaSQLite.execute(DB, q, [fid, v.tid]).then(res => {
         }, err => {
           console.log(err);
         });
       });
 
-      console.log($scope.detailedVList);
+      console.log('Detailed Violations List:', $scope.detailedVList);
     }
 
     // Inser the corrective actions marked in the form
@@ -105,8 +90,7 @@ app.controller('NewInspectionCtrl', function($scope, $filter, $state,
           ca.description
         ];
 
-        var q = 'INSERT INTO CorrectiveActions(ca_fid, ca_description) \
-          VALUES(?, ?)';
+        var q = 'INSERT INTO Form_CA(fc_fid, fc_caid) VALUES(?, ?)';
         $cordovaSQLite.execute(DB, q, corrAction);
       });
     }
@@ -155,38 +139,38 @@ app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
       Forms.addV(violation);
     } else {
       var exists = false;
-      _.each(Forms.checkedV(), elem => {
-        if (elem.tid === violation.tid) {
+      _.each(Forms.checkedV(), v => {
+        if (v.tid === violation.tid) {
           exists = true;
         }
       });
 
-      if (exists) {
+      if (!exists) {
         Forms.addV(violation);
       } else {
         Forms.removeV(violation);
       }
     }
 
-    _.each($scope.redVList, vElem => {
-      _.each(vElem.violations, eElem => {
-        if (eElem.tid === violation.tid) {
-          if (eElem.checked) {
-            eElem.checked = false;
+    _.each($scope.redVList, v => {
+      _.each(v.violations, elem => {
+        if (elem.tid === violation.tid) {
+          if (elem.checked) {
+            elem.checked = false;
           } else {
-            eElem.checked = true;
+            elem.checked = true;
           }
         }
       });
     });
 
-    _.each($scope.blueVList, vElem => {
-      _.each(vElem.violations, eElem => {
-        if (eElem.tid === violation.tid) {
-          if (eElem.checked) {
-            eElem.checked = false;
+    _.each($scope.blueVList, v => {
+      _.each(v.violations, elem => {
+        if (elem.tid === violation.tid) {
+          if (elem.checked) {
+            elem.checked = false;
           } else {
-            eElem.checked = true;
+            elem.checked = true;
           }
         }
       });
@@ -196,32 +180,30 @@ app.controller('AddViolationCtrl', function($scope, $filter, $stateParams,
   // Toggle a corrective action by adding or removing it from the list of
   // checked off corrective actions, and mark it as checked or unchecked.
   $scope.toggleCA = corrAction => {
+    console.log(corrAction);
     if (Forms.checkedCA().length < 1) {
-      Forms.checkedCA().push(corrAction);
+      Forms.addCA(corrAction);
     } else {
-      _.each(Forms.checkedCA(), elem => {
-        if (elem.name !== corrAction.name) {
-          Forms.checkedCA().push(corrAction);
-        } else {
-          // Filter out the corrective action that was unchecked
-          var temp = [];
-          _.each(Forms.checkedCA(), elem => {
-            if (elem.name !== corrAction.name) {
-              temp.push(elem);
-            }
-          });
-
-          $scope.checkedCA = Forms.checkedCA() = temp;
+      var exists = false;
+      _.each(Forms.checkedCA(), ca => {
+        if (ca.caid === corrAction.caid) {
+          exists = true;
         }
       });
+
+      if (!exists) {
+        Forms.addCA(corrAction);
+      } else {
+        Forms.removeCA(corrAction);
+      }
     }
 
-    _.each($scope.caList, elem => {
-      if (elem.name === corrAction.name) {
-        if (elem.checked) {
-          elem.checked = false;
+    _.each($scope.caList, ca => {
+      if (ca.caid === corrAction.caid) {
+        if (ca.checked) {
+          ca.checked = false;
         } else {
-          elem.checked = true;
+          ca.checked = true;
         }
       }
     });
@@ -239,24 +221,45 @@ app.controller('FormsCtrl', function($scope, $cordovaSQLite, DB, Forms) {
   // All available forms to the user
   $scope.forms = Forms.forms();
 
+  // Test query
+  // var q = 'SELECT * FROM CorrectiveAction';
+  // $cordovaSQLite.execute(DB, q).then(res => {
+  //   _.each(res.rows, row => {
+  //     console.log(row);
+  //   });
+  // }, err => {
+  //   console.log(err);
+  // });
+
   var q = 'SELECT * FROM \
     Form f \
-    LEFT OUTER JOIN Violation v ON f.f_fid = v.v_fid \
+    LEFT OUTER JOIN Form_Vtype fv ON f.f_fid = fv.fv_fid \
     ORDER BY f.f_fid';
-  // var q = 'SELECT * FROM \
-  //   Form f \
-  //   LEFT OUTER JOIN Violation v ON f.f_fid = v.v_fid \
-  //   LEFT OUTER JOIN Vtype vt ON v.v_tid = vt.vt_tid \
-  //   ORDER BY f.f_fid';
   $cordovaSQLite.execute(DB, q).then(res => {
     var rows = res.rows;
     _.each(rows, row => {
       Forms.addForm(row);
 
-      var q = 'SELECT * FROM Violation v WHERE v.v_fid = ?';
-      $cordovaSQLite.execute(DB, q, [row.v_fid]).then(res => {
-        console.log(res.rows);
-        Forms.addViolationsToForm(res.rows);
+      // Get each violation type from the database and add it to each of their
+      // respective forms
+      q = 'SELECT * FROM Vtype vt WHERE vt.vt_tid = ?';
+      $cordovaSQLite.execute(DB, q, [row.fv_tid]).then(res => {
+        rows = res.rows;
+        if (rows.length > 0) {
+          Forms.addViolationsToForm(row.f_fid, rows);
+        }
+      }, err => {
+        console.log(err);
+      });
+
+      // Get each corrective action from the database and add it to each of
+      // their respective forms
+      q = 'SELECT * FROM CorrectiveAction ca WHERE ca.ca_caid = ?';
+      $cordovaSQLite.execute(DB, q, [row.fv_tid]).then(res => {
+        rows = res.rows;
+        if (rows.length > 0) {
+          Forms.addCorrActionsToForm(row.f_fid, rows);
+        }
       }, err => {
         console.log(err);
       });
