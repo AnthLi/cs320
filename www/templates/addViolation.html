@@ -1,0 +1,145 @@
+<ion-view view-title="Add Violation">
+  <!-- Back button -->
+  <ion-nav-bar>
+    <ion-nav-back-button id="backButton" class="button-clear">
+      <i class="ion-chevron-left"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+  <!-- Violations -->
+  <ion-content class="padding">
+    <div class="checkboxes ion-scroll">
+      <button class="button button-full button-assertive" disabled style="opacity: 1.0">
+        CHOOSE VIOLATION
+      </button>
+
+      <!-- Red Item Violations -->
+      <ion-scroll id="violationList" zooming="false" scrollbar-y="false">
+        <form name="violations" ng-repeat="vObj in redVList">
+          <h5>{{vObj.title}}</h5>
+          <ion-list>
+            <button class="vItems item item-checkbox checkbox-assertive" ng-repeat="violation in vObj.violations">
+              {{violation.name}}
+              <label class="checkbox">
+                <input type="checkbox" ng-click="toggleV({{violation}})" ng-checked="{{violation.checked}}">
+              </label>
+            </button>
+          </ion-list>
+        </form>
+
+        <!-- Blue Item Violations -->
+        <form name="violations" ng-repeat="vObj in blueVList">
+          <h5>{{vObj.title}}</h5>
+          <ion-list>
+            <button class="vItems item item-checkbox checkbox-positive" ng-repeat="violation in vObj.violations">
+              {{violation.name}}
+              <label class="checkbox">
+                <input type="checkbox" ng-click="toggleV({{violation}})" ng-checked="{{violation.checked}}">
+              </label>
+            </button>
+          </ion-list>
+        </form>
+      </ion-scroll>
+    </div>
+
+    <!-- Corrective Actions -->
+    <div class="correctiveaction">
+      <button class="button button-full button-energized" disabled style="opacity: 1.0">
+        CORRECTIVE ACTION REQUIRED
+      </button>
+
+      <form name="corrective action" ng-repeat="action in caList">
+        <ion-list>
+          <button class="caItems item item-checkbox checkbox-energized">
+            {{action.name}}
+            <label class="checkbox">
+              <input type="checkbox" ng-click="toggleCA({{action}})" ng-checked="{{action.checked}}">
+            </label>
+          </button>
+        </ion-list>
+      </form>
+    </div>
+
+    <!-- Add Photos-->
+    <button class="button button-full button-balanced">ADD PHOTO</button>
+    <div class="photos">
+      <div class="row">
+        <div class="col">
+          <a class="button icon ion-ios-camera button-clear button-dark button-large center" href="#/page/newinspection/addviolation/takepicture">
+            <span class="pics">Take a Picture</span>
+          </a>
+        </div>
+        <div class="col">
+          <a class="button icon ion-images button-clear button-dark button-large center">
+            <span class="pics">Choose From Gallery</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Description -->
+    <div class="description">
+      <button class="button button-full button-positive" disabled style="opacity: 1.0">
+        ADD DESCRIPTION
+      </button>
+
+      <div class="row">
+        <div class="col form-group">
+          <li class="item item-checkbox checkbox-assertive">
+            Red Item
+            <label class="checkbox">
+              <input type="checkbox" ng-model="detailedV.isCrit" ng-true-value="'Red Item'" ng-false-value="''">
+            </label>
+          </li>
+        </div>
+
+        <div class="col form-group">
+          <li class="item item-checkbox checkbox-energized">
+            Critical Item
+            <label class="checkbox">
+              <input type="checkbox" ng-model="detailedV.isCrit" ng-true-value="'Critical Item'" ng-false-value="''">
+            </label>
+          </li>
+        </div>
+
+        <div class="col form-group">
+          <li class="item item-checkbox checkbox-royal">
+            Non-Critical
+            <label class="checkbox">
+              <input type="checkbox" ng-model="detailedV.isCrit" ng-true-value="'Non-Critical Item'" ng-false-value="''">
+            </label>
+          </li>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col form-group">
+          <label class="item item-input">
+            <input type="text" ng-model="detailedV.itemNum" placeholder="Item No.">
+          </label>
+        </div>
+
+        <div class="col form-group">
+          <label class="item item-input">
+            <input type="text" ng-model="detailedV.codeRef" placeholder="Code Ref.">
+          </label>
+        </div>
+
+        <div class="col form-group">
+          <label class="item item-input item-stacked-label">
+            <span class="corr-input-label">Date Verified:</span>
+            <input type="date" class="form-control" ng-model="detailedV.dateVerified" placeholder="">
+          </label>
+        </div>
+      </div>
+
+      <label class="item item-input">
+        <input type="text" ng-model="detailedV.description" placeholder="DESCRIPTION OF VIOLATION/PLAN OF CORRECTION">
+      </label>
+
+      <button id="addViolation" class="button icon-right ion-chevron-right button-balanced" ng-click="addViolation()">
+        Save & Add Another
+      </button>
+    </div>
+  </ion-content>
+</ion-view>

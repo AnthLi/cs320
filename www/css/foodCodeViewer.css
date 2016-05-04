@@ -1,0 +1,13 @@
+.scroll {
+  width: 100%;
+  height: 100%;
+}
+
+#backButton {
+  color: #000000;
+}
+
+#foodCodeViewer {
+  width: 100%;
+  height: 100%;
+}
