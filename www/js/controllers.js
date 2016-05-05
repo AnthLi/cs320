@@ -234,7 +234,7 @@ app.controller('FormsCtrl', function($scope, $cordovaSQLite, DB, Forms) {
   var q = 'SELECT * FROM \
     Form f \
     LEFT OUTER JOIN Form_Vtype fv ON f.f_fid = fv.fv_fid \
-    WHERE f.f_name != "" AND f.f_date != "" \
+    WHERE f.f_name != "" OR f.f_date != "" \
     ORDER BY f.f_fid';
   $cordovaSQLite.execute(DB, q).then(function(res) {
     var rows = res.rows;
