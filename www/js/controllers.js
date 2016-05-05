@@ -225,10 +225,16 @@ app.controller('FormsCtrl', function($scope, $cordovaSQLite, DB, Forms) {
   // All available forms to the user
   $scope.forms = Forms.forms();
 
+  var q = 'SELECT * FROM Form f WHERE f.f_name != ""';
+  $cordovaSQLite.execute(DB, q).then(function(res) {
+    console.log(res);
+  })
+
   // Get every violation type for each form and add it to its respective form
   var q = 'SELECT * FROM \
     Form f \
     LEFT OUTER JOIN Form_Vtype fv ON f.f_fid = fv.fv_fid \
+    WHERE f.f_name != "" AND f.f_date != "" \
     ORDER BY f.f_fid';
   $cordovaSQLite.execute(DB, q).then(function(res) {
     var rows = res.rows;
