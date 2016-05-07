@@ -1,7 +1,0 @@
-How are we determining a unique food establishment? Are names necessarily
-unique?
-
-Once and for all: are we editing forms?  If so, what gets edited?
-
-When searching the database, what are our potential criterion?  I assume this
-is for auto-complete purposes.

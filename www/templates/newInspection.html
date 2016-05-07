@@ -1,0 +1,190 @@
+<ion-view view-title="Inspection Form">
+  <ion-content class="content">
+    <!---.................................................................
+    ...........................INSPECTION INFO............................
+    ...................................................................-->
+    <form id="new-form" ng-submit="processForm()">
+      <div class="info">
+        <ion-item class="button button-full button-positive" disabled style="opacity: 1.0">
+          INSPECTION INFO
+        </ion-item>
+
+        <!--
+        The ng-repeat here significantly shortened the code for the new
+        insepction. Rather than having each field have its own place here,
+        ng-repeat allowed for the dynamic creation of the fields instead
+        -->
+        <div class="row" ng-repeat="field in fields">
+          <div class="col form-group">
+            <label class="item item-input">
+              <input type="text" class="form-control" ng-model="formData[field.model[0]]" placeholder="{{field.temp[0]}}">
+            </label>
+          </div>
+
+          <div class="col form-group">
+            <label class="item item-input">
+              <input type="text" class="form-control" ng-model="formData[field.model[1]]" placeholder="{{field.temp[1]}}" >
+            </label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-group">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">
+                Time In:
+              </span>
+
+              <input type="time" class="form-control" ng-model="formData.timein" placeholder="">
+            </label>
+          </div>
+
+          <div class="col form-group">
+            <label class="item item-input item-stacked-label">
+              <span class="input-label">
+                Time Out:
+              </span>
+
+              <input type="time" class="form-control" ng-model="formData.timeout" placeholder="">
+            </label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-group">
+            <ion-checkbox id="haccp" ng-model="haccp" ng-click="!haccp; formData.HACCP = 'Y'">
+              HACCP
+            </ion-checkbox>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-group">
+            <div class="list">
+              <label class="item item-input item-select">
+                <div class="input-label">
+                  Type of Operation(s):
+                </div>
+
+                <select class="form-control" ng-model="formData.opType">
+                  <option>Food Service</option>
+                  <option>Retail</option>
+                  <option>Residential Kitchen</option>
+                  <option>Mobile</option>
+                  <option>Temporary</option>
+                  <option>Caterer</option>
+                  <option>Bed & Breakfast</option>
+                </select>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col form-group">
+            <div class="list">
+              <label class="item item-input item-select">
+                <div class="input-label">
+                  Type of Inspection:
+                </div>
+
+                <select class="form-control" ng-model="formData.inspType">
+                  <option>Routine</option>
+                  <option>Re-Inspection</option>
+                </select>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!---.................................................................
+      ...........................VIOLATIONS.................................
+      ...................................................................-->
+      <div class="violations">
+        <ion-item class="button button-full button-assertive" disabled style="opacity: 1.0">
+          VIOLATIONS
+        </ion-item>
+
+        <div>
+          <h4>Violations</h4>
+          <div ng-repeat="v in checkedV track by $index">
+            {{v.name}}
+          </div>
+        </div>
+
+        <div>
+          <h4>Corrective Actions</h4>
+          <div ng-repeat="ca in checkedCA track by $index">
+            {{ca.name}}
+          </div>
+        </div>
+
+        <div>
+          <h4>Detailed Violations</h4>
+          <div ng-repeat="dv in detailedVList track by $index">
+            Item No.: {{dv.itemNum}} <br>
+            Code Reference: {{dv.codeRef}} <br>
+            Critial: {{dv.isCrit}} <br>
+            Description: {{dv.description}} <br>
+            Date Verified: {{dv.itemNum}} <br><br>
+          </div>
+        </div>
+
+        <a href="#/page/newinspection/addviolation" class="button icon-left ion-plus-circled button-outline button-assertive button-medium">
+          Add Violation
+        </a>
+      </div>
+
+      <!---.................................................................
+      ...........................SIGNATURE..................................
+      ...................................................................-->
+      <div class="signature">
+        <ion-item class="button button-full button-dark" disabled style="opacity: 1.0">
+          SIGNATURE
+        </ion-item>
+
+        <div class="sig row">
+          <div class="col">
+            <div class="sigline">
+              <signature-pad accept="accept" clear="clear" height="100" width="100%"></signature-pad>
+              ____________________________________________________<br>
+              Inspector's Signature
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="sigline">
+              <signature-pad accept="accept" clear="clear" height="100" width="100%"></signature-pad>
+              ____________________________________________________<br>
+              Print
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="sigline">
+              <signature-pad accept="accept" clear="clear" height="100" width="100%"></signature-pad>
+              ____________________________________________________<br>
+              PIC's Signature
+            </div>
+          </div>
+
+          <div class="col">
+            <div class="sigline">
+              <signature-pad accept="accept" clear="clear" height="100" width="100%"></signature-pad>
+              ____________________________________________________<br>
+              Print
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <button ng-click="clear()">Clear signature</button>
+      <button ng-click="signature = accept()">Sign</button> -->
+
+      <a id="savecontinue" class="button icon-right ion-chevron-right button-balanced" ng-click="processForm()">
+        Save & Continue
+      </a>
+    </form>
+  </ion-content>
+</ion-view>

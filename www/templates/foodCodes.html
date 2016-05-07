@@ -1,0 +1,11 @@
+<ion-view view-title="Food Code">
+    <ion-content>
+    <ion-list>
+      <ion-item class="item-icon-left item-icon-right" ng-repeat="foodCode in foodCodes" href="#/page/foodcodes/{{foodCode.path}}">
+          <i class="icon ion-ios-book"></i>
+        <h2>{{foodCode.name}}</h2>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>

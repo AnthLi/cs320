@@ -3,28 +3,29 @@
   color: #293241;
 }
 
+.chooseviolation{
+    padding-top: 30px;
+}
+
 .logo {
   max-width: 400px;
   padding-top: 50px;
 }
 
-
 .photos img {
-	display: inline-block;
-	width: 125px;
-	height: 125px;
+  display: inline-block;
+  width: 125px;
+  height: 125px;
 }
 
 .center{
-	margin-left: auto;
-	margin-right: auto;
-	display: block;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 .pics{
   font-size: 12px;
-}
-
 }
 
 .button {
@@ -51,9 +52,10 @@ img{
 }
 
 #violationList {
-  overflow: hidden;
   width: 100%;
   height: 350px;
+  margin: 0;
+  padding: 0;
 }
 
 .corr-input-label{
@@ -77,19 +79,30 @@ img{
 }
 
 .checkboxes{
-	font-family: "Calibri";
+  font-family: "Calibri";
 }
 
 .correctiveaction{
-	font-family: "Calibri";
+  font-family: "Calibri";
 }
 
-#savecontinue {
+#savecontinue, #addViolation, #printForm {
   margin-bottom: 20px;
 }
 
-@media (max-width: 740px) {
-  .sig {
-    display: inline-block;
+
+.sig {
+  display: inline-block;
+  margin-top: 20px;
+}
+
+.sig .col {
+  padding: 50px 0;
+}
+
+@media (min-width: 740px) {
+  .sig .col {
+    float: left;
+    width: 50%;
   }
 }

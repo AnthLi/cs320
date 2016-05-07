@@ -1,0 +1,17 @@
+<!-- pdf.js source: https://goo.gl/VH5R3g -->
+<ion-view view-title="{{foodCode.name}}">
+  <!-- Back button -->
+  <ion-nav-bar>
+    <ion-nav-back-button id="backButton" class="button-clear">
+      <i class="ion-chevron-left"></i> Back
+    </ion-nav-back-button>
+  </ion-nav-bar>
+
+  <ion-content>
+<<<<<<< HEAD:www/templates/foodcodeviewer.html
+    <iframe id="formViewer" ng-src={{getFormPath(foodCode.path)}}></iframe>
+=======
+    <iframe id="foodCodeViewer" ng-src="{{getFoodCodePath(foodCode.path)}}"></iframe>
+>>>>>>> be10bcf8a460ef933cb73c881552b2db42b73650:www/templates/foodCodeViewer.html
+  </ion-content>
+</ion-view>

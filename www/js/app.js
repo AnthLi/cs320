@@ -1,8 +1,21 @@
 var app = angular.module('inspectorGadget', [
   'ionic',
+  'ngCordova',
+  'signature',
   'inspectorGadget.controllers',
   'inspectorGadget.services'
 ]);
+
+// lodash
+app.constant('_',
+  window._
+);
+
+app.filter('reverse', function() {
+  return function(items) {
+    return items.slice().reverse();
+  }
+});
 
 app.run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -53,7 +66,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/newinspection',
     views: {
       'page-newinspection': {
-        templateUrl: 'templates/newinspection.html',
+        templateUrl: 'templates/newInspection.html',
         controller: 'NewInspectionCtrl'
       }
     }
@@ -63,8 +76,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/newinspection/addviolation',
     views: {
       'page-newinspection': {
-        templateUrl: 'templates/addviolation.html',
+        templateUrl: 'templates/addViolation.html',
         controller: 'AddViolationCtrl'
+      }
+    }
+  })
+
+  .state('page.takepicture', {
+    url: '/newinspection/addviolation/takepicture',
+    views: {
+      'page-newinspection': {
+        templateUrl: 'templates/takePicture.html',
+        controller: 'PictureCtrl'
       }
     }
   })
@@ -83,7 +106,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/forms/:formName?date=',
     views: {
       'page-forms': {
-        templateUrl: 'templates/formviewer.html',
+        templateUrl: 'templates/formViewer.html',
         controller: 'FormViewerCtrl'
       }
     }
@@ -93,7 +116,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/foodcodes',
     views: {
       'page-foodcodes': {
-        templateUrl: 'templates/foodcodes.html',
+        templateUrl: 'templates/foodCodes.html',
         controller: 'FoodCodesCtrl'
       }
     }
@@ -103,7 +126,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
     url: '/foodcodes/:foodCodePath',
     views: {
       'page-foodcodes': {
-        templateUrl: 'templates/foodcodeviewer.html',
+        templateUrl: 'templates/foodCodeViewer.html',
         controller: 'FoodCodeViewerCtrl'
       }
     }
